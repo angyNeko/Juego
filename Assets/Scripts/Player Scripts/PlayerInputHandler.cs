@@ -2,28 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputHandler : MonoBehaviour
+namespace SG
 {
-    Animator animator;
-    private PlayerController playerController;
-    private PlayerInputManager inputManager;
-
-    public bool isInteracting;
-
-    private void Awake()
+    public class PlayerInputHandler : MonoBehaviour
     {
-        inputManager = GetComponent<PlayerInputManager>();
-        playerController = GetComponent<PlayerController>();
-        animator = GetComponent<Animator>();
-    }
+        Animator animator;
+        private PlayerController playerController;
+        private PlayerInputManager inputManager;
 
-    private void Update()
-    {
-        inputManager.handleAllInputs();
-    }
+        public bool isInteracting;
 
-    private void FixedUpdate()
-    {
-        playerController.handleAllMovements();
+        private void Awake()
+        {
+            inputManager = GetComponent<PlayerInputManager>();
+            playerController = GetComponent<PlayerController>();
+            animator = GetComponent<Animator>();
+        }
+
+        private void Update()
+        {
+            inputManager.HandleAllInputs();
+        }
+
+        private void FixedUpdate()
+        {
+            playerController.handleAllMovements();
+        }
+
+        private void LateUpdate()
+        {
+            inputManager.rb_input = false;
+            inputManager.rt_input = false;
+        }
     }
 }

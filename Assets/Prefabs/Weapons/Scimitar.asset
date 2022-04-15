@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: Scimitar
-  modelPrefab: {fileID: 919132149155446097, guid: 7f3416346ca97eb4c9687d50ca4b3c49, type: 3}
+  modelPrefab: {fileID: 100006, guid: 0af636dcf564eb140b31a01bf4b6a9fd, type: 3}
   isUnarmed: 0
+  OH_Light_Attack_1: OH_Light_Attack_1
+  OH_Heavy_Attack_1: OH_Heavy_Attack_1

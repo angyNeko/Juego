@@ -6,21 +6,34 @@ namespace SG{
     public class WeaponHolderSlot : MonoBehaviour
     {
         public Transform parentOverride;
-        public bool isLeft;
-        public bool isRight;
+        public bool isLeftHandSlot;
+        public bool isRightHandSlot;
 
         public GameObject currentWeaponModel;
         
        public void UnloadWeapon() 
        {
-            
+            if (currentWeaponModel != null)
+            {
+                currentWeaponModel.SetActive(false);
+            }
+       }
+
+       public void UnloadWeaponAndDestroy()
+       {
+           if (currentWeaponModel != null)
+           {
+               Destroy(currentWeaponModel);
+           }
        }
 
         public void LoadWeaponModel(WeaponItem weaponItem)
         {
+            UnloadWeaponAndDestroy();
+
             if (weaponItem == null)
             {
-                //unload wepon
+                UnloadWeapon();
                 return;
             }
 

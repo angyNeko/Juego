@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: -1
-  XYAxis: {fileID: 6931008054399014494, guid: b28f27c455352ee469a1fc9cad742aa5, type: 3}
+  XYAxis: {fileID: -7037095033221647189, guid: b28f27c455352ee469a1fc9cad742aa5, type: 3}
   ZAxis: {fileID: 0}
 --- !u!114 &1098100104
 MonoBehaviour:
@@ -1267,6 +1267,10 @@ PrefabInstance:
     - target: {fileID: 7922940398526286307, guid: 91e064ff522b1534484528ad5843a9d1, type: 3}
       propertyPath: m_Name
       value: MainChar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922940398526286307, guid: 91e064ff522b1534484528ad5843a9d1, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91e064ff522b1534484528ad5843a9d1, type: 3}
