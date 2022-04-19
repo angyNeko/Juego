@@ -59,7 +59,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""2D Vector"",
+                    ""name"": ""WASD"",
                     ""id"": ""b5ce3820-a638-4364-9180-32a98638ceb9"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
@@ -118,7 +118,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""f4e3a3c3-98e3-40e5-90fb-16826efba8c7"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": ""MouseKeyboard"",
                     ""action"": ""Camera"",
                     ""isComposite"": false,
@@ -129,7 +129,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""c96cef09-9f3e-4649-80f2-35419f225baa"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Camera"",
                     ""isComposite"": false,
