@@ -8,9 +8,6 @@ namespace SG
     {
         // Imports
         Rigidbody characterModel;
-        InputManager inputManager;
-        AnimatorManager animatorManager;
-        //InputHandler inputHandler;
         CapsuleCollider capsuleCollider;
 
         // Cant modify
@@ -20,13 +17,13 @@ namespace SG
         public float distanceToGround = 0.625f;
 
         [Header("Movement Flags")]
-        public static bool sprintActive;
+        //public bool sprintActive;
 
         [Header("Movement Speeds")]
         [SerializeField] float walkSpeed = 1.5f;
         [SerializeField] float runSpeed = 7;
         [SerializeField] float sprintSpeed = 20;
-        //[SerializeField] float jumpVal = 7;
+        [SerializeField] float jumpVal = 7;
         [SerializeField] float rotationSpeed = 5;
 
         private float distToGround;
@@ -36,9 +33,6 @@ namespace SG
         private void Awake()
         {
             characterModel = GetComponent<Rigidbody>();
-            inputManager = GetComponent<InputManager>();
-            animatorManager = GetComponent<AnimatorManager>();
-            //inputHandler = GetComponent<InputHandler>();
             cameraObject = Camera.main.transform;
             capsuleCollider = GetComponent<CapsuleCollider>();
         }
@@ -48,18 +42,18 @@ namespace SG
             distanceToGround = capsuleCollider.bounds.extents.y;
         }
 
-        public void HandleAllMovements()
+        public void HandleAllMovements(float verticalInput, float horizontalInput, float moveAmount, bool sprintActive)
         {
-            HandleMovement();
-            HandleRotation();
+            HandleMovement(verticalInput, horizontalInput, moveAmount, sprintActive);
+            HandleRotation(verticalInput, horizontalInput);
         }
 
-        private void HandleMovement()
+        private void HandleMovement(float verticalInput, float horizontalInput, float moveAmount, bool sprintActive)
         {
             HandleFalling();
 
-            moveDirection = cameraObject.forward * inputManager.verticalInput;
-            moveDirection = moveDirection + cameraObject.right * inputManager.horizontalInput;
+            moveDirection = cameraObject.forward * verticalInput;
+            moveDirection = moveDirection + cameraObject.right * horizontalInput;
             moveDirection.Normalize();
             moveDirection.y = 0;
 
@@ -70,7 +64,7 @@ namespace SG
             }
             else{
 
-                if (inputManager.moveAmount >= 0.5f)
+                if (moveAmount >= 0.5f)
                 {
                     moveDirection = moveDirection * runSpeed;
                 }
@@ -88,12 +82,17 @@ namespace SG
             Debug.Log("movementVelocity: " + movementVelocity);
         }
 
-        private void HandleRotation()
+        public void Jump()
+        {
+            characterModel.AddForce(Vector3.up * jumpVal);
+        }
+
+        private void HandleRotation(float verticalInput, float horizontalInput)
         {
             Vector3 targetDirection = Vector3.zero;
 
-            targetDirection = cameraObject.forward * inputManager.verticalInput;
-            targetDirection = targetDirection + cameraObject.right * inputManager.horizontalInput;
+            targetDirection = cameraObject.forward * verticalInput;
+            targetDirection = targetDirection + cameraObject.right * horizontalInput;
             targetDirection.Normalize();
             targetDirection.y = 0;
 
@@ -118,7 +117,7 @@ namespace SG
         {
             if (!IsGrounded())
             {
-                
+                characterModel.AddForce(Vector3.down * 9.8f);
             }
         }
 
