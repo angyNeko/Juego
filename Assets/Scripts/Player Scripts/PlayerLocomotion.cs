@@ -2,124 +2,127 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SG
+namespace J
 {
     public class PlayerLocomotion : MonoBehaviour
     {
-        // Imports
-        Rigidbody characterModel;
-        CapsuleCollider capsuleCollider;
+        #region Imports
+        [HideInInspector]
+        PlayerController playerController;
+        #endregion
 
-        // Cant modify
         Vector3 moveDirection;
+        CapsuleCollider capsuleCollider;
         Transform cameraObject;
 
-        public float distanceToGround = 0.625f;
+        [HideInInspector]
+        public Transform myTransform;
 
-        [Header("Movement Flags")]
-        //public bool sprintActive;
+        public new Rigidbody characterModel;
+        public GameObject normalCamera;
 
-        [Header("Movement Speeds")]
-        [SerializeField] float walkSpeed = 1.5f;
-        [SerializeField] float runSpeed = 7;
-        [SerializeField] float sprintSpeed = 20;
-        [SerializeField] float jumpVal = 7;
-        [SerializeField] float rotationSpeed = 5;
-
-        private float distToGround;
-        public LayerMask groundlayer;
+        [Header("Stats")]
+        [SerializeField]
+        float moveSpeed = 1.5f;
+        [SerializeField] 
+        float walkSpeed = 1.5f;
+        [SerializeField] 
+        float runSpeed = 7;
+        [SerializeField]
+        float sprintSpeed = 20;
+        [SerializeField] 
+        float jumpVal = 7;
+        [SerializeField] 
+        float rotationSpeed = 10;
         
+        float rollRotation;
 
-        private void Awake()
-        {
-            characterModel = GetComponent<Rigidbody>();
-            cameraObject = Camera.main.transform;
-            capsuleCollider = GetComponent<CapsuleCollider>();
-        }
 
         private void Start()
         {
-            distanceToGround = capsuleCollider.bounds.extents.y;
+            characterModel = GetComponent<Rigidbody>();
+            playerController = GetComponent<PlayerController>();
+            cameraObject = Camera.main.transform;
+            myTransform = transform;
         }
 
-        public void HandleAllMovements(float verticalInput, float horizontalInput, float moveAmount, bool sprintActive)
+        private void Update()
         {
-            HandleMovement(verticalInput, horizontalInput, moveAmount, sprintActive);
-            HandleRotation(verticalInput, horizontalInput);
+            float delta = Time.deltaTime;
         }
 
-        private void HandleMovement(float verticalInput, float horizontalInput, float moveAmount, bool sprintActive)
-        {
-            HandleFalling();
+        #region Movement
+        Vector3 normalVector;
+        Vector3 targetPosition;
 
-            moveDirection = cameraObject.forward * verticalInput;
-            moveDirection = moveDirection + cameraObject.right * horizontalInput;
+        public void HandleMovement(float delta)
+        {
+            moveDirection = cameraObject.forward * playerController.inputHandler.vertical;
+            moveDirection += cameraObject.right * playerController.inputHandler.horizontal;
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            if (sprintActive)
+            float speed = moveSpeed;
+            moveDirection *= speed;
+
+            Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
+            characterModel.velocity = projectedVelocity;
+
+            playerController.HandleMovementAnimation(playerController.inputHandler.moveAmount);
+
+            if (playerController.animatorManager.canRotate)
             {
-                moveDirection = moveDirection * sprintSpeed;
-                Debug.Log("Sprinting");
+                HandleRotation(delta);
             }
-            else{
-
-                if (moveAmount >= 0.5f)
-                {
-                    moveDirection = moveDirection * runSpeed;
-                }
-                else
-                {
-                    moveDirection = moveDirection * walkSpeed;
-                }
-                
-            }
-
-            Vector3 movementVelocity = moveDirection;
-
-            characterModel.velocity = movementVelocity;
-
-            Debug.Log("movementVelocity: " + movementVelocity);
         }
 
-        public void Jump()
-        {
-            characterModel.AddForce(Vector3.up * jumpVal);
-        }
-
-        private void HandleRotation(float verticalInput, float horizontalInput)
+        private void HandleRotation(float delta)
         {
             Vector3 targetDirection = Vector3.zero;
+            float moveOverride = playerController.inputHandler.moveAmount;
 
-            targetDirection = cameraObject.forward * verticalInput;
-            targetDirection = targetDirection + cameraObject.right * horizontalInput;
+            targetDirection = cameraObject.forward * playerController.inputHandler.vertical;
+            targetDirection += cameraObject.right * playerController.inputHandler.horizontal;
+
             targetDirection.Normalize();
             targetDirection.y = 0;
 
             if (targetDirection == Vector3.zero)
             {
-                targetDirection = transform.forward;
+                targetDirection = myTransform.forward;
             }
 
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            Quaternion playerRotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            float rs = rotationSpeed;
 
-            transform.rotation = playerRotation;
+            Quaternion tr = Quaternion.LookRotation(targetDirection);
+            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+            myTransform.rotation = targetRotation;
         }
 
-        // Ground Check and Fall Handling
-        bool IsGrounded()
+        public void DoJump()
         {
-            return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f, groundlayer, QueryTriggerInteraction.Collide);
+            characterModel.AddForce(Vector3.up * jumpVal);
         }
 
-        private void HandleFalling()
+        public void DoRoll(float moveAmount, float vertical, float horizontal)
         {
-            if (!IsGrounded())
+            moveDirection = cameraObject.forward * vertical;
+            moveDirection += cameraObject.right * horizontal;
+
+            if (moveAmount > 0)
             {
-                characterModel.AddForce(Vector3.down * 9.8f);
+                playerController.animatorManager.PlayTargetAnimation("Roll", true);
+                moveDirection.y = 0;
+                Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = rollRotation;
             }
-        }
+            else
+            {
+                return;
+            }
 
+        }
+        #endregion
     }
 }

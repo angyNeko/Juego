@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SG
+namespace J
 {
     public class InputHandler : MonoBehaviour
     {
-        private PlayerInputActions playerInputActions;
+        PlayerInputActions playerInputActions;
         PlayerController playerController;
-        public Vector2 movementInput;
-        public float verticalInput;
-        public float horizontalInput;
+
+        Vector2 movementInput;
+        Vector2 cameraInput;
+
+        public float vertical;
+        public float horizontal;
         public float moveAmount;
-        public bool sprintInput;
+        public float cameraX;
+        public float cameraY;
+        
         public bool rb_input;
         public bool rt_input;
+        
+        public bool b_input;
+        public bool rollFlag;
 
         private void Awake()
         {
@@ -25,20 +33,12 @@ namespace SG
         {
             if (playerInputActions == null)
             {
-                playerInputActions = new PlayerInputActions();
-
-                playerInputActions.PlayerMovement.Movement.performed += i => movementInput = i.ReadValue<Vector2>();
-                
-                playerInputActions.PlayerMovement.Movement.canceled += i => movementInput = Vector2.zero;
-
-                playerInputActions.PlayerActions.Sprint.performed += i => sprintInput = true;
-                playerInputActions.PlayerActions.Sprint.canceled += i => sprintInput = false;
-
-                playerInputActions.PlayerActions.Jump.performed += i => playerController.HandleJump();
+                playerInputActions = new PlayerInputActions(); 
+                playerInputActions.PlayerMovement.Movement.performed += playerInputActions => movementInput = playerInputActions.ReadValue<Vector2>();
+                playerInputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
             }
 
-            playerInputActions.PlayerMovement.Enable();
-            playerInputActions.PlayerActions.Enable();
+            playerInputActions.Enable();
         }
 
         private void OnDisable()
@@ -46,27 +46,51 @@ namespace SG
             playerInputActions.Disable();
         }
 
-        public void HandleAllInputs()
+        private void Update()
         {
-            HandleMovementInput();
-            HandleSprintInput();
-            HandleAttackInput();
+            float delta = Time.deltaTime;
+            TickInput(delta);
         }
 
-        private void HandleMovementInput()
+        private void FixedUpdate()
         {
-            verticalInput = movementInput.y;
-            horizontalInput = movementInput.x;
-            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
-            playerController.HandleMovementAnimation(moveAmount);
+            float fdelta = Time.fixedDeltaTime;
+
+            if (playerController.cameraHandler != null)
+            {
+                playerController.DoCamera(fdelta);
+            }
         }
 
-        public bool HandleSprintInput()
+        public void TickInput(float delta)
         {
-            return sprintInput;
+            MoveInput(delta);
+        }
+
+        private void MoveInput(float delta)
+        {
+            horizontal = movementInput.x;
+            vertical = movementInput.y;
+            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+
+            cameraX = cameraInput.x;
+            cameraY = cameraInput.y;
+
+            playerController.DoMovement(delta);
+        }
+
+        public void RollInput(float delta)
+        {
+            b_input = playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+
+            if (b_input)
+            {
+                rollFlag = true;
+                playerController.HandleRoll();
+            }
         }
   
-        private void HandleAttackInput()
+        private void AttackInput()
         {
             playerInputActions.PlayerActions.LightAttack.performed += i => rb_input = true;
             playerInputActions.PlayerActions.HeavyAttack.performed += i => rt_input = true;
@@ -82,6 +106,7 @@ namespace SG
                 playerController.HandleAttack("heavy");
             }
         }
+
         private void LateUpdate()
         {
             rb_input = false;

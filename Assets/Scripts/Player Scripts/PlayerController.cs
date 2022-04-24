@@ -2,47 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SG
+namespace J
 {
     public class PlayerController : MonoBehaviour
     {
-        Animator animator;
-        PlayerLocomotion playerLocomotion;
-        InputHandler inputHandler;
+        [HideInInspector]
+        public Animator animator;
+        public PlayerLocomotion playerLocomotion;
+        public InputHandler inputHandler;
+        public AnimatorManager animatorManager;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
-        AnimatorManager animatorManager;
         PlayerStats playerStats;
+        public CameraHandler cameraHandler;
 
         public bool isInteracting;
+        float delta;
+
+        #region Unity Built-in
 
         private void Awake()
         {
+            cameraHandler = CameraHandler.singleton;
+        }
+
+        private void Start()
+        {
             inputHandler = GetComponent<InputHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
-            animator = GetComponent<Animator>();
+
+            animator = GetComponentInChildren<Animator>();
+            animatorManager = GetComponentInChildren<AnimatorManager>();
+
             playerInventory = GetComponent<PlayerInventory>();
-            animatorManager = GetComponent<AnimatorManager>();
             playerAttacker = GetComponent<PlayerAttacker>();
             playerStats = GetComponent<PlayerStats>();
+            animatorManager.Initialize();
         }
 
         private void Update()
         {
-            inputHandler.HandleAllInputs();
+
+        }
+        #endregion
+
+        #region Usual Movements
+
+        public void DoMovement(float delta)
+        {
+            playerLocomotion.HandleMovement(delta);
         }
 
-        private void FixedUpdate()
+        public void DoCamera(float fdelta)
         {
-            playerLocomotion.HandleAllMovements(inputHandler.verticalInput, inputHandler.horizontalInput, inputHandler.moveAmount, 
-            inputHandler.sprintInput);
+            cameraHandler.FollowTarget(fdelta);
+            cameraHandler.HandleCameraRotation(fdelta, inputHandler.cameraX, inputHandler.cameraY);
+
         }
 
         public void HandleMovementAnimation(float moveAmount)
         {
-            animatorManager.UpdateAnimatorValues(0, moveAmount, inputHandler.sprintInput);
+            animatorManager.UpdateAnimatorValues(0, moveAmount, false);
         }
 
+        public void HandleRoll()
+        {
+            if (animatorManager.anim.GetBool("isInteracting"))
+                return;
+            
+            playerLocomotion.DoRoll(inputHandler.moveAmount, inputHandler.vertical, inputHandler.horizontal);
+        }        
+        #endregion
+
+        #region Combat Related
         public void HandleAttack(string attackType)
         {
             if (attackType == "light")
@@ -68,12 +100,7 @@ namespace SG
         {
             animatorManager.PlayTargetAnimation("Dead", true);
         }
-
-        public void HandleJump()
-        {
-            //animatorManager.PlayTargetAnimation("Jump", true);
-            playerLocomotion.Jump();
-        }
+        #endregion
 
     }
 }

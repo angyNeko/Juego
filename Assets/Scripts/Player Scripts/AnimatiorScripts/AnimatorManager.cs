@@ -2,35 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SG
+namespace J
 {
     public class AnimatorManager : MonoBehaviour
     {
-        Animator animator;
+        PlayerController playerController;
+        public Animator anim;
 
         int horizontal;
         int vertical;
+        public bool canRotate;
+        bool isInteracting;
 
-        private void Awake()
+        public void Initialize()
         {
-            animator = GetComponent<Animator>();
+            playerController = GetComponent<PlayerController>();
+            anim = GetComponent<Animator>();
             horizontal = Animator.StringToHash("Horizontal");
             vertical = Animator.StringToHash("Vertical");
         }
 
+        private void Update()
+        {
+            //OnAnimatorMove();
+        }
+
         public void PlayTargetAnimation(string targetAnimaation, bool isInteracting)
         {
-            animator.SetBool("isInteracting", isInteracting);
-            animator.CrossFade(targetAnimaation, 0.2f);
+            anim.applyRootMotion = isInteracting;
+            anim.SetBool("isInteracting", isInteracting);
+            //OnAnimatorMove();
+            anim.CrossFade(targetAnimaation, 0.2f);
         }
 
         public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)
         {
 
-            float snappedHorizontal;
-            float snappedVertical;
 
             #region Snapped horizontal
+            float snappedHorizontal = 0;
+
             if (horizontalMovement > 0 && horizontalMovement < 0.55f)
             {
                 snappedHorizontal = 0.5f;
@@ -54,6 +65,8 @@ namespace SG
             #endregion
 
             #region Snapped Vertical
+            float snappedVertical;
+
             if (verticalMovement > 0 && verticalMovement < 0.55f)
             {
                 snappedVertical = 0.5f;
@@ -76,18 +89,32 @@ namespace SG
             }
             #endregion
 
-            if(isSprinting)
-            {
-                snappedHorizontal = horizontalMovement;
-                snappedVertical = 2;
-            }
-
-            Debug.Log("Snapped horizontal: " + snappedHorizontal);
-            Debug.Log("Snapped Vertical: " + snappedVertical);
-
-            animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
-            animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
+            anim.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
+            anim.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
         }
 
+        public void CanRotate()
+        {
+            canRotate = true;
+        }
+
+        public void StopRotation()
+        {
+            canRotate = true;
+        }
+        /*
+        private void OnAnimatorMove()
+        {
+            if (playerController.isInteracting == false)
+                return;
+
+            float delta = Time.deltaTime;
+            playerController.playerLocomotion.characterModel.drag = 0;
+            Vector3 deltaPosition = anim.deltaPosition;
+            deltaPosition.y = 0;
+            Vector3 velocity = deltaPosition / delta;
+            playerController.playerLocomotion.characterModel.velocity = velocity;
+        }
+        */
     }
 }
