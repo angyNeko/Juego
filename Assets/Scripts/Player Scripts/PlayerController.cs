@@ -8,16 +8,25 @@ namespace J
     {
         [HideInInspector]
         public Animator animator;
+        [HideInInspector]
         public PlayerLocomotion playerLocomotion;
+        [HideInInspector]
         public InputHandler inputHandler;
+        [HideInInspector]
         public AnimatorManager animatorManager;
+        [HideInInspector]
         PlayerAttacker playerAttacker;
+        [HideInInspector]
         PlayerInventory playerInventory;
+        [HideInInspector]
         PlayerStats playerStats;
+        [HideInInspector]
         public CameraHandler cameraHandler;
 
         public bool isInteracting;
         float delta;
+
+        public Transform playerCTransform;
 
         #region Unity Built-in
 
@@ -31,8 +40,8 @@ namespace J
             inputHandler = GetComponent<InputHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
 
-            animator = GetComponentInChildren<Animator>();
-            animatorManager = GetComponentInChildren<AnimatorManager>();
+            animator = GetComponent<Animator>();
+            animatorManager = GetComponent<AnimatorManager>();
 
             playerInventory = GetComponent<PlayerInventory>();
             playerAttacker = GetComponent<PlayerAttacker>();
@@ -42,7 +51,17 @@ namespace J
 
         private void Update()
         {
+            float delta = Time.deltaTime;
 
+            inputHandler.isInteracting = animator.GetBool("isInteracting");
+            inputHandler.rollFlag = false;
+            playerLocomotion.isSprinting = inputHandler.b_input;
+
+            inputHandler.TickInput(delta);
+            playerLocomotion.HandleMovement(delta);
+            playerLocomotion.HandleRollAndSprint(delta);
+
+            inputHandler.sprintFlag = false;
         }
         #endregion
 
@@ -60,17 +79,22 @@ namespace J
 
         }
 
-        public void HandleMovementAnimation(float moveAmount)
+        public void HandleMovementAnimation(float moveAmount, bool isInteracting)
         {
             animatorManager.UpdateAnimatorValues(0, moveAmount, false);
         }
 
-        public void HandleRoll()
+        public void DoAnimation(string targetAnimation, bool isInteracting)
         {
-            if (animatorManager.anim.GetBool("isInteracting"))
+            animatorManager.PlayTargetAnimation(targetAnimation, isInteracting);
+        }
+
+        public void DoRoll(float delta)
+        {
+            if (animatorManager.anim.GetBool("isInteracting") == true)
                 return;
             
-            playerLocomotion.DoRoll(inputHandler.moveAmount, inputHandler.vertical, inputHandler.horizontal);
+            playerLocomotion.HandleRollAndSprint(delta);
         }        
         #endregion
 

@@ -115,17 +115,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f4e3a3c3-98e3-40e5-90fb-16826efba8c7"",
-                    ""path"": ""<Mouse>/delta"",
-                    ""interactions"": """",
-                    ""processors"": ""NormalizeVector2"",
-                    ""groups"": ""MouseKeyboard"",
-                    ""action"": ""Camera"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""c96cef09-9f3e-4649-80f2-35419f225baa"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",

@@ -13,7 +13,7 @@ namespace J
 
         Vector3 cameraTransformPosition;
         LayerMask ignoreLayers;
-        private Vector3 cameraFollowVelocity = Vector3.zero;
+        public Vector3 cameraFollowVelocity = Vector3.zero;
 
         public static CameraHandler singleton;
 

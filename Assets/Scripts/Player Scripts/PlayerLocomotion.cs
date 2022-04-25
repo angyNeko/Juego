@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace J
         public new Rigidbody characterModel;
         public GameObject normalCamera;
 
+        #region stats
         [Header("Stats")]
         [SerializeField]
         float moveSpeed = 1.5f;
@@ -34,7 +36,10 @@ namespace J
         float jumpVal = 7;
         [SerializeField] 
         float rotationSpeed = 10;
-        
+        [SerializeField]
+        public bool isSprinting;
+        #endregion
+
         float rollRotation;
 
 
@@ -46,34 +51,70 @@ namespace J
             myTransform = transform;
         }
 
-        private void Update()
-        {
-            float delta = Time.deltaTime;
-        }
-
         #region Movement
         Vector3 normalVector;
         Vector3 targetPosition;
 
         public void HandleMovement(float delta)
         {
+            if (playerController.animator.GetBool("isInteracting"))
+                return;
+
             moveDirection = cameraObject.forward * playerController.inputHandler.vertical;
             moveDirection += cameraObject.right * playerController.inputHandler.horizontal;
             moveDirection.Normalize();
             moveDirection.y = 0;
 
+
             float speed = moveSpeed;
-            moveDirection *= speed;
+
+
+            if (playerController.inputHandler.sprintFlag)
+            {
+                speed = sprintSpeed;
+                isSprinting = true;
+                moveDirection *= speed;
+            }
+            else
+            {
+                moveDirection *= speed;
+            }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             characterModel.velocity = projectedVelocity;
 
-            playerController.HandleMovementAnimation(playerController.inputHandler.moveAmount);
+            playerController.HandleMovementAnimation(playerController.inputHandler.moveAmount, isSprinting);
 
             if (playerController.animatorManager.canRotate)
             {
                 HandleRotation(delta);
             }
+        }
+
+        public void HandleRollAndSprint(float delta)
+        {
+            if (playerController.inputHandler.rollFlag)
+            {
+                moveDirection = cameraObject.forward * playerController.inputHandler.vertical;
+                moveDirection += cameraObject.right * playerController.inputHandler.horizontal;
+
+                if (playerController.inputHandler.moveAmount > 0)
+                {
+                    playerController.animatorManager.PlayTargetAnimation("Roll", true);
+                    moveDirection.y = 0;
+                    Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                    myTransform.rotation = rollRotation;
+                }
+                else
+                {
+                    playerController.DoAnimation("Backstep", true);
+                    //playerController.DoAnimation("OH_Heavy_Attack_1", true);
+                }
+            }
+
+            
+
+            Debug.Log("myTransform = " + transform.position);
         }
 
         private void HandleRotation(float delta)
@@ -100,29 +141,6 @@ namespace J
             myTransform.rotation = targetRotation;
         }
 
-        public void DoJump()
-        {
-            characterModel.AddForce(Vector3.up * jumpVal);
-        }
-
-        public void DoRoll(float moveAmount, float vertical, float horizontal)
-        {
-            moveDirection = cameraObject.forward * vertical;
-            moveDirection += cameraObject.right * horizontal;
-
-            if (moveAmount > 0)
-            {
-                playerController.animatorManager.PlayTargetAnimation("Roll", true);
-                moveDirection.y = 0;
-                Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
-                transform.rotation = rollRotation;
-            }
-            else
-            {
-                return;
-            }
-
-        }
         #endregion
     }
 }

@@ -22,7 +22,11 @@ namespace J
         public bool rt_input;
         
         public bool b_input;
+
         public bool rollFlag;
+        public bool sprintFlag;
+        public float rollInputTimer;
+        public bool isInteracting;
 
         private void Awake()
         {
@@ -64,10 +68,12 @@ namespace J
 
         public void TickInput(float delta)
         {
-            MoveInput(delta);
+            HandleMoveInput(delta);
+            HandleRollInput(delta);
+            //HandleAttackInput(delta);
         }
 
-        private void MoveInput(float delta)
+        private void HandleMoveInput(float delta)
         {
             horizontal = movementInput.x;
             vertical = movementInput.y;
@@ -79,18 +85,29 @@ namespace J
             playerController.DoMovement(delta);
         }
 
-        public void RollInput(float delta)
+        private void HandleRollInput(float delta)
         {
             b_input = playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
 
             if (b_input)
             {
-                rollFlag = true;
-                playerController.HandleRoll();
+                rollInputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                if (rollInputTimer > 0 && rollInputTimer < 0.5)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                    playerController.DoRoll(delta);
+                }
+
+                rollInputTimer = 0;
             }
         }
   
-        private void AttackInput()
+        private void HandleAttackInput(float delta)
         {
             playerInputActions.PlayerActions.LightAttack.performed += i => rb_input = true;
             playerInputActions.PlayerActions.HeavyAttack.performed += i => rt_input = true;

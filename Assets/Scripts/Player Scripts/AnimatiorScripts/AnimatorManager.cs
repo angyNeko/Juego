@@ -27,18 +27,16 @@ namespace J
             //OnAnimatorMove();
         }
 
-        public void PlayTargetAnimation(string targetAnimaation, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
             anim.applyRootMotion = isInteracting;
             anim.SetBool("isInteracting", isInteracting);
             //OnAnimatorMove();
-            anim.CrossFade(targetAnimaation, 0.2f);
+            anim.CrossFade(targetAnimation, 0.1f);
         }
 
         public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)
         {
-
-
             #region Snapped horizontal
             float snappedHorizontal = 0;
 
@@ -89,6 +87,12 @@ namespace J
             }
             #endregion
 
+            if (isSprinting)
+            {
+                snappedVertical = 2;
+                snappedHorizontal = horizontalMovement;
+            }
+
             anim.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
             anim.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
         }
@@ -105,7 +109,7 @@ namespace J
         /*
         private void OnAnimatorMove()
         {
-            if (playerController.isInteracting == false)
+            if (playerController.inputHandler.isInteracting == false)
                 return;
 
             float delta = Time.deltaTime;
