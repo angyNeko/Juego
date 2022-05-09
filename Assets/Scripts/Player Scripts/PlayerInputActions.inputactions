@@ -241,9 +241,9 @@
             "id": "115e16a4-55d4-4da4-9d6c-99313304d479",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "NextButton",
                     "type": "Button",
-                    "id": "4084df4e-e9ad-485e-9762-c92fa5142fb0",
+                    "id": "b127e639-13be-4e19-b569-7faaa473ccce",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -253,12 +253,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "36272c8e-4467-43a1-b9e0-0c5afe515cdb",
-                    "path": "",
+                    "id": "2b21aa5a-dd75-4b07-b345-c34721b6c97b",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "New action",
+                    "action": "NextButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "101eebb8-b0fe-4829-81ed-bdf89f34b192",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "NextButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

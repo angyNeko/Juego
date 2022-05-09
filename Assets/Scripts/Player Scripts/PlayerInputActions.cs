@@ -263,9 +263,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""id"": ""115e16a4-55d4-4da4-9d6c-99313304d479"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""NextButton"",
                     ""type"": ""Button"",
-                    ""id"": ""4084df4e-e9ad-485e-9762-c92fa5142fb0"",
+                    ""id"": ""b127e639-13be-4e19-b569-7faaa473ccce"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -275,12 +275,23 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""36272c8e-4467-43a1-b9e0-0c5afe515cdb"",
-                    ""path"": """",
+                    ""id"": ""2b21aa5a-dd75-4b07-b345-c34721b6c97b"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""New action"",
+                    ""action"": ""NextButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""101eebb8-b0fe-4829-81ed-bdf89f34b192"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""NextButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -329,7 +340,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
-        m_UI_Newaction = m_UI.FindAction("New action", throwIfNotFound: true);
+        m_UI_NextButton = m_UI.FindAction("NextButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -487,12 +498,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
-    private readonly InputAction m_UI_Newaction;
+    private readonly InputAction m_UI_NextButton;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
         public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_UI_Newaction;
+        public InputAction @NextButton => m_Wrapper.m_UI_NextButton;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -502,16 +513,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNewaction;
+                @NextButton.started -= m_Wrapper.m_UIActionsCallbackInterface.OnNextButton;
+                @NextButton.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnNextButton;
+                @NextButton.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnNextButton;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @NextButton.started += instance.OnNextButton;
+                @NextButton.performed += instance.OnNextButton;
+                @NextButton.canceled += instance.OnNextButton;
             }
         }
     }
@@ -548,6 +559,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     }
     public interface IUIActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnNextButton(InputAction.CallbackContext context);
     }
 }

@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace J
 {
     public class InputHandler : MonoBehaviour
     {
-        PlayerInputActions playerInputActions;
+        public PlayerInputActions playerInputActions;
         PlayerController playerController;
+        [SerializeField]
+        DialougeManager dialougeManager;
+        public Cinemachine.CinemachineInputProvider cinemachineInputProvider;
+
+        public bool isInTutorial;
 
         Vector2 movementInput;
-        Vector2 cameraInput;
+        public Vector2 cameraInput;
+
 
         public float vertical;
         public float horizontal;
@@ -28,6 +36,9 @@ namespace J
         public float rollInputTimer;
         public bool isInteracting;
 
+        public bool isInUI;
+        public Button nextButton;
+
         private void Awake()
         {
             playerController = GetComponent<PlayerController>();
@@ -35,6 +46,9 @@ namespace J
 
         private void OnEnable()
         {
+            if (isInTutorial)
+                return;
+
             if (playerInputActions == null)
             {
                 playerInputActions = new PlayerInputActions(); 
@@ -45,7 +59,7 @@ namespace J
             playerInputActions.Enable();
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             playerInputActions.Disable();
         }
@@ -53,7 +67,21 @@ namespace J
         private void Update()
         {
             float delta = Time.deltaTime;
+
+            if (isInUI)
+            {
+                UIInputs();
+                cinemachineInputProvider.enabled = false;
+                return;
+            }
+
             TickInput(delta);
+            cinemachineInputProvider.enabled = true;
+
+            Debug.Log("Player Movement enabled: " + playerInputActions.PlayerMovement.enabled);
+
+            // Experimental
+            GetComponent<CapsuleCollider>().enabled = !isInteracting;
         }
 
         private void FixedUpdate()
@@ -68,11 +96,15 @@ namespace J
 
         public void TickInput(float delta)
         {
+            if (isInUI)
+                return;
+
             HandleMoveInput(delta);
             HandleRollInput(delta);
             //HandleAttackInput(delta);
         }
 
+        #region Movements
         private void HandleMoveInput(float delta)
         {
             horizontal = movementInput.x;
@@ -101,6 +133,7 @@ namespace J
                     sprintFlag = false;
                     rollFlag = true;
                     playerController.DoRoll(delta);
+                    GetComponent<CapsuleCollider>().enabled = false;
                 }
 
                 rollInputTimer = 0;
@@ -124,11 +157,26 @@ namespace J
             }
         }
 
+        #endregion
+        
         private void LateUpdate()
         {
             rb_input = false;
             rt_input = false;
         }
+
+        #region Ui
+
+        public void UIInputs()
+        {
+            playerInputActions.UI.NextButton.performed += i => HandleUINextInput();
+        }
+        public void HandleUINextInput()
+        {
+            //dialougeManager.DisplayNextSentence();
+            nextButton.onClick.Invoke();
+        }
+        #endregion
     }
 
 }
