@@ -5,7 +5,7 @@ using UnityEngine;
 namespace J
 {
     [System.Serializable]
-    public class Dialouge
+    public class Dialogue
     {
         public string name;
 

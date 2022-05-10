@@ -11,12 +11,12 @@ namespace J
         public PlayerInputActions playerInputActions;
         PlayerController playerController;
         [SerializeField]
-        DialougeManager dialougeManager;
+        DialogueManager dialogueManager;
         public Cinemachine.CinemachineInputProvider cinemachineInputProvider;
 
         public bool isInTutorial;
 
-        Vector2 movementInput;
+        public Vector2 movementInput;
         public Vector2 cameraInput;
 
 
@@ -26,11 +26,12 @@ namespace J
         public float cameraX;
         public float cameraY;
         
+        [Header("Input buttons")]
         public bool rb_input;
         public bool rt_input;
-        
         public bool b_input;
 
+        [Header("Flags")]
         public bool rollFlag;
         public bool sprintFlag;
         public float rollInputTimer;
@@ -51,7 +52,7 @@ namespace J
 
             if (playerInputActions == null)
             {
-                playerInputActions = new PlayerInputActions(); 
+                playerInputActions = new PlayerInputActions();
                 playerInputActions.PlayerMovement.Movement.performed += playerInputActions => movementInput = playerInputActions.ReadValue<Vector2>();
                 playerInputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
             }
@@ -78,8 +79,6 @@ namespace J
             TickInput(delta);
             cinemachineInputProvider.enabled = true;
 
-            Debug.Log("Player Movement enabled: " + playerInputActions.PlayerMovement.enabled);
-
             // Experimental
             GetComponent<CapsuleCollider>().enabled = !isInteracting;
         }
@@ -88,10 +87,6 @@ namespace J
         {
             float fdelta = Time.fixedDeltaTime;
 
-            if (playerController.cameraHandler != null)
-            {
-                playerController.DoCamera(fdelta);
-            }
         }
 
         public void TickInput(float delta)
@@ -173,8 +168,7 @@ namespace J
         }
         public void HandleUINextInput()
         {
-            //dialougeManager.DisplayNextSentence();
-            nextButton.onClick.Invoke();
+            dialogueManager.DisplayNextSentence();
         }
         #endregion
     }

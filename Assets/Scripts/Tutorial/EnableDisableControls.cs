@@ -6,29 +6,61 @@ namespace J
 {
     public class EnableDisableControls : MonoBehaviour
     {
-        public Cinemachine.CinemachineInputProvider inputProvider;
+        [Header("Components")]
+        DialogueTrigger dialogueTrigger;
+
+        [Header("Flags")]
+        [SerializeField]
+        public bool triggerDialogue;
+        [SerializeField]
+        bool Tutorial;
+
+        [Header("Controls to enable")]
+        [SerializeField]
+        bool allControls;
+        [SerializeField]
+        bool Camera;
+        [SerializeField]
+        bool Movement;
+        [SerializeField]
+        bool Sprint;
+
         InputHandler inputHandler;
 
-        bool playerMovedCamera;
-        Vector2 cameraInput;
-
-        float yInputCamera;
-
-        private void OnTriggerEnter(Collider other)
+        private void Start()
         {
-            inputHandler = other.GetComponent<InputHandler>();
-
-            if (inputHandler != null)
-            {
-                EnableCamera();
-            }
+            dialogueTrigger = GetComponent<DialogueTrigger>();
+            inputHandler = GameObject.Find("MainChar").GetComponent<InputHandler>();
         }
 
-        private void EnableCamera()
+        public void TriggerEvent()
         {
-            inputHandler.isInTutorial = true;
-            inputHandler.playerInputActions.PlayerMovement.Camera.Enable();
-            inputHandler.playerInputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+            if (inputHandler == null)
+                return;
+
+            if (triggerDialogue)
+            {
+                dialogueTrigger.TriggerDialouge();
+            }
+
+            inputHandler.isInTutorial = Tutorial;
+
+            if (allControls)
+            {
+                inputHandler.playerInputActions.PlayerMovement.Enable();
+                inputHandler.playerInputActions.PlayerActions.Enable();
+            }
+
+            if (Camera)
+                inputHandler.playerInputActions.PlayerMovement.Camera.Enable();
+
+            if (Movement)
+
+                inputHandler.playerInputActions.PlayerMovement.Movement.Enable();
+
+            if (Sprint)
+
+                inputHandler.playerInputActions.PlayerActions.Roll.Enable();
         }
     }
 }

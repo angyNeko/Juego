@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckpontEnter : MonoBehaviour
+namespace J
 {
-    GameObject chekcpoint;
-
-    private void Start()
+    public class CheckpontEnter : MonoBehaviour
     {
-        chekcpoint = GameObject.Find("Checkpoint");
-    }
+        [Header("Flags")]
+        [SerializeField]
+        bool stopPlayer;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(chekcpoint);
+        [SerializeField]
+        GameObject chekcpoint;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(chekcpoint);
+            EnableDisableControls enableDisable = GetComponent<EnableDisableControls>();
+            if (enableDisable == null)
+                GetComponent<DialogueTrigger>().TriggerDialouge();
+                return;
+
+            enableDisable.triggerDialogue = true;
+            enableDisable.TriggerEvent();
+        }
     }
 }

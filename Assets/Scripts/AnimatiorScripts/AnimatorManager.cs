@@ -93,6 +93,12 @@ namespace J
                 snappedHorizontal = horizontalMovement;
             }
 
+            if (playerController.dialogued)
+            {
+                snappedHorizontal = 0f;
+                snappedVertical = 0f;
+            }
+
             anim.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
             anim.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
         }

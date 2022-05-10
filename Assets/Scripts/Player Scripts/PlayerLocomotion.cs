@@ -23,6 +23,7 @@ namespace J
         public GameObject normalCamera;
 
         #region stats
+        [Header("Movement Stats")]
         [Header("Stats")]
         [SerializeField]
         float moveSpeed = 1.5f;

@@ -26,6 +26,8 @@ namespace J
         public bool isInteracting;
         float delta;
 
+        public bool dialogued;
+
         public Transform playerCTransform;
 
         #region Unity Built-in
@@ -58,6 +60,16 @@ namespace J
             playerLocomotion.isSprinting = inputHandler.b_input;
 
             inputHandler.TickInput(delta);
+
+            if (dialogued)
+            {
+                inputHandler.horizontal = 0f;
+                inputHandler.vertical = 0f;
+                inputHandler.moveAmount = 0f;
+                inputHandler.movementInput = Vector2.zero;
+                return;
+            }
+
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
 
@@ -69,6 +81,13 @@ namespace J
 
         public void DoMovement(float delta)
         {
+            if (dialogued)
+            {
+                inputHandler.vertical = 0;
+                inputHandler.horizontal = 0;
+                return;
+            }
+
             playerLocomotion.HandleMovement(delta);
         }
 
