@@ -21,6 +21,15 @@ namespace J
             healthBar.SetMaxHealth(maxHealth);
         }
 
+        private void Update()
+        {
+            if (healthBar.slider.value == 0)
+            {
+                animatorManager.PlayTargetAnimation("Dead", true);
+                GameObject.Find("Respawn Manager").GetComponent<RespawnManager>().Invoke("TriggerRespawn", 5f);
+            }
+        }
+
         private int SetMaxHealthFromHealthLevel()
         {
             maxHealth = healthLevel * 10;
@@ -41,8 +50,23 @@ namespace J
 
         public void Heal(int heal)
         {
-            currentHealth = currentHealth + heal;
+            if (heal <= currentHealth)
+            {
+                currentHealth = currentHealth + heal;
+            }
+
+            else
+            {
+                currentHealth = maxHealth;
+            }
+
             healthBar.SetCurrentHealth(currentHealth);
+        }
+
+        public void Revive()
+        {
+            healthBar.SetCurrentHealth(maxHealth);
+            animatorManager.PlayTargetAnimation("Revive", true);
         }
     }
 }

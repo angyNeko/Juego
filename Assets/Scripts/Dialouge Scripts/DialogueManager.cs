@@ -1,24 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 namespace J
 {
     public class DialogueManager : MonoBehaviour
     {
+        [Header("Managed by script")]
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI dialogueText;
-        public GameObject dialogueBoxContainer;
-        public GameObject dialogueBox;
-
         public GameObject dBoxClone;
 
+        [Header("Reference Objects")]
+        public GameObject dialogueBoxContainer;
+        public GameObject dialogueBox;
         public InputHandler inputHandler;
         public PlayerController playerController;
+        [SerializeField]
+        TimerManager timerManager;
+
+        [Header("Flags")]
+        public bool timerTrigger;
 
         private Queue<string> sentences;
+
+
+        bool dboxAvailable;
 
         private void Start()
         {
@@ -27,7 +35,12 @@ namespace J
 
         public void StartDialouge(Dialogue dialogue)
         {
-            dBoxClone = Instantiate(dialogueBox, dialogueBoxContainer.transform) as GameObject;
+            if (!dboxAvailable)
+            {
+                dBoxClone = Instantiate(dialogueBox, dialogueBoxContainer.transform) as GameObject;
+                dboxAvailable = true;
+            }
+
             nameText = GameObject.Find("Name").GetComponent<TextMeshProUGUI>();
             dialogueText = GameObject.Find("Dialouge").GetComponent<TextMeshProUGUI>();
             StopPlayerFirst();
@@ -48,7 +61,7 @@ namespace J
         {
             if (sentences.Count == 0)
             {
-                EndDialouge();
+                EndDialogue();
                 return;
             }
 
@@ -57,15 +70,22 @@ namespace J
             Debug.Log("Next sentence: " + sentence);
         }
 
-        public void EndDialouge()
+        public void EndDialogue()
+        {
+            ReEnableControls();
+            Destroy(dBoxClone);
+            dboxAvailable = false;
+
+            if (timerTrigger)
+                timerManager.Invoke("CloneTimer", 0.75f);
+        }
+
+        public void ReEnableControls()
         {
             playerController.dialogued = false;
             inputHandler.playerInputActions.UI.Disable();
             inputHandler.playerInputActions.PlayerMovement.Enable();
             inputHandler.isInUI = false;
-
-            Destroy(dBoxClone);
-            Debug.Log("End of conversation");
         }
 
         private void StopPlayerFirst()

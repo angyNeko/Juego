@@ -24,6 +24,54 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     ""name"": ""PlayerInputActions"",
     ""maps"": [
         {
+            ""name"": ""BaseUI"",
+            ""id"": ""8058367f-2bf6-4780-a305-c531afbe22f9"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8f26ac9-ffd8-4c1a-8dbe-ea3e8ada68d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a37d6ffb-09ef-402e-935a-9fc1fa986fec"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d0d99b33-d8cd-4520-bae0-dbde82dd4078"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d14ec8e6-3d94-4a46-aa75-31c05334916d"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""PlayerMovement"",
             ""id"": ""63f27eb4-6f06-4160-9a30-699bccb3c761"",
             ""actions"": [
@@ -328,6 +376,10 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         }
     ]
 }");
+        // BaseUI
+        m_BaseUI = asset.FindActionMap("BaseUI", throwIfNotFound: true);
+        m_BaseUI_Interact = m_BaseUI.FindAction("Interact", throwIfNotFound: true);
+        m_BaseUI_Pause = m_BaseUI.FindAction("Pause", throwIfNotFound: true);
         // PlayerMovement
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
@@ -396,6 +448,47 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         return asset.FindBinding(bindingMask, out action);
     }
+
+    // BaseUI
+    private readonly InputActionMap m_BaseUI;
+    private IBaseUIActions m_BaseUIActionsCallbackInterface;
+    private readonly InputAction m_BaseUI_Interact;
+    private readonly InputAction m_BaseUI_Pause;
+    public struct BaseUIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public BaseUIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_BaseUI_Interact;
+        public InputAction @Pause => m_Wrapper.m_BaseUI_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_BaseUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BaseUIActions set) { return set.Get(); }
+        public void SetCallbacks(IBaseUIActions instance)
+        {
+            if (m_Wrapper.m_BaseUIActionsCallbackInterface != null)
+            {
+                @Interact.started -= m_Wrapper.m_BaseUIActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_BaseUIActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_BaseUIActionsCallbackInterface.OnInteract;
+                @Pause.started -= m_Wrapper.m_BaseUIActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_BaseUIActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_BaseUIActionsCallbackInterface.OnPause;
+            }
+            m_Wrapper.m_BaseUIActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+            }
+        }
+    }
+    public BaseUIActions @BaseUI => new BaseUIActions(this);
 
     // PlayerMovement
     private readonly InputActionMap m_PlayerMovement;
@@ -544,6 +637,11 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
             if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
+    }
+    public interface IBaseUIActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPlayerMovementActions
     {

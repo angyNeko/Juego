@@ -47,9 +47,6 @@ namespace J
 
         private void OnEnable()
         {
-            if (isInTutorial)
-                return;
-
             if (playerInputActions == null)
             {
                 playerInputActions = new PlayerInputActions();
@@ -58,6 +55,10 @@ namespace J
             }
 
             playerInputActions.Enable();
+
+
+            if (isInTutorial)
+                OnDisable();
         }
 
         public void OnDisable()
@@ -114,13 +115,19 @@ namespace J
 
         private void HandleRollInput(float delta)
         {
-            b_input = playerInputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            if (!playerInputActions.PlayerActions.Roll.enabled)
+                return;
+
+            playerInputActions.PlayerActions.Roll.started += i => b_input = true;
+            playerInputActions.PlayerActions.Roll.canceled += i => b_input = false;
 
             if (b_input)
             {
                 rollInputTimer += delta;
                 sprintFlag = true;
+                playerController.animatorManager.UpdateAnimatorValues(horizontal, vertical, true);
             }
+
             else
             {
                 if (rollInputTimer > 0 && rollInputTimer < 0.5)

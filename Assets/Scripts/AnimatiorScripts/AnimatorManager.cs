@@ -32,7 +32,7 @@ namespace J
             anim.applyRootMotion = isInteracting;
             anim.SetBool("isInteracting", isInteracting);
             //OnAnimatorMove();
-            anim.CrossFade(targetAnimation, 0.1f);
+            anim.CrossFade(targetAnimation, 0.01f);
         }
 
         public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)

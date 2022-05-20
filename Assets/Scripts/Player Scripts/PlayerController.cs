@@ -27,6 +27,7 @@ namespace J
         float delta;
 
         public bool dialogued;
+        public bool interactNear;
 
         public Transform playerCTransform;
 
@@ -73,7 +74,7 @@ namespace J
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
 
-            inputHandler.sprintFlag = false;
+            inputHandler.sprintFlag = inputHandler.b_input;
         }
         #endregion
 

@@ -2,6 +2,54 @@
     "name": "PlayerInputActions",
     "maps": [
         {
+            "name": "BaseUI",
+            "id": "8058367f-2bf6-4780-a305-c531afbe22f9",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "b8f26ac9-ffd8-4c1a-8dbe-ea3e8ada68d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "a37d6ffb-09ef-402e-935a-9fc1fa986fec",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d0d99b33-d8cd-4520-bae0-dbde82dd4078",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d14ec8e6-3d94-4a46-aa75-31c05334916d",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "PlayerMovement",
             "id": "63f27eb4-6f06-4160-9a30-699bccb3c761",
             "actions": [

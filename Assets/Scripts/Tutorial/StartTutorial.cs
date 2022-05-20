@@ -10,10 +10,10 @@ namespace J {
 
         private void OnTriggerEnter(Collider other)
         {
+            Destroy(startTutorial);
             EnableDisableControls enableDisableControls = GetComponent<EnableDisableControls>();
             enableDisableControls.triggerDialogue = true;
             enableDisableControls.TriggerEvent();
-            Destroy(startTutorial);
         }
     }
 }

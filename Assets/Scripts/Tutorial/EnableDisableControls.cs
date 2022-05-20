@@ -24,6 +24,8 @@ namespace J
         bool Movement;
         [SerializeField]
         bool Sprint;
+        [SerializeField]
+        bool baseUI;
 
         InputHandler inputHandler;
 
@@ -49,18 +51,20 @@ namespace J
             {
                 inputHandler.playerInputActions.PlayerMovement.Enable();
                 inputHandler.playerInputActions.PlayerActions.Enable();
+                inputHandler.playerInputActions.BaseUI.Enable();
             }
 
             if (Camera)
                 inputHandler.playerInputActions.PlayerMovement.Camera.Enable();
 
             if (Movement)
-
                 inputHandler.playerInputActions.PlayerMovement.Movement.Enable();
 
             if (Sprint)
-
                 inputHandler.playerInputActions.PlayerActions.Roll.Enable();
+
+            if (baseUI)
+                inputHandler.playerInputActions.BaseUI.Enable();
         }
     }
 }
