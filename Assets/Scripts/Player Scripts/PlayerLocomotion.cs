@@ -7,12 +7,19 @@ namespace J
 {
     public class PlayerLocomotion : MonoBehaviour
     {
+
         #region Imports
         [HideInInspector]
         PlayerController playerController;
         #endregion
 
-        Vector3 moveDirection;
+        [Header("PlayerVel")]
+        [SerializeField]
+        float x;
+        [SerializeField]
+        float y;
+
+        public Vector3 moveDirection;
         CapsuleCollider capsuleCollider;
         Transform cameraObject;
 
@@ -23,8 +30,19 @@ namespace J
         public GameObject normalCamera;
 
         #region stats
+        [Header("Ground & Air Detection Stats")]
+        [SerializeField]
+        float groundDetectionRayStartPoint = 0.5f;
+        [SerializeField]
+        float minDistanceToBeginFall = 1f;
+        [SerializeField]
+        float groundDirectionRayDistance = 0.2f;
+        LayerMask ignoreForGroundCheck;
+        public float inAirTimer;
+        [SerializeField]
+        float maxDist;
+
         [Header("Movement Stats")]
-        [Header("Stats")]
         [SerializeField]
         float moveSpeed = 1.5f;
         [SerializeField] 
@@ -33,12 +51,12 @@ namespace J
         float runSpeed = 7;
         [SerializeField]
         float sprintSpeed = 20;
-        [SerializeField] 
+        [SerializeField]
+        float fallSpeed = 45;
+        [SerializeField]
         float jumpVal = 7;
         [SerializeField] 
         float rotationSpeed = 10;
-        [SerializeField]
-        public bool isSprinting;
         #endregion
 
         float rollRotation;
@@ -50,6 +68,9 @@ namespace J
             playerController = GetComponent<PlayerController>();
             cameraObject = Camera.main.transform;
             myTransform = transform;
+
+            playerController.isGrounded = true;
+            ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
         }
 
         #region Movement
@@ -58,6 +79,8 @@ namespace J
 
         public void HandleMovement(float delta)
         {
+            if (playerController.inputHandler.rollFlag)
+                return;
             if (playerController.animator.GetBool("isInteracting"))
                 return;
 
@@ -66,16 +89,15 @@ namespace J
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-
             float speed = moveSpeed;
 
 
-            if (playerController.inputHandler.sprintFlag)
+            if (playerController.isSprinting)
             {
                 speed = sprintSpeed;
-                isSprinting = true;
                 moveDirection *= speed;
             }
+
             else
             {
                 moveDirection *= speed;
@@ -84,7 +106,10 @@ namespace J
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             characterModel.velocity = projectedVelocity;
 
-            playerController.HandleMovementAnimation(playerController.inputHandler.moveAmount, isSprinting);
+            playerController.HandleMovementAnimation(playerController.inputHandler.moveAmount, playerController.isSprinting);
+
+            x = projectedVelocity.x;
+            y = projectedVelocity.y;
 
             if (playerController.animatorManager.canRotate)
             {
@@ -140,6 +165,86 @@ namespace J
             Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
 
             myTransform.rotation = targetRotation;
+        }
+
+        public void HandleFallingAnimation(float delta, Vector3 moveDirection)
+        {
+            playerController.isGrounded = true;
+            RaycastHit hit;
+            Vector3 origin = myTransform.position;
+            origin.y += groundDetectionRayStartPoint;
+
+            if (Physics.Raycast(origin, myTransform.forward, out hit, maxDist))
+            {
+                moveDirection = Vector3.zero;
+            }
+
+            if (playerController.isInAir)
+            {
+                characterModel.AddForce(-Vector3.up * fallSpeed);
+                characterModel.AddForce(moveDirection * fallSpeed / 10f);
+            }
+
+            Vector3 dir = moveDirection;
+            dir.Normalize();
+            origin = origin + dir * groundDirectionRayDistance;
+
+            targetPosition = myTransform.position;
+
+            Debug.DrawRay(origin, -Vector3.up * groundDetectionRayStartPoint, Color.yellow, 2, false);
+            //Debug.DrawRay(origin, -Vector3.up * minDistanceToBeginFall, Color.red, 0.3f, false);
+            if (Physics.Raycast(origin, -Vector3.up, out hit, minDistanceToBeginFall, ignoreForGroundCheck))
+            {
+                normalVector = hit.normal;
+                Vector3 tp = hit.point;
+                playerController.isGrounded = true;
+                targetPosition.y = tp.y;
+
+                if (playerController.isInAir)
+                {
+                    if (inAirTimer > 0.5f)
+                    {
+                        Debug.Log("Air Time: " + inAirTimer);
+                        playerController.DoAnimation("Landing", true);
+                    }
+                    else
+                    {
+                        playerController.DoAnimation("Empty", false);
+                        inAirTimer = 0;
+                    }
+
+                    playerController.isInAir = false;
+                }
+            }
+            else
+            {
+                if (playerController.isGrounded)
+                {
+                    playerController.isGrounded = false;
+                }
+
+                if (playerController.isInAir == false)
+                {
+                    if (playerController.isInteracting == false)
+                    {
+                        playerController.DoAnimation("Falling", true);
+                    }
+
+                    Vector3 vel = characterModel.velocity;
+                    vel.Normalize();
+                    characterModel.velocity = vel * (moveSpeed / 2);
+                    playerController.isInAir = true;
+                }
+            }
+
+            if (playerController.isInteracting || playerController.inputHandler.moveAmount > 0)
+            {
+                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+            }
+            else
+            {
+                myTransform.position = targetPosition;
+            }
         }
 
         #endregion

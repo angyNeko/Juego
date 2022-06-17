@@ -175,7 +175,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "LightAttack",
+                    "name": "RB",
                     "type": "Button",
                     "id": "e6e3f76f-1f0d-4253-b498-212f5b50afc8",
                     "expectedControlType": "Button",
@@ -184,7 +184,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HeavyAttack",
+                    "name": "RT",
                     "type": "Button",
                     "id": "56fbe4e8-d31a-4939-abcc-9291e8ec7c4e",
                     "expectedControlType": "Button",
@@ -245,7 +245,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
-                    "action": "LightAttack",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -256,7 +256,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "LightAttack",
+                    "action": "RB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -267,7 +267,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
-                    "action": "HeavyAttack",
+                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -278,7 +278,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "HeavyAttack",
+                    "action": "RT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

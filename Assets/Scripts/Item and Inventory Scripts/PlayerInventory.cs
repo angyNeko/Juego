@@ -9,19 +9,18 @@ namespace J
         WeaponSlotManager weaponSlotManager;
         WeaponHolderSlot weaponHolderSlot;
 
-        public WeaponItem rightHandWeapon;
         public WeaponItem leftHandWeapon;
+        public WeaponItem rightHandWeapon;
 
         private void Awake()
         {
             weaponSlotManager = GetComponent<WeaponSlotManager>();
-
         }
 
         private void Start()
         {
-            weaponSlotManager.LoadWeaponOnSlot(rightHandWeapon, false);
             weaponSlotManager.LoadWeaponOnSlot(leftHandWeapon, true);
+            weaponSlotManager.LoadWeaponOnSlot(rightHandWeapon, false);
         }
     }
 }

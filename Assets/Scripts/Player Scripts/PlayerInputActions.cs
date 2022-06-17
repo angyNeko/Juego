@@ -197,7 +197,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""LightAttack"",
+                    ""name"": ""RB"",
                     ""type"": ""Button"",
                     ""id"": ""e6e3f76f-1f0d-4253-b498-212f5b50afc8"",
                     ""expectedControlType"": ""Button"",
@@ -206,7 +206,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""HeavyAttack"",
+                    ""name"": ""RT"",
                     ""type"": ""Button"",
                     ""id"": ""56fbe4e8-d31a-4939-abcc-9291e8ec7c4e"",
                     ""expectedControlType"": ""Button"",
@@ -267,7 +267,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseKeyboard"",
-                    ""action"": ""LightAttack"",
+                    ""action"": ""RB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -278,7 +278,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""LightAttack"",
+                    ""action"": ""RB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,7 +289,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""MouseKeyboard"",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -300,7 +300,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""HeavyAttack"",
+                    ""action"": ""RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -388,8 +388,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
-        m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
-        m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
+        m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_NextButton = m_UI.FindAction("NextButton", throwIfNotFound: true);
@@ -536,16 +536,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Roll;
-    private readonly InputAction m_PlayerActions_LightAttack;
-    private readonly InputAction m_PlayerActions_HeavyAttack;
+    private readonly InputAction m_PlayerActions_RB;
+    private readonly InputAction m_PlayerActions_RT;
     public struct PlayerActionsActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActionsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
-        public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
-        public InputAction @HeavyAttack => m_Wrapper.m_PlayerActions_HeavyAttack;
+        public InputAction @RB => m_Wrapper.m_PlayerActions_RB;
+        public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -561,12 +561,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Roll.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
                 @Roll.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
                 @Roll.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRoll;
-                @LightAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
-                @LightAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
-                @LightAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
-                @HeavyAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
-                @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
-                @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
+                @RB.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
+                @RB.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
+                @RB.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRB;
+                @RT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
+                @RT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
+                @RT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -577,12 +577,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Roll.started += instance.OnRoll;
                 @Roll.performed += instance.OnRoll;
                 @Roll.canceled += instance.OnRoll;
-                @LightAttack.started += instance.OnLightAttack;
-                @LightAttack.performed += instance.OnLightAttack;
-                @LightAttack.canceled += instance.OnLightAttack;
-                @HeavyAttack.started += instance.OnHeavyAttack;
-                @HeavyAttack.performed += instance.OnHeavyAttack;
-                @HeavyAttack.canceled += instance.OnHeavyAttack;
+                @RB.started += instance.OnRB;
+                @RB.performed += instance.OnRB;
+                @RB.canceled += instance.OnRB;
+                @RT.started += instance.OnRT;
+                @RT.performed += instance.OnRT;
+                @RT.canceled += instance.OnRT;
             }
         }
     }
@@ -652,8 +652,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnJump(InputAction.CallbackContext context);
         void OnRoll(InputAction.CallbackContext context);
-        void OnLightAttack(InputAction.CallbackContext context);
-        void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnRB(InputAction.CallbackContext context);
+        void OnRT(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

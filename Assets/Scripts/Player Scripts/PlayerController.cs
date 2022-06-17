@@ -23,8 +23,11 @@ namespace J
         [HideInInspector]
         public CameraHandler cameraHandler;
 
+        [Header("Player Flags")]
         public bool isInteracting;
-        float delta;
+        public bool isSprinting;
+        public bool isInAir;
+        public bool isGrounded;
 
         public bool dialogued;
         public bool interactNear;
@@ -58,10 +61,19 @@ namespace J
 
             inputHandler.isInteracting = animator.GetBool("isInteracting");
             inputHandler.rollFlag = false;
-            playerLocomotion.isSprinting = inputHandler.b_input;
+            isSprinting = inputHandler.b_input;
 
             inputHandler.TickInput(delta);
 
+            playerLocomotion.HandleMovement(delta);
+            playerLocomotion.HandleRollAndSprint(delta);
+            playerLocomotion.HandleFallingAnimation(delta, playerLocomotion.moveDirection) ;
+
+            inputHandler.sprintFlag = inputHandler.b_input;
+        }
+
+        private void FixedUpdate()
+        {
             if (dialogued)
             {
                 inputHandler.horizontal = 0f;
@@ -71,10 +83,20 @@ namespace J
                 return;
             }
 
-            playerLocomotion.HandleMovement(delta);
-            playerLocomotion.HandleRollAndSprint(delta);
+            isInteracting = animator.GetBool("isInteracting");
+        }
 
-            inputHandler.sprintFlag = inputHandler.b_input;
+        private void LateUpdate()
+        {
+            inputHandler.rollFlag = false;
+            inputHandler.sprintFlag = false;
+            inputHandler.rb_input = false;
+            inputHandler.rt_input = false;
+            
+            if (isInAir)
+            {
+                playerLocomotion.inAirTimer += Time.deltaTime;
+            }
         }
         #endregion
 
@@ -116,23 +138,6 @@ namespace J
             
             playerLocomotion.HandleRollAndSprint(delta);
         }        
-        #endregion
-
-        #region Combat Related
-        public void HandleAttack(string attackType)
-        {
-            if (attackType == "light")
-            {
-                playerAttacker.HandleLightAttack(playerInventory.rightHandWeapon);
-                Debug.Log("Light Attack");
-            }
-
-            if (attackType == "heavy")
-            {
-                playerAttacker.HandleHeavyAttack(playerInventory.rightHandWeapon);
-                Debug.Log("Heavy Attack");
-            }
-        }
 
         public void HandleDamage(int damage)
         {

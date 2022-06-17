@@ -54,8 +54,8 @@ namespace J
                 model.transform.localRotation = Quaternion.identity;
                 model.transform.localScale = Vector3.one;
             }
-
-            currentWeaponModel = model;
+            
+            currentWeaponModel = model; 
         }
     }
 }

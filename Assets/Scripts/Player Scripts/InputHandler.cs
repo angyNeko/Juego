@@ -9,6 +9,8 @@ namespace J
     public class InputHandler : MonoBehaviour
     {
         public PlayerInputActions playerInputActions;
+        PlayerAttacker playerAttacker;
+        PlayerInventory playerInventory;
         PlayerController playerController;
         [SerializeField]
         DialogueManager dialogueManager;
@@ -18,7 +20,6 @@ namespace J
 
         public Vector2 movementInput;
         public Vector2 cameraInput;
-
 
         public float vertical;
         public float horizontal;
@@ -43,6 +44,8 @@ namespace J
         private void Awake()
         {
             playerController = GetComponent<PlayerController>();
+            playerAttacker = GetComponent<PlayerAttacker>();
+            playerInventory = GetComponent<PlayerInventory>();
         }
 
         private void OnEnable()
@@ -97,7 +100,7 @@ namespace J
 
             HandleMoveInput(delta);
             HandleRollInput(delta);
-            //HandleAttackInput(delta);
+            HandleAttackInput(delta);
         }
 
         #region Movements
@@ -121,7 +124,7 @@ namespace J
             playerInputActions.PlayerActions.Roll.started += i => b_input = true;
             playerInputActions.PlayerActions.Roll.canceled += i => b_input = false;
 
-            if (b_input)
+            if (b_input && moveAmount > 0.5f)
             {
                 rollInputTimer += delta;
                 sprintFlag = true;
@@ -144,19 +147,20 @@ namespace J
   
         private void HandleAttackInput(float delta)
         {
-            playerInputActions.PlayerActions.LightAttack.performed += i => rb_input = true;
-            playerInputActions.PlayerActions.HeavyAttack.performed += i => rt_input = true;
+            playerInputActions.PlayerActions.RB.performed += i => rb_input = true;
+            playerInputActions.PlayerActions.RT.performed += i => rt_input = true;
 
-            // rb is righ hand
-            if (rb_input)
-            {
-                playerController.HandleAttack("light");
-            }
-
+            // rt is left hand
             if (rt_input)
             {
-                playerController.HandleAttack("heavy");
+                playerAttacker.HandleHeavyAttack(playerInventory.leftHandWeapon);
             }
+
+            if (rb_input)
+            {
+                playerAttacker.HandleLightAttack(playerInventory.rightHandWeapon);
+            }
+
         }
 
         #endregion

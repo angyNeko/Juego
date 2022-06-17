@@ -12,6 +12,7 @@ namespace J
         {
             animatorManager = GetComponent<AnimatorManager>();
         }
+
         public void HandleLightAttack(WeaponItem weaponItem)
         {
             animatorManager.PlayTargetAnimation(weaponItem.OH_Light_Attack_1, true);
