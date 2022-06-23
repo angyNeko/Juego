@@ -79,7 +79,6 @@ namespace J
                 inputHandler.horizontal = 0f;
                 inputHandler.vertical = 0f;
                 inputHandler.moveAmount = 0f;
-                inputHandler.movementInput = Vector2.zero;
                 return;
             }
 
