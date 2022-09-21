@@ -2475,16 +2475,11 @@ GameObject:
   - component: {fileID: 1894930334991177374}
   - component: {fileID: 5415209872545946153}
   - component: {fileID: 5415209872545946154}
-  - component: {fileID: 5415209872545946147}
   - component: {fileID: 5415209872545946149}
-  - component: {fileID: 5415209872545946150}
-  - component: {fileID: 5415209872545946151}
-  - component: {fileID: 5415209872545946152}
   - component: {fileID: 5415209872545946155}
   - component: {fileID: 5415209872545946156}
   - component: {fileID: 5415209872545946157}
   - component: {fileID: 5415209872545946158}
-  - component: {fileID: 5415209872545946159}
   m_Layer: 0
   m_Name: MainChar Normal
   m_TagString: Player
@@ -2562,20 +2557,6 @@ CapsuleCollider:
   m_Height: 1.775
   m_Direction: 1
   m_Center: {x: 0, y: 0.888, z: 0}
---- !u!114 &5415209872545946147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181348909306304094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02b65d02721020744a7d8e1339bca3dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 1894930334991177374}
-  canRotate: 1
 --- !u!114 &5415209872545946149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2588,91 +2569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 118594f8092cc0f4a855b2bb3c0f3385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5415209872545946150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181348909306304094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947d79229f3b94d4ea7906ac857e0818, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  moveDirection: {x: 0, y: 0, z: 0}
-  myTransform: {fileID: 0}
-  characterModel: {fileID: 5415209872545946153}
-  normalCamera: {fileID: 0}
-  groundDetectionRayStartPoint: 0.5
-  minDistanceToBeginFall: 1
-  groundDirectionRayDistance: 0.2
-  inAirTimer: 0
-  maxDist: 0
-  moveSpeed: 7
-  walkSpeed: 7
-  runSpeed: 7
-  sprintSpeed: 20
-  fallSpeed: 45
-  jumpVal: 7
-  rotationSpeed: 10
---- !u!114 &5415209872545946151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181348909306304094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 379a345b47758ed43b3eaff582223c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  playerLocomotion: {fileID: 0}
-  inputHandler: {fileID: 0}
-  animatorManager: {fileID: 0}
-  cameraHandler: {fileID: 0}
-  isInteracting: 0
-  isSprinting: 0
-  isInAir: 0
-  isGrounded: 0
-  dialogued: 0
-  interactNear: 0
-  playerCTransform: {fileID: 0}
---- !u!114 &5415209872545946152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181348909306304094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cafe537b1c5875a4183bdfcfabc3f4a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  cinemachineInputProvider: {fileID: 0}
-  isInTutorial: 0
-  movementInput: {x: 0, y: 0}
-  cameraInput: {x: 0, y: 0}
-  vertical: 0
-  horizontal: 0
-  moveAmount: 0
-  cameraX: 0
-  cameraY: 0
-  rb_input: 0
-  rt_input: 0
-  b_input: 0
-  rollFlag: 0
-  sprintFlag: 0
-  rollInputTimer: 0
-  isInteracting: 0
-  isInUI: 0
-  nextButton: {fileID: 0}
 --- !u!114 &5415209872545946155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2701,8 +2597,8 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   healthBar: {fileID: 0}
-  playerController: {fileID: 5415209872545946151}
-  animatorManager: {fileID: 5415209872545946147}
+  playerManager: {fileID: 0}
+  animatorHandler: {fileID: 0}
 --- !u!114 &5415209872545946157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,20 +2625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandWeapon: {fileID: 0}
   rightHandWeapon: {fileID: 0}
---- !u!114 &5415209872545946159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5181348909306304094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4654c5ca9ecfb93408f734629ddd409e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInteracting: 0
-  isSprinting: 0
 --- !u!1 &5415209873173035583
 GameObject:
   m_ObjectHideFlags: 0

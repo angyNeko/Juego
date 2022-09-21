@@ -6,6 +6,7 @@ namespace J
 {
     public class CameraHandler : MonoBehaviour
     {
+        [Header("Object Reference")]
         public Transform targetTransform;
         public Transform cameraTransform;
         public Transform cameraPivotTransform;
@@ -13,10 +14,9 @@ namespace J
         private Vector3 cameraTransformPosition;
         private LayerMask ignoreLayers;
         private Vector3 cameraFollowVelocity = Vector3.zero;
-
-
         public static CameraHandler singleton;
 
+        [Header("Camera settings")]
         public float lookSpeed = 0.1f;
         public float followSpeed = 0.1f;
         public float pivotSpeed = 0.3f;
@@ -25,9 +25,10 @@ namespace J
         private float defaultPosition;
         private float lookAngle;
         private float pivotAngle;
-        public float minimumPivot = -35;
-        public float maximumPivot = 35;
+        public float minimumPivot = -40;
+        public float maximumPivot = 40;
 
+        [Header("Camera Collision")]
         public float cameraSphereRadius = 0.2f;
         public float cameraCollisionOffset = 0.2f;
         public float minimumCollisionOffset = 0.2f;

@@ -25,12 +25,11 @@ namespace J
             //OnAnimatorMove();
         }
 
-        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
         {
             anim.applyRootMotion = isInteracting;
             anim.SetBool("isInteracting", isInteracting);
-            //OnAnimatorMove();
-            anim.CrossFade(targetAnimation, 0.01f);
+            anim.CrossFade(targetAnim, 0.02f);
         }
 
         public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)

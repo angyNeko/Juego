@@ -12,6 +12,9 @@ namespace J
         public float mouseX;
         public float mouseY;
 
+        public bool bInput;
+        public bool rollFlag;
+
         PlayerInputActions inputActions;
         CameraHandler cameraHandler;
 
@@ -19,6 +22,11 @@ namespace J
         Vector2 cameraInput;
 
         private void Awake()
+        {
+            InitializeCamera();
+        }
+
+        private void InitializeCamera()
         {
             cameraHandler = CameraHandler.singleton;
         }
@@ -28,12 +36,14 @@ namespace J
             float delta = Time.fixedDeltaTime;
 
             TickInput(delta);
-            
+
             if (cameraHandler != null)
             {
                 cameraHandler.FollowTarget(delta);
                 cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
             }
+            else
+                InitializeCamera();
         }
 
         public void OnEnable()
@@ -56,6 +66,7 @@ namespace J
         public void TickInput(float delta)
         {
             MoveInput(delta);
+            HandleRollInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -65,6 +76,19 @@ namespace J
             moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
             mouseX = cameraInput.x;
             mouseY = cameraInput.y;
+        }
+
+        private void HandleRollInput(float delta)
+        {
+            bInput = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            Debug.Log("Roll Phase: " + inputActions.PlayerActions.Roll.phase);
+            /*
+            if (bInput)
+            {
+                rollFlag = true;
+            }
+            */
+            rollFlag = bInput;
         }
     }
 }

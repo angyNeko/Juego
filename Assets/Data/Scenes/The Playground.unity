@@ -160,7 +160,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1858274390}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &658842880
 BoxCollider:
@@ -307,7 +307,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1304449205}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304449204
 GameObject:
@@ -339,7 +339,7 @@ Transform:
   m_Children:
   - {fileID: 979848765}
   m_Father: {fileID: 1413714176}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1333781787 stripped
 GameObject:
@@ -401,8 +401,8 @@ MonoBehaviour:
   lookSpeed: 0.01
   followSpeed: 0.1
   pivotSpeed: 0.003
-  minimumPivot: -35
-  maximumPivot: 35
+  minimumPivot: -40
+  maximumPivot: 40
   cameraSphereRadius: 0.2
   cameraCollisionOffset: 0.2
   minimumCollisionOffset: 0.2
@@ -620,9 +620,12 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1800297495, guid: 531ba326ffbf74d40a0e2bcc5166436d, type: 3}
+      propertyPath: normalCamera
+      value: 
+      objectReference: {fileID: 979848762}
     - target: {fileID: 4236279157036204627, guid: 531ba326ffbf74d40a0e2bcc5166436d, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -684,5 +687,4 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 531ba326ffbf74d40a0e2bcc5166436d, type: 3}

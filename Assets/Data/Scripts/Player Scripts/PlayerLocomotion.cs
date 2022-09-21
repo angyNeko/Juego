@@ -41,24 +41,8 @@ namespace J
             float delta = Time.deltaTime;
 
             inputHandler.TickInput(delta);
-
-            moveDirection = cameraObject.forward * inputHandler.vertical;
-            moveDirection += cameraObject.right * inputHandler.horizontal;
-            moveDirection.Normalize();
-            moveDirection.y = 0;
-
-            float speed = movementSpeed;
-            moveDirection *= speed;
-
-            Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-            rigidbody.velocity = projectedVelocity;
-
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
-
-            if (animatorHandler.canRotate)
-            {
-                HandleRoatation(delta);
-            }
+            HandleMovement(delta);
+            HandleRollAndSprint(delta);
         }
 
         #region Movement
@@ -85,6 +69,52 @@ namespace J
             Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
 
             myTransform.rotation = targetRotation;
+        }
+
+        private void HandleMovement(float delta)
+        {
+
+            moveDirection = cameraObject.forward * inputHandler.vertical;
+            moveDirection += cameraObject.right * inputHandler.horizontal;
+            moveDirection.Normalize();
+            moveDirection.y = 0;
+
+            float speed = movementSpeed;
+            moveDirection *= speed;
+
+            Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
+            rigidbody.velocity = projectedVelocity;
+
+            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, isSprinting);
+
+            if (animatorHandler.canRotate)
+            {
+                HandleRoatation(delta);
+            }
+        }
+
+        public void HandleRollAndSprint(float delta)
+        {
+            if (animatorHandler.anim.GetBool("IsInteracting"))
+                return;
+
+            if (inputHandler.rollFlag)
+            {
+                moveDirection = cameraObject.forward * inputHandler.vertical;
+                moveDirection += cameraObject.right * inputHandler.horizontal;
+
+                if (inputHandler.moveAmount > 0)
+                {
+                    animatorHandler.PlayTargetAnimation("Roll", true);
+                    moveDirection.y = 0;
+                    Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                    myTransform.rotation = rollRotation;
+                }
+                else
+                {
+                    animatorHandler.PlayTargetAnimation("Dodging Back", true);
+                }
+            }
         }
 
         #endregion
