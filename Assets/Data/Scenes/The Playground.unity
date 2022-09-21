@@ -364,6 +364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 1333781796}
+  inputHandler: {fileID: 0}
+  playerLocomotion: {fileID: 0}
   canRotate: 1
 --- !u!1 &1413714174
 GameObject:
@@ -688,3 +690,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 531ba326ffbf74d40a0e2bcc5166436d, type: 3}
+--- !u!1 &1762208848796295420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5848889103225453387, guid: 531ba326ffbf74d40a0e2bcc5166436d, type: 3}
+  m_PrefabInstance: {fileID: 1762208848796295419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1762208848796295421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762208848796295420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb23aad4f77ad249be97c0820fab94a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

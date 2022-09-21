@@ -14,6 +14,7 @@ namespace J
 
         public bool bInput;
         public bool rollFlag;
+        public bool isInteracting;
 
         PlayerInputActions inputActions;
         CameraHandler cameraHandler;

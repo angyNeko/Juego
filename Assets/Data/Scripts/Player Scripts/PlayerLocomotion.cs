@@ -95,7 +95,7 @@ namespace J
 
         public void HandleRollAndSprint(float delta)
         {
-            if (animatorHandler.anim.GetBool("IsInteracting"))
+            if (animatorHandler.anim.GetBool("isInteracting"))
                 return;
 
             if (inputHandler.rollFlag)
