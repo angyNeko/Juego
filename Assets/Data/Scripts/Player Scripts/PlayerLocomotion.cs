@@ -12,6 +12,8 @@ namespace J
         public Transform myTransform;
         [HideInInspector]
         public AnimatorHandler animatorHandler;
+        [HideInInspector]
+        public PlayerManager playerManager;
 
         public new Rigidbody rigidbody;
         public GameObject normalCamera;
@@ -31,6 +33,7 @@ namespace J
             rigidbody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            playerManager = GetComponent<PlayerManager>();
             cameraObject = Camera.main.transform;
             myTransform = transform;
             animatorHandler.Initialize();
@@ -95,7 +98,7 @@ namespace J
 
         public void HandleRollAndSprint(float delta)
         {
-            if (animatorHandler.anim.GetBool("isInteracting"))
+            if (playerManager.isInteracting == true)
                 return;
 
             if (inputHandler.rollFlag)

@@ -14,10 +14,10 @@ namespace J
 
         public bool bInput;
         public bool rollFlag;
-        public bool isInteracting;
 
         PlayerInputActions inputActions;
-        CameraHandler cameraHandler;
+        PlayerLocomotion playerLocomotion;
+        public CameraHandler cameraHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -25,6 +25,11 @@ namespace J
         private void Awake()
         {
             InitializeCamera();
+        }
+
+        private void Start()
+        {
+            playerLocomotion = GetComponent<PlayerLocomotion>();
         }
 
         private void InitializeCamera()
@@ -83,13 +88,12 @@ namespace J
         {
             bInput = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
             Debug.Log("Roll Phase: " + inputActions.PlayerActions.Roll.phase);
-            /*
+            
             if (bInput)
             {
                 rollFlag = true;
+                //playerLocomotion.HandleRollAndSprint(delta);
             }
-            */
-            rollFlag = bInput;
         }
     }
 }

@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f05eeb11f55d5e74ea1ec9e0900ea9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetBool: 
+  targetBool: isInteracting
   status: 0
 --- !u!114 &-8404619764712546292
 MonoBehaviour:

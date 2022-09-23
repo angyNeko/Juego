@@ -9,25 +9,25 @@ namespace J
         public Animator anim;
         public InputHandler inputHandler;
         public PlayerLocomotion playerLocomotion;
+        public PlayerManager playerManager;
 
         int horizontal;
         int vertical;
         public bool canRotate;
-        bool isInteracting;
 
         public void Initialize()
         {
             anim = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
+            playerManager = GetComponentInParent<PlayerManager>();  
             horizontal = Animator.StringToHash("Horizontal");
             vertical = Animator.StringToHash("Vertical");
         }
 
         private void Update()
         {
-            OnAnimatorMove();
-            Debug.Log("Apply Root Motion: " + anim.applyRootMotion);
+            //OnAnimatorMove();
         }
 
         public void PlayTargetAnimation(string targetAnim, bool isInteracting)
@@ -111,7 +111,7 @@ namespace J
         
         private void OnAnimatorMove()
         {
-            if (inputHandler.isInteracting == false)
+            if (playerManager.isInteracting == true)
             {
                 float delta = Time.deltaTime;
                 playerLocomotion.rigidbody.drag = 0;
@@ -119,6 +119,8 @@ namespace J
                 deltaPosition.y = 0;
                 Vector3 velocity = deltaPosition / delta;
                 playerLocomotion.rigidbody.velocity = velocity;
+                
+                
             }
         }
         

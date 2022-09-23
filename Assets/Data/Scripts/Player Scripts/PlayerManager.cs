@@ -8,6 +8,10 @@ namespace J
     {
         InputHandler inputHandler;
         Animator anim;
+
+        [Header("Flags")]
+        public bool isInteracting;
+        public bool applyRootMotion;
         
         void Start()
         {
@@ -15,9 +19,10 @@ namespace J
             anim = GetComponentInChildren<Animator>();
         }
 
-        void Update()
+        void FixedUpdate()
         {
-            inputHandler.isInteracting = anim.GetBool("isInteracting");
+            isInteracting = anim.GetBool("isInteracting");
+            applyRootMotion = anim.applyRootMotion;
             inputHandler.rollFlag = false;
         }
     }
