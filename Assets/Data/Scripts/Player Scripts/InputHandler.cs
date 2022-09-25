@@ -14,42 +14,20 @@ namespace J
 
         public bool bInput;
         public bool rollFlag;
+        public float rollInputTimer;
+        public bool sprintFlag;
 
         PlayerInputActions inputActions;
         PlayerLocomotion playerLocomotion;
-        public CameraHandler cameraHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
 
-        private void Awake()
-        {
-            InitializeCamera();
-        }
+
 
         private void Start()
         {
             playerLocomotion = GetComponent<PlayerLocomotion>();
-        }
-
-        private void InitializeCamera()
-        {
-            cameraHandler = CameraHandler.singleton;
-        }
-
-        private void FixedUpdate()
-        {
-            float delta = Time.fixedDeltaTime;
-
-            TickInput(delta);
-
-            if (cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                cameraHandler.HandleCameraRotation(delta, mouseX, mouseY);
-            }
-            else
-                InitializeCamera();
         }
 
         public void OnEnable()
@@ -91,8 +69,18 @@ namespace J
             
             if (bInput)
             {
-                rollFlag = true;
-                //playerLocomotion.HandleRollAndSprint(delta);
+                rollInputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+
+                rollInputTimer = 0;
             }
         }
     }

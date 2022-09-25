@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7442890029830504398}
   - component: {fileID: 7442890029830504397}
   m_Layer: 0
-  m_Name: Player H
+  m_Name: Player H V2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,14 +82,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 0, z: 0}
-  myTransform: {fileID: 0}
-  animatorHandler: {fileID: 0}
-  playerManager: {fileID: 0}
+  myTransform: {fileID: 7442890029830504392}
+  animatorHandler: {fileID: 7235389969291712734}
+  playerManager: {fileID: 7442890029830504393}
   rigidbody: {fileID: 0}
   normalCamera: {fileID: 0}
-  groundDetectionRayStartPoint: 0.35
+  groundDetectionRayStartPoint: 0.5
   minimumDistanceNeededToBeginFall: 1
-  groundDirectionRayDistance: 0.35
+  groundDirectionRayDistance: 0.05
   inAirTimer: 0
   movementSpeed: 5
   sprintSpeed: 7
@@ -125,11 +125,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Height
-      value: 1.75
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Center.y
-      value: 0.86
+      value: 1.12
       objectReference: {fileID: 0}
     - target: {fileID: 8456383729204053883, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Name
@@ -186,3 +186,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9083985428409327041, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
   m_PrefabInstance: {fileID: 7442890030475965142}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7235389969291712734 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -8997292810333951480, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
+  m_PrefabInstance: {fileID: 7442890030475965142}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2b9469a2a4029a47b113881f1a6c7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
