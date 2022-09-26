@@ -1,21 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
 namespace J
 {
-    public class PlayerLocomotion : MonoBehaviour
+    public class PlayerLocomotionCC : MonoBehaviour
     {
         Transform cameraObject;
-        InputHandler inputHandler;
+        InputHandlerCC inputHandler;
         public Vector3 moveDirection;
 
         [HideInInspector]
         public Transform myTransform;
         [HideInInspector]
-        public AnimatorHandler animatorHandler;
+        public AnimatorHandlerCC animatorHandler;
         [HideInInspector]
-        public PlayerManager playerManager;
+        public PlayerManagerCC playerManager;
 
-        public new Rigidbody rigidbody;
+        public CharacterController characterController;
         public GameObject normalCamera;
 
         [Header("Ground and Air Detection Stats")]
@@ -39,17 +40,17 @@ namespace J
         [SerializeField]
         float fallingSpeed = 45f;
 
-        private void Start()
+        // Start is called before the first frame update
+        void Start()
         {
-            inputHandler = GetComponent<InputHandler>();
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
-            playerManager = GetComponent<PlayerManager>();
-            rigidbody = GetComponent<Rigidbody>();
+            inputHandler = GetComponent<InputHandlerCC>();
+            animatorHandler = GetComponent<AnimatorHandlerCC>();
+            playerManager = GetComponent<PlayerManagerCC>();
+            characterController = GetComponent<CharacterController>();
             cameraObject = Camera.main.transform;
             myTransform = transform;
             animatorHandler.Initialize();
 
-            playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
         }
 
@@ -105,8 +106,7 @@ namespace J
                 moveDirection *= speed;
             }
 
-            Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-            rigidbody.velocity = projectedVelocity;
+            characterController.SimpleMove(moveDirection);
 
             animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0, playerManager.isSprinting);
 
@@ -140,85 +140,18 @@ namespace J
             }
         }
 
-        public void HandleFalling(float delta, Vector3 moveDirection)
+        public void HandleFalling(float delta)
         {
-            playerManager.isGrounded = false;
-            RaycastHit hit;
-            Vector3 origin = myTransform.position;
-            origin.y += groundDetectionRayStartPoint;
-
-            if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
+            if (!characterController.isGrounded)
             {
-                moveDirection = Vector3.zero;
-            }
-
-            if (playerManager.isInAir)
-            {
-                rigidbody.AddForce(Vector3.down * fallingSpeed);
-                // Hop off edge with litte force
-                rigidbody.AddForce(moveDirection * fallingSpeed / 10f);
-            }
-
-            Vector3 dir = moveDirection;
-            dir.Normalize();
-            origin = origin + dir * groundDirectionRayDistance;
-
-            targetPosition = myTransform.position;
-
-            Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
-            {
-                normalVector = hit.normal;
-                Vector3 tp = hit.point;
-                playerManager.isGrounded = true;
-                targetPosition.y = tp.y;
-
-                if (playerManager.isInAir)
-                {
-                    if (inAirTimer > 0.5f)
-                    {
-                        Debug.Log("You were in the air for: " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation("Land", true);
-                    }
-                    else
-                    {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
-                    }
-
-                    playerManager.isInAir = false;
-                    inAirTimer = 0;
-                }
+                Vector3 vel = characterController.velocity;
+                vel.Normalize();
+                characterController.Move(Vector3.down * (movementSpeed / 2));
+                playerManager.isInAir = true;
             }
             else
             {
-                if (playerManager.isGrounded)
-                {
-                    playerManager.isGrounded = false;
-                }
-                if (playerManager.isInAir == false)
-                {
-                    if (playerManager.isInteracting == false)
-                    {
-                        animatorHandler.PlayTargetAnimation("Fall", true);
-                    }
-
-                    Vector3 vel = rigidbody.velocity;
-                    vel.Normalize();
-                    rigidbody.velocity = vel * (movementSpeed / 2);
-                    playerManager.isInAir = true;
-                }
-            }
-
-            if (playerManager.isGrounded)
-            {
-                if (playerManager.isInteracting || inputHandler.moveAmount > 0)
-                {
-                    myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
-                }
-                else
-                {
-                    myTransform.position = targetPosition;
-                }
+                playerManager.isInAir = false;
             }
         }
 
