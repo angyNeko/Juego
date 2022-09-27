@@ -42,7 +42,7 @@ namespace J
         private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
-            animatorHandler = GetComponent<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
             playerManager = GetComponent<PlayerManager>();
             rigidbody = GetComponent<Rigidbody>();
             cameraObject = Camera.main.transform;
@@ -156,7 +156,7 @@ namespace J
             {
                 rigidbody.AddForce(Vector3.down * fallingSpeed);
                 // Hop off edge with litte force
-                rigidbody.AddForce(moveDirection * fallingSpeed / 10f);
+                rigidbody.AddForce(moveDirection * fallingSpeed / 2f);
             }
 
             Vector3 dir = moveDirection;
@@ -166,7 +166,7 @@ namespace J
             targetPosition = myTransform.position;
 
             Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+            if (RotaryHeart.Lib.PhysicsExtension.Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
             {
                 normalVector = hit.normal;
                 Vector3 tp = hit.point;
