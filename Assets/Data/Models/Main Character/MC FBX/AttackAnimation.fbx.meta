@@ -1,26 +1,11 @@
 fileFormatVersion: 2
-guid: b063cd899b9231f4dbcf9c48b5153c8b
+guid: b0c2b7f0b7a9f824bb86ce8d545d4a11
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
-      74: -4449717305648701825
-    second: Armature|0TPose
-  - first:
-      74: 7709686125681325085
-    second: Armature|Armature.001Action
-  - first:
-      74: -1827505218091721766
-    second: Armature|AttackCombo
-  - first:
-      74: -8535775156832171347
-    second: Armature|BackStep
-  - first:
-      74: 4638988283103373526
-    second: Armature|BasicCombo
-  - first:
-      74: 5449073193131188545
-    second: Armature|CubeAction
+      74: 5277993699677943682
+    second: AttackCombo
   externalObjects: {}
   materials:
     materialImportMode: 2
