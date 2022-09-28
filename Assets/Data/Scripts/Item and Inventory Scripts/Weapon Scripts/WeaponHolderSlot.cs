@@ -12,7 +12,7 @@ namespace J
 
         public GameObject currentWeaponModel;
         
-       public void UnloadWeapon() 
+       public void UnloadWeapon()
        {
             if (currentWeaponModel != null)
             {
@@ -55,7 +55,7 @@ namespace J
                 model.transform.localScale = Vector3.one;
             }
             
-            currentWeaponModel = model; 
+            currentWeaponModel = model;
         }
     }
 }

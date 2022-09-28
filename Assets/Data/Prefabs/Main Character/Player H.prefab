@@ -79,7 +79,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -160,8 +160,12 @@ PrefabInstance:
       value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
+      propertyPath: m_Radius
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Center.y
-      value: 0.85
+      value: 0.885
       objectReference: {fileID: 0}
     - target: {fileID: 8456383729204053883, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Name
