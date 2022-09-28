@@ -33,15 +33,15 @@ namespace J
             if (isLeft)
             {
                 leftHandSlot.LoadWeaponModel(weaponItem);
-                LoadLeftHandWeaponDamageCollider(weaponItem.weaponAtk);
+                //LoadLeftHandWeaponDamageCollider(weaponItem.weaponAtk);
             }
             else
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
-                LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
+                //LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
             }
         }
-
+        /*
         #region Handle Weapon's Damage Collider
         private void LoadLeftHandWeaponDamageCollider(int weaponAtk)
         {
@@ -76,6 +76,7 @@ namespace J
         }
 
         #endregion
+        */
     }
 
 }
