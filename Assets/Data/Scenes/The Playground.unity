@@ -2573,7 +2573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520168ab53eacb445ae3b8a2b4b68d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandWeapon: {fileID: 11400000, guid: 8d40bbb3a06e59242914dc73ebfb8e0b, type: 2}
+  leftHandWeapon: {fileID: 0}
   rightHandWeapon: {fileID: 11400000, guid: 8d40bbb3a06e59242914dc73ebfb8e0b, type: 2}
 --- !u!114 &1525905147
 MonoBehaviour:
