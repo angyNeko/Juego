@@ -12,13 +12,16 @@ namespace J
         public float mouseX;
         public float mouseY;
 
-        public bool bInput;
+        public bool sprint_Input;
+        public bool atk_Input;
+
         public bool rollFlag;
         public float rollInputTimer;
         public bool sprintFlag;
 
         PlayerInputActions inputActions;
-        PlayerLocomotion playerLocomotion;
+        PlayerAttacker playerAttacker;
+        PlayerInventory playerInventory;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -27,7 +30,8 @@ namespace J
 
         private void Start()
         {
-            playerLocomotion = GetComponent<PlayerLocomotion>();
+            playerAttacker = GetComponent<PlayerAttacker>();
+            playerInventory = GetComponent<PlayerInventory>();
         }
 
         public void OnEnable()
@@ -51,6 +55,7 @@ namespace J
         {
             MoveInput(delta);
             HandleRollInput(delta);
+            HandleAttackInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -64,10 +69,10 @@ namespace J
 
         private void HandleRollInput(float delta)
         {
-            bInput = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            sprint_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
             Debug.Log("Roll Phase: " + inputActions.PlayerActions.Roll.phase);
             
-            if (bInput)
+            if (sprint_Input)
             {
                 rollInputTimer += delta;
                 sprintFlag = true;
@@ -81,6 +86,16 @@ namespace J
                 }
 
                 rollInputTimer = 0;
+            }
+        }
+
+        private void HandleAttackInput(float delta)
+        {
+            inputActions.PlayerActions.Attack.performed += i => atk_Input = true;
+
+            if (atk_Input)
+            {
+                playerAttacker.HandleSwordAttack(playerInventory.leftHandWeapon);
             }
         }
     }

@@ -10,17 +10,12 @@ namespace J
 
         private void Awake()
         {
-            animatorHandler = GetComponent<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
-        public void HandleLightAttack(WeaponItem weaponItem)
+        public void HandleSwordAttack(WeaponItem weaponItem)
         {
-            animatorHandler.PlayTargetAnimation(weaponItem.OH_Light_Attack_1, true);
-        }
-
-        public void HandleHeavyAttack(WeaponItem weaponItem)
-        {
-            animatorHandler.PlayTargetAnimation(weaponItem.OH_Heavy_Attack_1, true);
+            animatorHandler.PlayTargetAnimation(weaponItem.swordAttack, true);
         }
     }
 }

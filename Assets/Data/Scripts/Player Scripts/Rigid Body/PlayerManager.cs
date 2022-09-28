@@ -36,7 +36,7 @@ namespace J
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
 
-            isSprinting = inputHandler.bInput;
+            isSprinting = inputHandler.sprint_Input;
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
@@ -61,7 +61,8 @@ namespace J
         {
             inputHandler.rollFlag = false;
             inputHandler.sprintFlag = false;
-            isSprinting = inputHandler.bInput;
+            inputHandler.sprint_Input = false;
+            inputHandler.atk_Input = false;
 
             if (isInAir)
             {

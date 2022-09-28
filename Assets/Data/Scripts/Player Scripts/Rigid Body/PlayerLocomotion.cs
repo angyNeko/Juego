@@ -94,7 +94,7 @@ namespace J
 
             float speed = movementSpeed;
 
-            if (inputHandler.sprintFlag)
+            if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5f)
             {
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
@@ -102,7 +102,16 @@ namespace J
             }
             else
             {
-                moveDirection *= speed;
+                if (inputHandler.moveAmount < 0.5f)
+                {
+                    moveDirection *= speed;
+                    playerManager.isSprinting = false;
+                }
+                else
+                {
+                    moveDirection *= speed;
+                    playerManager.isSprinting = false;
+                }
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
