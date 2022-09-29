@@ -95,7 +95,7 @@ namespace J
 
             if (atk_Input)
             {
-                playerAttacker.HandleSwordAttack(playerInventory.leftHandWeapon);
+                playerAttacker.HandleSwordAttack(playerInventory.rightHandWeapon);
             }
         }
     }
