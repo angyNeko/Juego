@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 9}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -34,7 +34,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -43,15 +43,15 @@ MonoBehaviour:
     y: 0
     width: 912
     height: 387
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 22}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 24}
   m_Panes:
   - {fileID: 22}
   - {fileID: 24}
   - {fileID: 23}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 135
+  controlID: 74
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -96,8 +96,8 @@ MonoBehaviour:
     y: 0
     width: 1008
     height: 387
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 25}
   m_Panes:
   - {fileID: 25}
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 55
+  controlID: 165
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 70
+  controlID: 158
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 1
-  controlID: 53
+  controlID: 156
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -326,7 +326,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 100}
   m_MaxSize: {x: 32384, y: 8096}
   vertical: 0
-  controlID: 54
+  controlID: 157
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -547,9 +547,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 14740000
-      m_LastClickedID: 29716
-      m_ExpandedIDs: 4ac8ffff4ec8fffff8ccfffffcccffff00cdffffa6deffffaadeffffaedefffff8f9fffffcf9ffff06faffff0afaffff0efaffff12faffff18faffff1cfaffff20faffff24faffff34faffff38faffff3cfaffff40faffff64faffff68faffffc073000014740000
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 14fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -629,21 +629,21 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 95}
     m_SelectedIDs: cc770000
     m_LastClickedID: 30668
-    m_ExpandedIDs: 0000000060750000627500006475000066750000687500006e750000ce770000ec77000000ca9a3b
+    m_ExpandedIDs: 00000000f4740000f6740000f8740000fa740000fc740000fe7400000075000002750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Materials
-      m_OriginalName: Materials
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 30672
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
@@ -657,7 +657,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: c4f4ffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000060750000627500006475000066750000687500006a7500006c7500006e750000
+    m_ExpandedIDs: 00000000f4740000f6740000f8740000fa740000fc740000fe7400000075000002750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -688,18 +688,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 0a780000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: AttackCombo
-      m_OriginalName: AttackCombo
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -27254
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 4
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 4}
     m_CreateAssetUtility:
@@ -1070,8 +1070,8 @@ MonoBehaviour:
     m_SearchString: 
   m_ActionsTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d7c3a2fb
-    m_LastClickedID: -73219113
+    m_SelectedIDs: faa11238
+    m_LastClickedID: 940745210
     m_ExpandedIDs: cf6e5d9996ef8d9b39558bbbb1172cc07da4a3ce0f2656e6baced3f6d7c3a2fb85a63f0f16f16a12de2bb71425a3d92fc46e13308d203e43123e3d53
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1261,11 +1261,17 @@ MonoBehaviour:
       \"\",\n                    \"processors\": \"\",\n                    \"groups\":
       \"Gamepad\",\n                    \"action\": \"Attack\",\n                   
       \"isComposite\": false,\n                    \"isPartOfComposite\": false\n               
-      }\n            ]\n        }\n    ],\n    \"controlSchemes\": [\n        {\n           
-      \"name\": \"MouseKeyboard\",\n            \"bindingGroup\": \"MouseKeyboard\",\n           
-      \"devices\": [\n                {\n                    \"devicePath\": \"<Mouse>\",\n                   
-      \"isOptional\": false,\n                    \"isOR\": false\n               
-      },\n                {\n                    \"devicePath\": \"<Keyboard>\",\n                   
+      },\n                {\n                    \"name\": \"\",\n                   
+      \"id\": \"a727c2d0-d1c4-4b83-8d1b-7c0b63a9cadf\",\n                    \"path\":
+      \"<Keyboard>/o\",\n                    \"interactions\": \"\",\n                   
+      \"processors\": \"\",\n                    \"groups\": \"MouseKeyboard\",\n                   
+      \"action\": \"Attack\",\n                    \"isComposite\": false,\n                   
+      \"isPartOfComposite\": false\n                }\n            ]\n        }\n   
+      ],\n    \"controlSchemes\": [\n        {\n            \"name\": \"MouseKeyboard\",\n           
+      \"bindingGroup\": \"MouseKeyboard\",\n            \"devices\": [\n               
+      {\n                    \"devicePath\": \"<Mouse>\",\n                    \"isOptional\":
+      false,\n                    \"isOR\": false\n                },\n               
+      {\n                    \"devicePath\": \"<Keyboard>\",\n                   
       \"isOptional\": false,\n                    \"isOR\": false\n               
       }\n            ]\n        },\n        {\n            \"name\": \"Gamepad\",\n           
       \"bindingGroup\": \"Gamepad\",\n            \"devices\": [\n               
@@ -1353,9 +1359,9 @@ MonoBehaviour:
     m_IsLocked: 1
   m_FolderTreeState:
     scrollPos: {x: 0, y: 98}
-    m_SelectedIDs: a07a0000
-    m_LastClickedID: 31392
-    m_ExpandedIDs: 0000000060750000627500006475000066750000687500006a7500006c7500006e750000ce770000ec7700001e8a000000ca9a3b
+    m_SelectedIDs: 36750000
+    m_LastClickedID: 30006
+    m_ExpandedIDs: 00000000f4740000f6740000f8740000fa740000fc740000fe740000007500000275000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1383,7 +1389,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 643}
     m_SelectedIDs: 806e0000
     m_LastClickedID: 28288
-    m_ExpandedIDs: 0000000060750000627500006475000066750000687500006a7500006c7500006e750000
+    m_ExpandedIDs: 00000000f4740000f6740000f8740000fa740000fc740000fe7400000075000002750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1410,7 +1416,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000b8730000d27300009cae0000e481000000000000267e0000148100006c850000168a00000a780000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
