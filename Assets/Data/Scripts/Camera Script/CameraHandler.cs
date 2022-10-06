@@ -44,6 +44,7 @@ namespace J
         public void FollowTarget(float delta)
         {
             Vector3 targetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
+            //targetPosition.y = 0;
             myTransform.position = targetPosition;
 
             HandleCameraCollision(delta);

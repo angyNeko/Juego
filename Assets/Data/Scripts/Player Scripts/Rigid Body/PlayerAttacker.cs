@@ -13,9 +13,9 @@ namespace J
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
-        public void HandleSwordAttack(WeaponItem weaponItem)
+        public void HandleAttack(WeaponItem weaponItem)
         {
-            animatorHandler.PlayTargetAnimation(weaponItem.swordAttack, true);
+            animatorHandler.PlayTargetAnimation(weaponItem.attackAnim, true);
         }
     }
 }

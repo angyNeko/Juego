@@ -19,9 +19,11 @@ namespace J
         public bool isInAir;
         public bool isGrounded;
 
+        /*public List<Collider> Ragdallpart = new List<Collider>();*/
         private void Awake()
         {
             InitializeCamera();
+            /*SetRagdall();*/
         }
 
         void Start()
@@ -73,6 +75,24 @@ namespace J
         public void InitializeCamera()
         {
             cameraHandler = CameraHandler.singleton;
+        }
+
+        /*private void SetRagdall()
+        {
+            Collider[] colliders = this.GetComponentsInChildren<Collider>();
+
+            foreach (Collider c in colliders)
+            {
+                if (c.gameObject != this.gameObject)
+                {
+                    c.isTrigger = true;
+                    Ragdallpart.Add(c);
+                }
+            }
+        }*/
+        private void isTriggerRagdall()
+        {
+
         }
     }
 }

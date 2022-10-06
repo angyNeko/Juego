@@ -182,19 +182,25 @@ namespace J
                 playerManager.isGrounded = true;
                 targetPosition.y = tp.y;
 
+                if (playerManager.isGrounded && animatorHandler.anim.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+                {
+                    animatorHandler.PlayTargetAnimation("Empty", false);
+                }
+
                 if (playerManager.isInAir)
                 {
                     if (inAirTimer > 0.5f)
                     {
                         Debug.Log("You were in the air for: " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation("Land", true);
+                        animatorHandler.PlayTargetAnimation("Empty", true);
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                     }
 
                     playerManager.isInAir = false;
+                    rigidbody.useGravity = false;
                     inAirTimer = 0;
                 }
             }
@@ -211,6 +217,7 @@ namespace J
                         animatorHandler.PlayTargetAnimation("Fall", true);
                     }
 
+                    rigidbody.useGravity = true;
                     Vector3 vel = rigidbody.velocity;
                     vel.Normalize();
                     rigidbody.velocity = vel * (movementSpeed / 2);

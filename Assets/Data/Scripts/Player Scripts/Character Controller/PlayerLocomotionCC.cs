@@ -118,8 +118,8 @@ namespace J
 
         public void HandleRollAndSprint(float delta)
         {
-            if (playerManager.isInteracting == true)
-                return;
+            //if (playerManager.isInteracting == true)
+            //    return;
 
             if (inputHandler.rollFlag)
             {

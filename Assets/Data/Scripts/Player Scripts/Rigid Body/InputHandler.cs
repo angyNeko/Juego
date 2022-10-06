@@ -70,7 +70,6 @@ namespace J
         private void HandleRollInput(float delta)
         {
             sprint_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            Debug.Log("Roll Phase: " + inputActions.PlayerActions.Roll.phase);
             
             if (sprint_Input)
             {
@@ -95,7 +94,7 @@ namespace J
 
             if (atk_Input)
             {
-                playerAttacker.HandleSwordAttack(playerInventory.rightHandWeapon);
+                playerAttacker.HandleAttack(playerInventory.rightHandWeapon);
             }
         }
     }
