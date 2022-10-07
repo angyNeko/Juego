@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7442890029830504392}
   - component: {fileID: 7442890029830504399}
-  - component: {fileID: 7442890029830504397}
   - component: {fileID: 7442890029830504393}
+  - component: {fileID: 7442890029830504397}
   - component: {fileID: 7442890029830504398}
   - component: {fileID: 336477067}
   - component: {fileID: 336477068}
@@ -86,6 +86,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7442890029830504393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442890029830504396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb23aad4f77ad249be97c0820fab94a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraHandler: {fileID: 0}
+  isInteracting: 0
+  isSprinting: 0
+  isInAir: 0
+  isGrounded: 0
 --- !u!114 &7442890029830504397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,23 +125,6 @@ MonoBehaviour:
   rollFlag: 0
   rollInputTimer: 0
   sprintFlag: 0
---- !u!114 &7442890029830504393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7442890029830504396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afb23aad4f77ad249be97c0820fab94a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraHandler: {fileID: 0}
-  isInteracting: 0
-  isSprinting: 0
-  isInAir: 0
-  isGrounded: 0
 --- !u!114 &7442890029830504398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   rotationSpeed: 10
-  fallingSpeed: 45
+  fallingSpeed: 35
 --- !u!114 &336477067
 MonoBehaviour:
   m_ObjectHideFlags: 0

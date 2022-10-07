@@ -205,6 +205,7 @@ namespace J
                 {
                     playerManager.isGrounded = false;
                 }
+
                 if (playerManager.isInAir == false)
                 {
                     if (playerManager.isInteracting == false)
@@ -222,6 +223,7 @@ namespace J
 
             if (playerManager.isGrounded)
             {
+                // Stops fall animation if grounded
                 if (animatorHandler.anim.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
                 {
                     animatorHandler.PlayTargetAnimation("Empty", false);

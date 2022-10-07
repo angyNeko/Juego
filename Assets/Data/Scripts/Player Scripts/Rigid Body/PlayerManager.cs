@@ -61,10 +61,7 @@ namespace J
         // Reset flags here
         private void LateUpdate()
         {
-            inputHandler.rollFlag = false;
-            inputHandler.sprintFlag = false;
-            inputHandler.sprint_Input = false;
-            inputHandler.atk_Input = false;
+            inputHandler.ResetBools();
 
             if (isInAir)
             {

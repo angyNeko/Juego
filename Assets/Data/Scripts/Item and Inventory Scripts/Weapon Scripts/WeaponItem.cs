@@ -11,7 +11,8 @@ namespace J
         public bool isUnarmed;
 
         [Header("Attack Animation")]
-        public string attackAnim;
+        public string lightAtkAnimation;
+        public string heavyAtkAnimation;
 
         [Header("Item Properties")]
         public int weaponAtk;

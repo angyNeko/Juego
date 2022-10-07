@@ -13,7 +13,8 @@ namespace J
         public float mouseY;
 
         public bool sprint_Input;
-        public bool atk_Input;
+        public bool lightAtkInput;
+        public bool heavyAtkInput;
 
         public bool rollFlag;
         public float rollInputTimer;
@@ -56,6 +57,15 @@ namespace J
             HandleAttackInput(delta);
         }
 
+        public void ResetBools()
+        {
+            rollFlag = false;
+            sprintFlag = false;
+            sprint_Input = false;
+            lightAtkInput = false;
+            heavyAtkInput = false;
+        }
+
         private void MoveInput(float delta)
         {
             horizontal = movementInput.x;
@@ -88,12 +98,20 @@ namespace J
 
         private void HandleAttackInput(float delta)
         {
-            inputActions.PlayerActions.Attack.performed += i => atk_Input = true;
+            inputActions.PlayerActions.LightAttack.performed += i => lightAtkInput = true;
+            inputActions.PlayerActions.HeavyAttack.performed += i => heavyAtkInput = true;
 
-            if (atk_Input)
+            if (lightAtkInput)
             {
-                playerAttacker.HandleAttack(playerInventory.rightHandWeapon);
+                playerAttacker.HandleLightAttack(playerInventory.rightHandWeapon);
             }
+
+            if (heavyAtkInput)
+            {
+                return;
+                //playerAttacker.HandleHeavyAttack(playerInventory.rightHandWeapon);
+            }
+            
         }
     }
 }
