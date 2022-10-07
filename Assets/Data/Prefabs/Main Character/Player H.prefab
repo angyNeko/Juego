@@ -150,7 +150,7 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   rotationSpeed: 10
-  fallingSpeed: 150
+  fallingSpeed: 45
 --- !u!114 &336477067
 MonoBehaviour:
   m_ObjectHideFlags: 0

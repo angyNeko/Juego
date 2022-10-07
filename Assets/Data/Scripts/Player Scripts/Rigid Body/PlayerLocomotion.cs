@@ -182,11 +182,6 @@ namespace J
                 playerManager.isGrounded = true;
                 targetPosition.y = tp.y;
 
-                if (playerManager.isGrounded && animatorHandler.anim.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
-                {
-                    animatorHandler.PlayTargetAnimation("Empty", false);
-                }
-
                 if (playerManager.isInAir)
                 {
                     if (inAirTimer > 0.5f)
@@ -227,6 +222,11 @@ namespace J
 
             if (playerManager.isGrounded)
             {
+                if (animatorHandler.anim.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+                {
+                    animatorHandler.PlayTargetAnimation("Empty", false);
+                }
+
                 if (playerManager.isInteracting || inputHandler.moveAmount > 0)
                 {
                     myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);

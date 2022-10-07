@@ -26,8 +26,6 @@ namespace J
         Vector2 movementInput;
         Vector2 cameraInput;
 
-
-
         private void Start()
         {
             playerAttacker = GetComponent<PlayerAttacker>();
