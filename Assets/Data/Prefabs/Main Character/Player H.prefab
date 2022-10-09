@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 7442890029830504398}
   - component: {fileID: 336477067}
   - component: {fileID: 336477068}
+  - component: {fileID: 264053753}
   m_Layer: 0
   m_Name: Player H
   m_TagString: Untagged
@@ -121,7 +122,8 @@ MonoBehaviour:
   mouseX: 0
   mouseY: 0
   sprint_Input: 0
-  atk_Input: 0
+  lightAtkInput: 0
+  heavyAtkInput: 0
   rollFlag: 0
   rollInputTimer: 0
   sprintFlag: 0
@@ -141,7 +143,7 @@ MonoBehaviour:
   myTransform: {fileID: 0}
   animatorHandler: {fileID: 0}
   playerManager: {fileID: 0}
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 7442890029830504399}
   normalCamera: {fileID: 0}
   groundDetectionRayStartPoint: 0.35
   minimumDistanceNeededToBeginFall: 1
@@ -150,7 +152,9 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   rotationSpeed: 10
-  fallingSpeed: 35
+  fallingSpeed: 200
+  leftKnee: {fileID: 1344186051939334510}
+  rightKnee: {fileID: 4160737820650245043}
 --- !u!114 &336477067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +181,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftHandWeapon: {fileID: 0}
   rightHandWeapon: {fileID: 11400000, guid: 8d40bbb3a06e59242914dc73ebfb8e0b, type: 2}
+--- !u!114 &264053753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7442890029830504396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f83ab9c6d27d5a2448c045f5e208e89c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthLevel: 10
+  maxHealth: 0
+  currentHealth: 0
+  healthBar: {fileID: 0}
+  playerManager: {fileID: 0}
+  animatorHandler: {fileID: 0}
 --- !u!1001 &7442890030475965142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Height
-      value: 1.75
+      value: 1.26
       objectReference: {fileID: 0}
     - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Radius
@@ -206,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8082982317302047762, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Center.y
-      value: 0.885
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 8456383729204053883, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
       propertyPath: m_Name
@@ -315,6 +337,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b8e2466ceb6134cb885f325c048f32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1344186051939334510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8497719770897976248, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
+  m_PrefabInstance: {fileID: 7442890030475965142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1826976636876713751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9083985428409327041, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
@@ -367,6 +394,11 @@ MonoBehaviour:
   isLeftHandSlot: 0
   isRightHandSlot: 1
   currentWeaponModel: {fileID: 0}
+--- !u!1 &4160737820650245043 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6843109737047062885, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}
+  m_PrefabInstance: {fileID: 7442890030475965142}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5635425409021214755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2990241174355931893, guid: b35bc4694be7e6a40bef57c05cad0e98, type: 3}

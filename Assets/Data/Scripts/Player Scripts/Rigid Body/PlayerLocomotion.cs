@@ -40,6 +40,12 @@ namespace J
         [SerializeField]
         float fallingSpeed = 45f;
 
+        [Header("Knee Transforms")]
+        [SerializeField]
+        GameObject leftKnee;
+        [SerializeField]
+        GameObject rightKnee;
+
         private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
@@ -156,13 +162,8 @@ namespace J
             RaycastHit hit;
             Vector3 origin = myTransform.position;
             origin.y += groundDetectionRayStartPoint;
-
-            GameObject leftFoot = GameObject.Find("Left knee");
-            Vector3 leftFootTrans = leftFoot.transform.position;
-
-
-            GameObject rightFoot = GameObject.Find("Right knee");
-            Vector3 rightFootTrans = leftFoot.transform.position;
+            Vector3 leftFootTrans = leftKnee.transform.position;
+            Vector3 rightFootTrans = rightKnee.transform.position;
 
             if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
             {
@@ -221,12 +222,11 @@ namespace J
                     playerManager.isGrounded = false;
                 }
 
-
+                // Checks if both feet is grounded
+                // Doesnt let player fall if true
                 if (Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck) &&
-                        Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
-                {
+                    Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
                     return;
-                }
 
                 if (playerManager.isInAir == false)
                 {

@@ -187,6 +187,14 @@ PrefabInstance:
       value: Player H
       objectReference: {fileID: 0}
     - target: {fileID: 7442890029830504398, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
+      propertyPath: leftKnee
+      value: 
+      objectReference: {fileID: 1774354025}
+    - target: {fileID: 7442890029830504398, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
+      propertyPath: rightKnee
+      value: 
+      objectReference: {fileID: 2070403632}
+    - target: {fileID: 7442890029830504398, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 264053759}
@@ -3612,6 +3620,11 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1774354025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1344186051939334510, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
+  m_PrefabInstance: {fileID: 264053751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1858274386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3988,6 +4001,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3695777c1ff6ff043b1396153e9c2deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2070403632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4160737820650245043, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
+  m_PrefabInstance: {fileID: 264053751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2139021744
 GameObject:
   m_ObjectHideFlags: 0
