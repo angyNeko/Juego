@@ -7,7 +7,6 @@ namespace  J
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField]
         public Slider slider;
 
         private void Start()

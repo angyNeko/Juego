@@ -42,12 +42,13 @@ namespace J
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
-            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
         }
 
         private void FixedUpdate()
         {
             float delta = Time.fixedDeltaTime;
+
+            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
 
             if (cameraHandler != null)
             {
@@ -91,5 +92,6 @@ namespace J
         {
 
         }
+
     }
 }

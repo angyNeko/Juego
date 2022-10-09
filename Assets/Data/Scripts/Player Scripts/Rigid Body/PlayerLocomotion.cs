@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 namespace J
 {
@@ -156,6 +157,13 @@ namespace J
             Vector3 origin = myTransform.position;
             origin.y += groundDetectionRayStartPoint;
 
+            GameObject leftFoot = GameObject.Find("Left knee");
+            Vector3 leftFootTrans = leftFoot.transform.position;
+
+
+            GameObject rightFoot = GameObject.Find("Right knee");
+            Vector3 rightFootTrans = leftFoot.transform.position;
+
             if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
             {
                 moveDirection = Vector3.zero;
@@ -168,14 +176,15 @@ namespace J
                 rigidbody.AddForce(moveDirection * fallingSpeed / 2f);
             }
 
+
+
             Vector3 dir = moveDirection;
             dir.Normalize();
             origin = origin + dir * groundDirectionRayDistance;
 
             targetPosition = myTransform.position;
 
-            Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-            if (RotaryHeart.Lib.PhysicsExtension.Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
             {
                 normalVector = hit.normal;
                 Vector3 tp = hit.point;
@@ -203,7 +212,20 @@ namespace J
             {
                 if (playerManager.isGrounded)
                 {
+                    // Stops fall animation if grounded
+                    if (animatorHandler.anim.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+                    {
+                        animatorHandler.PlayTargetAnimation("Empty", false);
+                    }
+
                     playerManager.isGrounded = false;
+                }
+
+
+                if (Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck) &&
+                        Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+                {
+                    return;
                 }
 
                 if (playerManager.isInAir == false)
@@ -221,25 +243,47 @@ namespace J
                 }
             }
 
-            if (playerManager.isGrounded)
+            if (playerManager.isInteracting || inputHandler.moveAmount > 0)
             {
-                // Stops fall animation if grounded
-                if (animatorHandler.anim.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
-                {
-                    animatorHandler.PlayTargetAnimation("Empty", false);
-                }
-
-                if (playerManager.isInteracting || inputHandler.moveAmount > 0)
-                {
-                    myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
-                }
-                else
-                {
-                    myTransform.position = targetPosition;
-                }
+                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+            }
+            else
+            {
+                myTransform.position = targetPosition;
             }
         }
+        /*
+        private void OnDrawGizmos()
+        {
+            Vector3 origin = myTransform.position;
+            origin.y += groundDetectionRayStartPoint;
 
+            Vector3 dir = moveDirection;
+            dir.Normalize();
+            origin = origin + dir * groundDirectionRayDistance;
+
+            RaycastHit hit;
+
+            Gizmos.DrawRay(origin, Vector3.down);
+            float sphereCastRadius = 0.3f;
+
+            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+            {
+                Gizmos.color = Color.green;
+                Vector3 sphereCastMidpoint = transform.position + (transform.forward * hit.distance);
+                Gizmos.DrawRay(sphereCastMidpoint, Vector3.down);
+                Gizmos.DrawRay(origin, Vector3.down);
+                Debug.DrawLine(transform.position, sphereCastMidpoint, Color.green);
+            }
+            else
+            {
+                Gizmos.color = Color.red;
+                Vector3 sphereCastMidpoint = transform.position + (origin * (minimumDistanceNeededToBeginFall - sphereCastRadius));
+                Gizmos.DrawRay(sphereCastMidpoint, Vector3.down);
+                Debug.DrawLine(transform.position, sphereCastMidpoint, Color.red);
+            }
+        }
+        */
         #endregion
     }
 }

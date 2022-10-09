@@ -6,14 +6,16 @@ namespace J
 {
     public class DamagePlayer : MonoBehaviour
     {
-        public int damage = 5;
+        [SerializeField]
+        int damage = 5;
 
         private void OnTriggerEnter(Collider other)
         {
-            PlayerManager playerManager =  other.GetComponent<PlayerManager>();
-            if (playerManager != null)
+            PlayerStats playerStats =  other.GetComponentInParent<PlayerStats>();
+
+            if (playerStats != null)
             {
-                //playerManager.HandleDamage(damage);
+                playerStats.TakeDamage(damage);
             }
         }
     }

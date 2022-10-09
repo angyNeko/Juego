@@ -10,12 +10,18 @@ namespace J
         public int maxHealth;
         public int currentHealth;
 
-        [SerializeField] HealthBar healthBar;
-        [SerializeField] PlayerManager playerManager;
-        [SerializeField] AnimatorHandler animatorHandler;
+        [SerializeField] 
+        HealthBar healthBar;
+        [SerializeField] 
+        PlayerManager playerManager;
+        [SerializeField] 
+        AnimatorHandler animatorHandler;
 
         void Start()
         {
+            playerManager = GetComponent<PlayerManager>();
+            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
             healthBar.SetMaxHealth(maxHealth);
@@ -31,19 +37,24 @@ namespace J
 
         private int SetMaxHealthFromHealthLevel()
         {
+            // Modify later
             maxHealth = healthLevel * 10;
             return maxHealth;
         }
 
         public void TakeDamage(int damage)
         {
-            currentHealth = currentHealth - damage;
+            currentHealth -= damage;
             healthBar.SetCurrentHealth(currentHealth);
 
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                //playerManager.HandleDeath();
+                animatorHandler.PlayTargetAnimation("Damage_Die", true);
+            }
+            else
+            {
+                animatorHandler.PlayTargetAnimation("Damage", true);
             }
         }
 
