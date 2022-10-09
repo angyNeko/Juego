@@ -72,7 +72,7 @@ namespace J
 
         public void InitializeCamera()
         {
-            cameraHandler = CameraHandler.singleton;
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         /*private void SetRagdall()

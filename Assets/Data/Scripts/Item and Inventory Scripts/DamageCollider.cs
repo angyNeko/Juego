@@ -8,6 +8,7 @@ namespace J
     {
         Collider damageCollider;
         int currentWeaponDamage;
+
         private void Awake()
         {
             damageCollider = GetComponent<Collider>();

@@ -220,13 +220,20 @@ namespace J
                     }
 
                     playerManager.isGrounded = false;
+
+                    if (!Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck) ||
+                    !Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck))
+                        myTransform.position = targetPosition;
                 }
 
                 // Checks if both feet is grounded
                 // Doesnt let player fall if true
-                if (Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck) &&
-                    Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+                if (Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck) &&
+                    Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck))
+                {
+                    myTransform.position = targetPosition;
                     return;
+                }
 
                 if (playerManager.isInAir == false)
                 {
@@ -252,6 +259,7 @@ namespace J
                 myTransform.position = targetPosition;
             }
         }
+
         /*
         private void OnDrawGizmos()
         {

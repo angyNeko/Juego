@@ -33,26 +33,26 @@ namespace J
             if (isLeft)
             {
                 leftHandSlot.LoadWeaponModel(weaponItem);
-                //LoadLeftHandWeaponDamageCollider(weaponItem.weaponAtk);
+                LoadLeftHandWeaponDamageCollider(weaponItem.weaponAtk);
             }
             else
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
-                //LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
+                LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
             }
         }
-        /*
+
         #region Handle Weapon's Damage Collider
         private void LoadLeftHandWeaponDamageCollider(int weaponAtk)
         {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-            leftHandDamageCollider.SetWeaponDamageValue(weaponAtk);
+            //leftHandDamageCollider.SetWeaponDamageValue(weaponAtk);
         }
 
         private void LoadRightHandWeaponDamageCollider(int weaponAtk)
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-            rightHandDamageCollider.SetWeaponDamageValue(weaponAtk);
+            //rightHandDamageCollider.SetWeaponDamageValue(weaponAtk);
         }
 
         private void OpenLeftHandDamageCollider()
@@ -74,9 +74,7 @@ namespace J
         {
             rightHandDamageCollider.DisableDamageCollider();
         }
-
         #endregion
-        */
     }
 
 }
