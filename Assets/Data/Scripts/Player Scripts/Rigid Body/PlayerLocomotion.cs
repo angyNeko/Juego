@@ -226,6 +226,7 @@ namespace J
                         myTransform.position = targetPosition;
                 }
 
+                /*
                 // Checks if both feet is grounded
                 // Doesnt let player fall if true
                 if (Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck) &&
@@ -234,6 +235,7 @@ namespace J
                     myTransform.position = targetPosition;
                     return;
                 }
+                */
 
                 if (playerManager.isInAir == false)
                 {

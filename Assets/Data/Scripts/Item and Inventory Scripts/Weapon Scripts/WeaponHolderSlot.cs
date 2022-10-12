@@ -11,8 +11,8 @@ namespace J
         public bool isRightHandSlot;
 
         public GameObject currentWeaponModel;
-        
-       public void UnloadWeapon()
+
+        public void UnloadWeapon()
        {
             if (currentWeaponModel != null)
             {

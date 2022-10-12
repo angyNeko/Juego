@@ -94,6 +94,7 @@ namespace J
             anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
         }
 
+        #region Rotation
         public void CanRotate()
         {
             canRotate = true;
@@ -103,7 +104,20 @@ namespace J
         {
             canRotate = false;
         }
-        
+        #endregion
+
+        #region Combos
+        public void EnableCombo()
+        {
+            anim.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            anim.SetBool("canDoCombo", false);
+        }
+        #endregion
+
         private void OnAnimatorMove()
         {
             if (playerManager.isInteracting == true)

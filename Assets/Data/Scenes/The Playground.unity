@@ -134,6 +134,14 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 2057056357}
+    - target: {fileID: 336477068, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
+      propertyPath: rightHandWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d40bbb3a06e59242914dc73ebfb8e0b, type: 2}
+    - target: {fileID: 1566426372, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
+      propertyPath: m_TagString
+      value: Player Camera Override
+      objectReference: {fileID: 0}
     - target: {fileID: 7442890029830504392, guid: 0a9245543bafb6f43a5a9b010a63fe3b, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -386,7 +394,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29528
+  m_Name: pb_Mesh29634
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -612,7 +620,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29516
+  m_Name: pb_Mesh29622
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -781,7 +789,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29540
+  m_Name: pb_Mesh29646
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

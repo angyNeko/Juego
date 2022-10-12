@@ -12,12 +12,14 @@ namespace J
         PlayerLocomotion playerLocomotion;
         Animator anim;
         public CameraHandler cameraHandler;
+        public GameObject cameraOverride;
 
         [Header("Player Flags")]
         public bool isInteracting;
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
+        public bool canDoCombo;
 
         /*public List<Collider> Ragdallpart = new List<Collider>();*/
         private void Awake()
@@ -37,6 +39,7 @@ namespace J
         {
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
+            canDoCombo = anim.GetBool("canDoCombo");
 
             isSprinting = inputHandler.sprint_Input;
             inputHandler.TickInput(delta);

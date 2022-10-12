@@ -15,8 +15,12 @@ MonoBehaviour:
   itemIcon: {fileID: 0}
   itemName: Scimitar
   modelPrefab: {fileID: 100006, guid: 0af636dcf564eb140b31a01bf4b6a9fd, type: 3}
-  isUnarmed: 0
-  lightAtkAnimation: Sword_LightAttack_01
-  heavyAtkAnimation: 
+  modelPrefab: {fileID: 100006, guid: 0af636dcf564eb140b31a01bf4b6a9fd, type: 3}
+  isUnarmed: 1
+  lightAtkAnimation_1:
+  - SW_LAtk_1
+  - SW_LAtk_2
+  - SW_LAtk_3
+  heavyAtkAnimation: SW_LAtk_1
   weaponAtk: 0
   sword: 1

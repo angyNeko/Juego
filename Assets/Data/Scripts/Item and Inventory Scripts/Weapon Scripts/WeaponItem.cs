@@ -10,8 +10,10 @@ namespace J
     {
         public bool isUnarmed;
 
-        [Header("Attack Animation")]
-        public string lightAtkAnimation;
+        [Header("Light Attack Animation")]
+        public string[] lightAtkAnimation_1;
+
+        [Header("Heavy Attack Animation")]
         public string heavyAtkAnimation;
 
         [Header("Item Properties")]
@@ -19,5 +21,6 @@ namespace J
 
         [Header("Weapon Type")]
         public bool sword;
+
     }
 }

@@ -9,6 +9,8 @@ namespace J
         Collider damageCollider;
         int currentWeaponDamage;
 
+        int weaponAtk;
+
         private void Awake()
         {
             damageCollider = GetComponent<Collider>();
@@ -19,7 +21,7 @@ namespace J
 
         public void SetWeaponDamageValue(int WeaponDamageValue)
         {
-            
+            weaponAtk = WeaponDamageValue;
         }
 
         public void EnableDamageCollider()

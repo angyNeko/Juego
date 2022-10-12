@@ -39,7 +39,7 @@ namespace J
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
             ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
-            targetTransform = FindObjectOfType<PlayerManager>().transform;
+            targetTransform = GameObject.FindGameObjectWithTag("Player Camera Override").transform;
         }
 
         public void FollowTarget(float delta)

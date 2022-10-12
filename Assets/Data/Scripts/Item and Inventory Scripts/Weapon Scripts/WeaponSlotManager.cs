@@ -6,11 +6,15 @@ namespace J
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        [SerializeField]
         WeaponHolderSlot leftHandSlot;
+        [SerializeField]
         WeaponHolderSlot rightHandSlot;
 
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
+
+        
 
         private void Awake()
         {
@@ -30,29 +34,36 @@ namespace J
 
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
-            if (isLeft)
-            {
-                leftHandSlot.LoadWeaponModel(weaponItem);
-                LoadLeftHandWeaponDamageCollider(weaponItem.weaponAtk);
-            }
-            else
+            if (!isLeft)
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
             }
+            else
+            {
+                leftHandSlot.LoadWeaponModel(weaponItem);
+                LoadLeftHandWeaponDamageCollider();
+            }
         }
 
         #region Handle Weapon's Damage Collider
-        private void LoadLeftHandWeaponDamageCollider(int weaponAtk)
+        private void LoadLeftHandWeaponDamageCollider()
         {
-            leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            try
+            {
+                leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            }
+            catch
+            {
+                leftHandDamageCollider = null;
+            }
             //leftHandDamageCollider.SetWeaponDamageValue(weaponAtk);
         }
 
         private void LoadRightHandWeaponDamageCollider(int weaponAtk)
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-            //rightHandDamageCollider.SetWeaponDamageValue(weaponAtk);
+            rightHandDamageCollider.SetWeaponDamageValue(weaponAtk);
         }
 
         private void OpenLeftHandDamageCollider()

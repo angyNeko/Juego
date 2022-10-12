@@ -17,12 +17,14 @@ namespace J
         public bool heavyAtkInput;
 
         public bool rollFlag;
-        public float rollInputTimer;
         public bool sprintFlag;
+        public bool comboFlag;
+        public float rollInputTimer;
 
         PlayerInputActions inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
+        PlayerManager playerManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -31,6 +33,7 @@ namespace J
         {
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         public void OnEnable()
@@ -64,6 +67,7 @@ namespace J
             sprint_Input = false;
             lightAtkInput = false;
             heavyAtkInput = false;
+            comboFlag = false;
         }
 
         private void MoveInput(float delta)
@@ -103,7 +107,20 @@ namespace J
 
             if (lightAtkInput)
             {
-                playerAttacker.HandleLightAttack(playerInventory.rightHandWeapon);
+                if (playerManager.canDoCombo)
+                {
+                    comboFlag = true;
+                    playerAttacker.HandleWeaponCombo(playerInventory.rightHandWeapon);
+                    comboFlag = false;
+                }
+                else if (playerManager.isInteracting && !playerManager.canDoCombo)
+                {
+                    return;
+                }
+                else
+                {
+                    playerAttacker.HandleLightAttack(playerInventory.rightHandWeapon);
+                }
             }
 
             if (heavyAtkInput)
