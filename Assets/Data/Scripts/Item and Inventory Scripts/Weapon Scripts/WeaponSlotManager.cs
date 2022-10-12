@@ -14,10 +14,14 @@ namespace J
         DamageCollider leftHandDamageCollider;
         DamageCollider rightHandDamageCollider;
 
+        Animator animator;
+
         
 
         private void Awake()
         {
+            animator = GetComponent<Animator>();
+
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
             {
@@ -31,18 +35,38 @@ namespace J
                 }
             }
         }
-
+         
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
-            if (!isLeft)
-            {
-                rightHandSlot.LoadWeaponModel(weaponItem);
-                LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
-            }
-            else
+            if (isLeft)
             {
                 leftHandSlot.LoadWeaponModel(weaponItem);
                 LoadLeftHandWeaponDamageCollider();
+                #region Handle Left Weapon Idle Animations
+                if (weaponItem != null)
+                {
+                    //animator.CrossFade(weaponItem.leftHandIdle, 0.2f);
+                }
+                else
+                {
+                    //animator.CrossFade("Left Arm Empty", 0.2f);
+                }
+                #endregion
+            }
+            else
+            {
+                rightHandSlot.LoadWeaponModel(weaponItem);
+                //LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
+                #region Handle Right Weapon Idle Animations
+                if (weaponItem != null)
+                {
+                    animator.CrossFade(weaponItem.rightHandIdle, 0.2f);
+                }
+                else
+                {
+                    animator.CrossFade("Right Hand Empty", 0.2f);
+                }
+                #endregion
             }
         }
 
@@ -62,8 +86,14 @@ namespace J
 
         private void LoadRightHandWeaponDamageCollider(int weaponAtk)
         {
-            rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
-            rightHandDamageCollider.SetWeaponDamageValue(weaponAtk);
+            try
+            {
+                rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            }
+            catch
+            {
+                rightHandDamageCollider.SetWeaponDamageValue(weaponAtk);
+            }
         }
 
         private void OpenLeftHandDamageCollider()
@@ -86,6 +116,7 @@ namespace J
             rightHandDamageCollider.DisableDamageCollider();
         }
         #endregion
+
     }
 
 }

@@ -12,10 +12,13 @@ namespace J
         public WeaponItem leftHandWeapon;
         public WeaponItem rightHandWeapon;
 
-        [SerializeField]
-        bool leftWeaponLoaded;
-        [SerializeField]
-        bool rightWeaponLoaded;
+        public WeaponItem unarmedWeapon;
+
+        public WeaponItem[] weaponsInRightHandSlot = new WeaponItem[1];
+        public WeaponItem[] weaponsInLeftHandSlot = new WeaponItem[1];
+
+        public int currentRightWeaponIndex = -1;
+        public int currentLeftWeaponIndex = -1;
 
         private void Awake()
         {
@@ -25,14 +28,31 @@ namespace J
 
         private void Start()
         {
-            weaponSlotManager.LoadWeaponOnSlot(leftHandWeapon, true);
-            weaponSlotManager.LoadWeaponOnSlot(rightHandWeapon, false);
+            rightHandWeapon = unarmedWeapon;
+            leftHandWeapon = unarmedWeapon;
         }
 
-        private void Update()
+        public void ChangeRightHandWeapon()
         {
-            //leftWeaponLoaded = weaponHolderSlot.currentWeaponModel;
-            rightWeaponLoaded = weaponHolderSlot.currentWeaponModel;
+            currentRightWeaponIndex++;
+            int currentIndex = currentRightWeaponIndex;
+
+            if (currentRightWeaponIndex >= weaponsInRightHandSlot.Length)
+            {
+                currentRightWeaponIndex = -1;
+                rightHandWeapon = unarmedWeapon;
+                weaponSlotManager.LoadWeaponOnSlot(rightHandWeapon, false);
+            }
+
+            if (currentRightWeaponIndex == currentIndex && weaponsInRightHandSlot[currentIndex] != null)
+            {
+                rightHandWeapon = weaponsInRightHandSlot[currentRightWeaponIndex];
+                weaponSlotManager.LoadWeaponOnSlot(rightHandWeapon, false);
+            }
+            else if (currentRightWeaponIndex == currentIndex && weaponsInRightHandSlot[currentIndex] == null)
+            {
+                currentRightWeaponIndex++;
+            }
         }
     }
 }

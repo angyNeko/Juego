@@ -15,6 +15,11 @@ namespace J
         public bool sprint_Input;
         public bool lightAtkInput;
         public bool heavyAtkInput;
+        public bool d_Pad_Up;
+        public bool d_Pad_Right;
+        public bool d_Pad_Down;
+        public bool d_Pad_Left;
+
 
         public bool rollFlag;
         public bool sprintFlag;
@@ -58,6 +63,7 @@ namespace J
             MoveInput(delta);
             HandleRollInput(delta);
             HandleAttackInput(delta);
+            HandleQuickSlotInput(delta);
         }
 
         public void ResetBools()
@@ -68,6 +74,10 @@ namespace J
             lightAtkInput = false;
             heavyAtkInput = false;
             comboFlag = false;
+            d_Pad_Right = false;
+            d_Pad_Left = false;
+            d_Pad_Up = false;
+            d_Pad_Down = false;
         }
 
         private void MoveInput(float delta)
@@ -129,6 +139,21 @@ namespace J
                 //playerAttacker.HandleHeavyAttack(playerInventory.rightHandWeapon);
             }
             
+        }
+
+        private void HandleQuickSlotInput(float delta)
+        {
+            inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
+            inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
+
+            if (d_Pad_Right)
+            {
+                playerInventory.ChangeRightHandWeapon();
+            }
+            if (d_Pad_Left)
+            {
+                //playerInventory.ChangeRightHandWeapon;
+            }
         }
     }
 }

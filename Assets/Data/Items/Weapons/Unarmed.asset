@@ -10,19 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aae7ceda6a9163c478a6366ee7c4fea5, type: 3}
-  m_Name: Scimitar
+  m_Name: Unarmed
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
-  itemName: Scimitar
-  modelPrefab: {fileID: 100006, guid: 0af636dcf564eb140b31a01bf4b6a9fd, type: 3}
+  itemName: 
+  modelPrefab: {fileID: 7470983045598386252, guid: fae7b6b1cb5a1464dae7159f6f32aee3, type: 3}
   isUnarmed: 1
-  rightHandIdle: Right_Arm_Idle_Sword
-  leftHandIdle: 
-  lightAtkAnimation_1:
-  - SW_LAtk_1
-  - SW_LAtk_2
-  - SW_LAtk_3
-  heavyAtkAnimation: SW_LAtk_1
+  rightHandIdle: Right Arm Empty
+  leftHandIdle: Left Arm Empty
+  lightAtkAnimation_1: []
+  heavyAtkAnimation: 
   weaponAtk: 0
-  sword: 1
+  sword: 0
   spear: 0
