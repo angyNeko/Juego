@@ -21,7 +21,7 @@ namespace J
         public bool d_Pad_Left;
 
 
-        public bool rollFlag;
+        public bool dodgelFlag;
         public bool sprintFlag;
         public bool comboFlag;
         public float rollInputTimer;
@@ -61,14 +61,14 @@ namespace J
         public void TickInput(float delta)
         {
             MoveInput(delta);
-            HandleRollInput(delta);
+            HandleRollSprintInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotInput(delta);
         }
 
         public void ResetBools()
         {
-            rollFlag = false;
+            dodgelFlag = false;
             sprintFlag = false;
             sprint_Input = false;
             lightAtkInput = false;
@@ -89,24 +89,14 @@ namespace J
             mouseY = cameraInput.y;
         }
 
-        private void HandleRollInput(float delta)
+        private void HandleRollSprintInput(float delta)
         {
-            sprint_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
-            
-            if (sprint_Input)
-            {
-                rollInputTimer += delta;
-                sprintFlag = true;
-            }
-            else
-            {
-                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
-                {
-                    sprintFlag = false;
-                    rollFlag = true;
-                }
+            sprintFlag = inputActions.PlayerActions.Sprint.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            inputActions.PlayerActions.Dodge.performed += i => dodgelFlag = true;
 
-                rollInputTimer = 0;
+            if (sprintFlag)
+            {
+                sprintFlag = true;
             }
         }
 

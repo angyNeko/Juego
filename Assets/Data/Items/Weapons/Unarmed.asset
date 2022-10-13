@@ -18,8 +18,10 @@ MonoBehaviour:
   isUnarmed: 1
   rightHandIdle: Right Arm Empty
   leftHandIdle: Left Arm Empty
-  lightAtkAnimation_1: []
-  heavyAtkAnimation: []
+  lightAtkAnimation_1:
+  - Empty
+  heavyAtkAnimation:
+  - Empty
   weaponAtk: 0
   sword: 0
   spear: 0

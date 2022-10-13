@@ -58,7 +58,7 @@ namespace J
                 rightHandSlot.LoadWeaponModel(weaponItem);
                 //LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
                 #region Handle Right Weapon Idle Animations
-                if (weaponItem != null)
+                if (weaponItem != null && weaponItem.name != "Unarmed")
                 {
                     animator.CrossFade(weaponItem.rightHandIdle, 0.2f);
                 }

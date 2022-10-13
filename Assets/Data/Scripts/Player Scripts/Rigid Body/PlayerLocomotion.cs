@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -88,7 +89,7 @@ namespace J
 
         public void HandleMovement(float delta)
         {
-            if (inputHandler.rollFlag)
+            if (inputHandler.dodgelFlag)
                 return;
 
             if (playerManager.isInteracting)
@@ -137,7 +138,7 @@ namespace J
             if (playerManager.isInteracting == true)
                 return;
 
-            if (inputHandler.rollFlag)
+            if (inputHandler.dodgelFlag)
             {
                 moveDirection = cameraObject.forward * inputHandler.vertical;
                 moveDirection += cameraObject.right * inputHandler.horizontal;

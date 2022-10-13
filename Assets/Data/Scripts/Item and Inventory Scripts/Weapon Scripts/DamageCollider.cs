@@ -27,6 +27,7 @@ namespace J
         public void EnableDamageCollider()
         {
             damageCollider.enabled = true;
+
         }
 
         public void DisableDamageCollider()

@@ -42,10 +42,8 @@ namespace J
 
         public void HandleLightAttack(WeaponItem weaponItem)
         {
-            if (weaponItem == null || weaponItem.lightAtkAnimation_1.Length < 0)
+            if (weaponItem == null || weaponItem.lightAtkAnimation_1.Length < 0 || weaponItem.name == "Unarmed")
                 return;
-
-
 
             animatorHandler.PlayTargetAnimation(weaponItem.lightAtkAnimation_1[lastAtkNo], true);
             

@@ -207,8 +207,8 @@
             "id": "8fc38dd4-d5e1-4d14-8b70-85e27a464110",
             "actions": [
                 {
-                    "name": "Roll",
-                    "type": "Value",
+                    "name": "Dodge",
+                    "type": "Button",
                     "id": "9ea65061-bc82-4f85-a8b3-78f7f19188d0",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -217,12 +217,12 @@
                 },
                 {
                     "name": "Sprint",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "81c2e52b-dead-4913-8137-bd0322afb5e4",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "LightAttack",
@@ -247,29 +247,29 @@
                 {
                     "name": "",
                     "id": "9958b880-740d-4d7b-911a-6db0585f7f02",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
-                    "action": "Roll",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "a2c63b75-7cd2-4f59-9ff5-4faee8214304",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Roll",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "2557b7d2-5d8a-4e82-b745-513d678e890f",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "MouseKeyboard",
@@ -280,10 +280,10 @@
                 {
                     "name": "",
                     "id": "4c300738-f9fa-42c7-b97b-3919e7eefae5",
-                    "path": "<Keyboard>/shift",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "MouseKeyboard",
+                    "groups": "Gamepad",
                     "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
