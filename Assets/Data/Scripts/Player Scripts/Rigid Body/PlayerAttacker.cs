@@ -68,7 +68,16 @@ namespace J
 
         public void HandleHeavyAttack(WeaponItem weaponItem)
         {
-            animatorHandler.PlayTargetAnimation(weaponItem.heavyAtkAnimation, true);
+            lastAttack = weaponItem.heavyAtkAnimation[lastAtkNo];
+
+            if (lastAtkNo >= (weaponItem.heavyAtkAnimation.Length - 1))
+            {
+                lastAtkNo = 0;
+            }
+            else
+            {
+                lastAtkNo++;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace J 
@@ -18,7 +19,7 @@ namespace J
         public string[] lightAtkAnimation_1;
 
         [Header("Heavy Attack Animation")]
-        public string heavyAtkAnimation;
+        public string[] heavyAtkAnimation;
 
         [Header("Item Properties")]
         public int weaponAtk;
@@ -26,7 +27,6 @@ namespace J
         [Header("Weapon Type")]
         public bool sword;
         public bool spear;
-
 
     }
 }

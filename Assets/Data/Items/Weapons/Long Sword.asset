@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 0}
   itemName: 
-  modelPrefab: {fileID: 100006, guid: 6a0eedfe1b2e14d47b276e72159e85b1, type: 3}
+  modelPrefab: {fileID: 6463470073403630552, guid: 6f0ac09ed14236b4b832a44a605dfce6, type: 3}
   isUnarmed: 0
   rightHandIdle: 
   leftHandIdle: 
