@@ -20,6 +20,7 @@ namespace J
         public bool isInAir;
         public bool isGrounded;
         public bool canDoCombo;
+        public bool isKnockedBack;
 
         /*public List<Collider> Ragdallpart = new List<Collider>();*/
         private void Awake()
@@ -66,12 +67,12 @@ namespace J
         // Reset flags here
         private void LateUpdate()
         {
-            inputHandler.ResetBools();
-
             if (isInAir)
             {
                 playerLocomotion.inAirTimer = playerLocomotion.inAirTimer + Time.deltaTime;
             }
+
+            inputHandler.ResetBools();
         }
 
         public void InitializeCamera()
@@ -96,6 +97,5 @@ namespace J
         {
 
         }
-
     }
 }

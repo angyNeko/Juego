@@ -40,6 +40,8 @@ namespace J
         float rotationSpeed = 10;
         [SerializeField]
         float fallingSpeed = 45f;
+        [SerializeField]
+        float knockbackAmount = 30f;
 
         private void Start()
         {
@@ -89,11 +91,7 @@ namespace J
             if (playerManager.isInteracting)
                 return;
 
-            moveDirection = cameraObject.forward * inputHandler.vertical;
-            moveDirection += cameraObject.right * inputHandler.horizontal;
-            moveDirection.Normalize();
-            moveDirection.y = 0;
-
+            GetMoveDirection(delta);
             float speed = movementSpeed;
 
             if (inputHandler.sprintFlag && inputHandler.moveAmount > 0.5f)
@@ -125,6 +123,23 @@ namespace J
             {
                 HandleRoatation(delta);
             }
+        }
+
+        private void GetMoveDirection(float delta)
+        {
+            moveDirection = cameraObject.forward * inputHandler.vertical;
+            moveDirection += cameraObject.right * inputHandler.horizontal;
+            moveDirection.Normalize();
+            moveDirection.y = 0;
+        }
+
+        public void HandleKnockback()
+        {
+            if (playerManager.isKnockedBack)
+            {
+                rigidbody.AddForce(moveDirection * -knockbackAmount, ForceMode.Impulse);
+            }
+            playerManager.isKnockedBack = false;
         }
 
         public void HandleRollAndSprint(float delta)

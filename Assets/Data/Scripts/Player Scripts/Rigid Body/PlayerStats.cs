@@ -20,7 +20,7 @@ namespace J
 
         private void Awake()
         {
-            healthBar = GameObject.FindGameObjectWithTag("UI Canvas").GetComponentInChildren<HealthBar>();
+            healthBar = GameObject.FindGameObjectWithTag("Healthbar").GetComponent<HealthBar>();
         }
 
         void Start()
