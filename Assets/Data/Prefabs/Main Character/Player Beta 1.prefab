@@ -1441,9 +1441,7 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   rotationSpeed: 10
-  fallingSpeed: 45
-  leftKnee: {fileID: 0}
-  rightKnee: {fileID: 0}
+  fallingSpeed: 200
 --- !u!114 &2636926346723425110
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -45,6 +45,7 @@ namespace J
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
+
         }
 
         private void FixedUpdate()

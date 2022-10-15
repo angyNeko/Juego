@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace J 
 {
@@ -16,6 +17,11 @@ namespace J
         PlayerManager playerManager;
         [SerializeField] 
         AnimatorHandler animatorHandler;
+
+        private void Awake()
+        {
+            healthBar = GameObject.FindGameObjectWithTag("UI Canvas").GetComponentInChildren<HealthBar>();
+        }
 
         void Start()
         {

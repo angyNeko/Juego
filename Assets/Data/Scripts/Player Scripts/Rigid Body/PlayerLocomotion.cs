@@ -41,12 +41,6 @@ namespace J
         [SerializeField]
         float fallingSpeed = 45f;
 
-        [Header("Knee Transforms")]
-        [SerializeField]
-        GameObject leftKnee;
-        [SerializeField]
-        GameObject rightKnee;
-
         private void Start()
         {
             inputHandler = GetComponent<InputHandler>();
@@ -163,8 +157,6 @@ namespace J
             RaycastHit hit;
             Vector3 origin = myTransform.position;
             origin.y += groundDetectionRayStartPoint;
-            Vector3 leftFootTrans = leftKnee.transform.position;
-            Vector3 rightFootTrans = rightKnee.transform.position;
 
             if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
             {
@@ -221,10 +213,6 @@ namespace J
                     }
 
                     playerManager.isGrounded = false;
-
-                    if (!Physics.Raycast(leftFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck) ||
-                    !Physics.Raycast(rightFootTrans, -Vector3.up, out hit, minimumDistanceNeededToBeginFall / 2f, ignoreForGroundCheck))
-                        myTransform.position = targetPosition;
                 }
 
                 /*
