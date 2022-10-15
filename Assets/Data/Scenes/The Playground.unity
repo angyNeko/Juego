@@ -3721,10 +3721,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 499144665336196197, guid: cbbbce0e63391ec4791a8459af853753, type: 3}
-      propertyPath: m_TagString
-      value: Healthbar
-      objectReference: {fileID: 0}
     - target: {fileID: 499144665527572738, guid: cbbbce0e63391ec4791a8459af853753, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3981,18 +3977,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2939401743377270376, guid: f3375ec62f6b0454f99cb373d0019ff7, type: 3}
-      propertyPath: lookSpeed
-      value: 0.001
-      objectReference: {fileID: 0}
-    - target: {fileID: 2939401743377270376, guid: f3375ec62f6b0454f99cb373d0019ff7, type: 3}
-      propertyPath: followSpeed
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2939401743377270376, guid: f3375ec62f6b0454f99cb373d0019ff7, type: 3}
-      propertyPath: targetTransform
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2939401743377270377, guid: f3375ec62f6b0454f99cb373d0019ff7, type: 3}
       propertyPath: m_Name
       value: Camera Holder
