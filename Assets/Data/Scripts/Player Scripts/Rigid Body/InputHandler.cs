@@ -163,6 +163,11 @@ namespace J
             inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
         }
 
+        private void HandleJumpInput()
+        {
+
+        }
+
         private void HandleInventoryInput()
         {
             inputActions.PlayerActions.Inventory.performed += inputActions => inventory_Input = true;
