@@ -13,24 +13,27 @@ namespace J
         public float mouseY;
 
         public bool sprint_Input;
-        public bool lightAtkInput;
-        public bool heavyAtkInput;
+        public bool lightAtk_Input;
+        public bool heavyAtk_Input;
+        public bool interact_Input;
+        public bool inventory_Input;
+
         public bool d_Pad_Up;
         public bool d_Pad_Right;
         public bool d_Pad_Down;
         public bool d_Pad_Left;
-        public bool interact_Input;
-
 
         public bool dodgelFlag;
         public bool sprintFlag;
         public bool comboFlag;
+        public bool inventoryFlag;
         public float rollInputTimer;
 
         PlayerInputActions inputActions;
         PlayerAttacker playerAttacker;
         PlayerInventory playerInventory;
         PlayerManager playerManager;
+        UIManager uiManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -40,6 +43,7 @@ namespace J
             playerAttacker = GetComponent<PlayerAttacker>();
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            uiManager = FindObjectOfType<UIManager>();
         }
 
         public void OnEnable()
@@ -66,6 +70,8 @@ namespace J
             HandleAttackInput(delta);
             HandleQuickSlotInput();
             HandleInteractInput();
+            //HandleJumpInput();
+            HandleInventoryInput();
         }
 
         public void ResetBools()
@@ -75,9 +81,10 @@ namespace J
             comboFlag = false;
 
             sprint_Input = false;
-            lightAtkInput = false;
-            heavyAtkInput = false;
+            lightAtk_Input = false;
+            heavyAtk_Input = false;
             interact_Input = false;
+            inventory_Input = false;
 
             d_Pad_Right = false;
             d_Pad_Left = false;
@@ -107,10 +114,10 @@ namespace J
 
         private void HandleAttackInput(float delta)
         {
-            inputActions.PlayerActions.LightAttack.performed += i => lightAtkInput = true;
-            inputActions.PlayerActions.HeavyAttack.performed += i => heavyAtkInput = true;
+            inputActions.PlayerActions.LightAttack.performed += i => lightAtk_Input = true;
+            inputActions.PlayerActions.HeavyAttack.performed += i => heavyAtk_Input = true;
 
-            if (lightAtkInput)
+            if (lightAtk_Input)
             {
                 if (playerManager.canDoCombo)
                 {
@@ -128,7 +135,7 @@ namespace J
                 }
             }
 
-            if (heavyAtkInput)
+            if (heavyAtk_Input)
             {
                 return;
                 //playerAttacker.HandleHeavyAttack(playerInventory.rightHandWeapon);
@@ -154,6 +161,25 @@ namespace J
         private void HandleInteractInput()
         {
             inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
+        }
+
+        private void HandleInventoryInput()
+        {
+            inputActions.PlayerActions.Inventory.performed += inputActions => inventory_Input = true;
+
+            if (inventory_Input)
+            {
+                inventoryFlag = !inventoryFlag; 
+
+                if (inventoryFlag)
+                {
+                    uiManager.OpenSelectWindow(); 
+                }
+                else
+                {
+                    uiManager.CloseSelectWindow();
+                }
+            }
         }
     }
 }

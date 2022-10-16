@@ -159,6 +159,15 @@
             "id": "8fc38dd4-d5e1-4d14-8b70-85e27a464110",
             "actions": [
                 {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "b1402fde-77c9-45b0-ad89-aa9f6d6a7d22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "HeavyAttack",
                     "type": "Button",
                     "id": "af12acc4-ce64-4242-bb7c-9affc59f578b",
@@ -312,6 +321,28 @@
                     "processors": "",
                     "groups": "MouseKeyboard",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f624f99b-8885-4e04-883f-f38e0683926b",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e031f38-aea9-495a-b885-3a0b931b7563",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
