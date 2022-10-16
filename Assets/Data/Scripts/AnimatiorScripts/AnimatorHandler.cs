@@ -129,7 +129,7 @@ namespace J
                 Vector3 velocity = deltaPosition / delta;
                 playerLocomotion.rigidbody.velocity = velocity;
 
-                playerManager.cameraHandler.FollowTarget(delta);
+                playerManager.cameraHandler.FollowTarget(delta, 0);
             }
         }
         

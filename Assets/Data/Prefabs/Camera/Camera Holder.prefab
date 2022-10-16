@@ -165,11 +165,14 @@ MonoBehaviour:
   cameraTransform: {fileID: 2939401742603671722}
   cameraPivotTransform: {fileID: 2939401742999701026}
   myTransform: {fileID: 0}
-  lookSpeed: 0.001
-  followSpeed: 0.3
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  lookSpeed: 0.01
+  followSpeed: 1.12
   pivotSpeed: 0.02
-  minimumPivot: -80
-  maximumPivot: 80
+  minimumPivot: -40
+  maximumPivot: 40
   cameraSphereRadius: 0.2
   cameraCollisionOffset: 0.2
   minimumCollisionOffset: 0.2

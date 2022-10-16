@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Katana
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 1c319e91d7824c34aa750ed3cd96f2e3, type: 3}
-  itemName: 
+  itemName: Katana
   modelPrefab: {fileID: 8606021183331470697, guid: 524962fe8ada7a647b20c1deb929ae18, type: 3}
   isUnarmed: 0
   rightHandIdle: Right_Arm_Idle_Sword
@@ -26,3 +26,7 @@ MonoBehaviour:
   weaponAtk: 0
   sword: 0
   spear: 0
+  skillQ: 
+  skillQIcon: {fileID: 0}
+  skillE: 
+  skillEIcon: {fileID: 0}

@@ -12,7 +12,7 @@ namespace J
         public Transform cameraPivotTransform;
         public Transform myTransform;
         private Vector3 cameraTransformPosition;
-        private LayerMask ignoreLayers;
+        public LayerMask ignoreLayers;
         private Vector3 cameraFollowVelocity = Vector3.zero;
         public static CameraHandler singleton;
 
@@ -42,10 +42,21 @@ namespace J
             targetTransform = GameObject.FindGameObjectWithTag("Player Camera Override").transform as Transform;
         }
 
-        public void FollowTarget(float delta)
+        public void FollowTarget(float delta, float vertical)
         {
+            /*
+            float mFollowSpeed;
+            if (vertical < 0)
+            {
+                mFollowSpeed = 2;
+            }
+            else
+            {
+                mFollowSpeed = followSpeed;
+            }
+            */
+
             Vector3 targetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
-            //targetPosition.y = 0;
             myTransform.position = targetPosition;
 
             HandleCameraCollision(delta);

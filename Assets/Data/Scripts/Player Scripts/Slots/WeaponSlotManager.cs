@@ -66,7 +66,7 @@ namespace J
                 }
                 else
                 {
-                    animator.CrossFade("Right Hand Empty", 0.2f);
+                    animator.CrossFade("Right Arm Empty", 0.2f);
                 }
                 #endregion
             }

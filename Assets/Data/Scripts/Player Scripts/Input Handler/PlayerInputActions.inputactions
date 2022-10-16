@@ -2,54 +2,6 @@
     "name": "PlayerInputActions",
     "maps": [
         {
-            "name": "BaseUI",
-            "id": "8058367f-2bf6-4780-a305-c531afbe22f9",
-            "actions": [
-                {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "b8f26ac9-ffd8-4c1a-8dbe-ea3e8ada68d8",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "a37d6ffb-09ef-402e-935a-9fc1fa986fec",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "d0d99b33-d8cd-4520-bae0-dbde82dd4078",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d14ec8e6-3d94-4a46-aa75-31c05334916d",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "UI",
             "id": "94eb22e3-8b89-4b13-a0cd-e842d9a8ccc6",
             "actions": [
@@ -207,22 +159,13 @@
             "id": "8fc38dd4-d5e1-4d14-8b70-85e27a464110",
             "actions": [
                 {
-                    "name": "Dodge",
+                    "name": "HeavyAttack",
                     "type": "Button",
-                    "id": "9ea65061-bc82-4f85-a8b3-78f7f19188d0",
+                    "id": "af12acc4-ce64-4242-bb7c-9affc59f578b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Value",
-                    "id": "81c2e52b-dead-4913-8137-bd0322afb5e4",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "LightAttack",
@@ -234,13 +177,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "HeavyAttack",
+                    "name": "Dodge",
                     "type": "Button",
-                    "id": "af12acc4-ce64-4242-bb7c-9affc59f578b",
+                    "id": "9ea65061-bc82-4f85-a8b3-78f7f19188d0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "c6014f20-23d9-43d2-867b-2be40539183a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Value",
+                    "id": "81c2e52b-dead-4913-8137-bd0322afb5e4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -258,7 +219,7 @@
                 {
                     "name": "",
                     "id": "a2c63b75-7cd2-4f59-9ff5-4faee8214304",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -290,6 +251,28 @@
                 },
                 {
                     "name": "",
+                    "id": "dd1eeb0e-b81e-437f-8e7d-3a550dc0da5e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfec016b-5dd8-4b8f-890d-d5825b750117",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "HeavyAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "be3f878e-55ba-4eb1-b5b7-168fe2dfd77e",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -312,34 +295,23 @@
                 },
                 {
                     "name": "",
-                    "id": "a727c2d0-d1c4-4b83-8d1b-7c0b63a9cadf",
-                    "path": "<Keyboard>/o",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MouseKeyboard",
-                    "action": "LightAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "dd1eeb0e-b81e-437f-8e7d-3a550dc0da5e",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "MouseKeyboard",
-                    "action": "HeavyAttack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "bfec016b-5dd8-4b8f-890d-d5825b750117",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "b19c180e-2eec-46a6-b922-929dd03ec963",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "HeavyAttack",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba472900-7142-440e-8bdd-fbf27d858a22",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
