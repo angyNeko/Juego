@@ -19,6 +19,7 @@ namespace J
         public bool d_Pad_Right;
         public bool d_Pad_Down;
         public bool d_Pad_Left;
+        public bool interact_Input;
 
 
         public bool dodgelFlag;
@@ -63,17 +64,21 @@ namespace J
             MoveInput(delta);
             HandleRollSprintInput(delta);
             HandleAttackInput(delta);
-            HandleQuickSlotInput(delta);
+            HandleQuickSlotInput();
+            HandleInteractInput();
         }
 
         public void ResetBools()
         {
             dodgelFlag = false;
             sprintFlag = false;
+            comboFlag = false;
+
             sprint_Input = false;
             lightAtkInput = false;
             heavyAtkInput = false;
-            comboFlag = false;
+            interact_Input = false;
+
             d_Pad_Right = false;
             d_Pad_Left = false;
             d_Pad_Up = false;
@@ -131,7 +136,7 @@ namespace J
             
         }
 
-        private void HandleQuickSlotInput(float delta)
+        private void HandleQuickSlotInput()
         {
             inputActions.PlayerQuickSlots.DPadRight.performed += i => d_Pad_Right = true;
             inputActions.PlayerQuickSlots.DPadLeft.performed += i => d_Pad_Left = true;
@@ -144,6 +149,11 @@ namespace J
             {
                 //playerInventory.ChangeRightHandWeapon;
             }
+        }
+
+        private void HandleInteractInput()
+        {
+            inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
         }
     }
 }

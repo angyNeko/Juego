@@ -14,6 +14,11 @@ namespace J
         public CameraHandler cameraHandler;
         public GameObject cameraOverride;
 
+        [SerializeField]
+        InteractableUI interactableUI;
+        public GameObject interactableUIGameObject;
+        public GameObject itemInteractableGameObject;
+
         [Header("Player Flags")]
         public bool isInteracting;
         public bool isSprinting;
@@ -34,6 +39,7 @@ namespace J
             inputHandler = GetComponent<InputHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             anim = GetComponentInChildren<Animator>();
+            interactableUI = FindObjectOfType<InteractableUI>();
         }
 
         void Update()
@@ -47,6 +53,8 @@ namespace J
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
 
+            CheckForInteractable();
+
         }
 
         private void FixedUpdate()
@@ -57,7 +65,7 @@ namespace J
 
             if (cameraHandler != null)
             {
-                cameraHandler.FollowTarget(delta);
+                cameraHandler.FollowTarget(delta, inputHandler.vertical);
                 cameraHandler.HandleCameraRotation(delta, inputHandler.mouseX, inputHandler.mouseY);
             }
             else
@@ -73,11 +81,50 @@ namespace J
             }
 
             inputHandler.ResetBools();
+
+            CheckForInteractable();
         }
 
         public void InitializeCamera()
         {
             cameraHandler = FindObjectOfType<CameraHandler>();
+        }
+
+        public void CheckForInteractable()
+        {
+            RaycastHit hit;
+
+            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
+            {
+                if (hit.collider.tag == "Interactable")
+                {
+                    Interactable interactableObject = hit.collider.GetComponent<Interactable>();
+
+                    if(interactableObject != null)
+                    {
+                        string interactableText = interactableObject.interactableText;
+                        interactableUI.interactableText.text = interactableText;
+                        interactableUIGameObject.SetActive(true);
+
+                        if (inputHandler.interact_Input)
+                        {
+                            hit.collider.GetComponent<Interactable>().Interact(this);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (interactableUIGameObject != null)
+                {
+                    interactableUIGameObject.SetActive(false);
+                }
+
+                if (itemInteractableGameObject != null && inputHandler.interact_Input)
+                {
+                    itemInteractableGameObject.SetActive(false);
+                }
+            }
         }
 
         /*private void SetRagdall()

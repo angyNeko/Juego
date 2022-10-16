@@ -39,7 +39,7 @@ namespace J
             currentRightWeaponIndex++;
             int currentIndex = currentRightWeaponIndex;
 
-            if (currentRightWeaponIndex >= weaponsInRightHandSlot.Length)
+            if (currentRightWeaponIndex > weaponsInRightHandSlot.Length - 1)
             {
                 currentRightWeaponIndex = -1;
                 rightHandWeapon = unarmedWeapon;

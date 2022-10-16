@@ -1289,14 +1289,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2636926346711282575}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.032, y: 0.087, z: 0}
+  m_LocalRotation: {x: 0.15478323, y: -0.10102915, z: -0.2968062, w: 0.93687856}
+  m_LocalPosition: {x: 0.025, y: 0.086, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7286572246637114759}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.3, y: -16.794, z: -37.129}
 --- !u!114 &2636926346711282573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,11 +1383,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHandler: {fileID: 0}
   cameraOverride: {fileID: 0}
+  interactableUI: {fileID: 0}
+  interactableUIGameObject: {fileID: 0}
+  itemInteractableGameObject: {fileID: 0}
   isInteracting: 0
   isSprinting: 0
   isInAir: 0
   isGrounded: 1
   canDoCombo: 0
+  isKnockedBack: 0
 --- !u!114 &2636926346723425108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,6 +1416,7 @@ MonoBehaviour:
   d_Pad_Right: 0
   d_Pad_Down: 0
   d_Pad_Left: 0
+  interact_Input: 0
   dodgelFlag: 0
   sprintFlag: 0
   comboFlag: 0
@@ -1442,6 +1447,7 @@ MonoBehaviour:
   sprintSpeed: 7
   rotationSpeed: 10
   fallingSpeed: 200
+  knockbackAmount: 30
 --- !u!114 &2636926346723425110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1471,13 +1477,11 @@ MonoBehaviour:
   leftHandWeapon: {fileID: 11400000, guid: 0d59725bb9a3a8d4caf24690afb76fba, type: 2}
   rightHandWeapon: {fileID: 11400000, guid: 0d59725bb9a3a8d4caf24690afb76fba, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: 0d59725bb9a3a8d4caf24690afb76fba, type: 2}
-  weaponsInRightHandSlot:
-  - {fileID: 11400000, guid: 1acc451d72022574495caf31763229e6, type: 2}
-  - {fileID: 11400000, guid: 8d40bbb3a06e59242914dc73ebfb8e0b, type: 2}
-  weaponsInLeftHandSlot:
-  - {fileID: 0}
+  weaponsInRightHandSlot: []
+  weaponsInLeftHandSlot: []
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
+  weaponsInventory: []
 --- !u!114 &2636926346723425096
 MonoBehaviour:
   m_ObjectHideFlags: 0
