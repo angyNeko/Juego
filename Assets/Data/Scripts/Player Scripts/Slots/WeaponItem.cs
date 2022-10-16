@@ -28,5 +28,12 @@ namespace J
         public bool sword;
         public bool spear;
 
+        [Header("Skill Slots")]
+        public string skillQ;
+        public Sprite skillQIcon;
+        public string skillE;
+        public Sprite skillEIcon;
+
+
     }
 }

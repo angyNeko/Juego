@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae7ceda6a9163c478a6366ee7c4fea5, type: 3}
   m_Name: Scimitar
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: d73c8fa1ecf6728418570d7dadad7608, type: 3}
   itemName: Scimitar
   modelPrefab: {fileID: 100006, guid: 0af636dcf564eb140b31a01bf4b6a9fd, type: 3}
   isUnarmed: 1

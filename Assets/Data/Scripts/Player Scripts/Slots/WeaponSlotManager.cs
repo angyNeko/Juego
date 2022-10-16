@@ -16,11 +16,12 @@ namespace J
 
         Animator animator;
 
-        
+        QuickSlotsUI quickSlots;
 
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            quickSlots = FindObjectOfType<QuickSlotsUI>();
 
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
@@ -56,7 +57,8 @@ namespace J
             else
             {
                 rightHandSlot.LoadWeaponModel(weaponItem);
-                //LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
+                LoadRightHandWeaponDamageCollider(weaponItem.weaponAtk);
+                quickSlots.UpdateWeaponQuickSlotsUI(weaponItem);
                 #region Handle Right Weapon Idle Animations
                 if (weaponItem != null && weaponItem.name != "Unarmed")
                 {

@@ -50,6 +50,7 @@ namespace J
 
         public void TakeDamage(int damage)
         {
+            PlayerLocomotion playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
             currentHealth -= damage;
             healthBar.SetCurrentHealth(currentHealth);
 
@@ -57,10 +58,14 @@ namespace J
             {
                 currentHealth = 0;
                 animatorHandler.PlayTargetAnimation("Damage_Die", true);
+
+                
+                playerLocomotion.rigidbody.velocity = Vector3.zero; // Stops player from moving
             }
             else
             {
                 animatorHandler.PlayTargetAnimation("Damage", true);
+                playerLocomotion.rigidbody.AddForce(playerLocomotion.rigidbody.transform.position * -300f);
             }
         }
 

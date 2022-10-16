@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae7ceda6a9163c478a6366ee7c4fea5, type: 3}
   m_Name: Katana
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 21300000, guid: 1c319e91d7824c34aa750ed3cd96f2e3, type: 3}
   itemName: 
   modelPrefab: {fileID: 8606021183331470697, guid: 524962fe8ada7a647b20c1deb929ae18, type: 3}
   isUnarmed: 0

@@ -14,27 +14,59 @@ namespace J
 
         public void UpdateWeaponQuickSlotsUI(WeaponItem weapon)
         {
-            weaponIcon.sprite = weapon.itemIcon;
-            weaponIcon.enabled = true;
+            if (weapon.itemIcon != null)
+            {
+                weaponIcon.sprite = weapon.itemIcon;
+                weaponIcon.enabled = true;
+            }
+            else
+            {
+                weaponIcon.sprite = null;
+                weaponIcon.enabled = false;
+            }
         }
 
         public void UpdateConsumableQuickSlotsUI(ConsumableItem item)
         {
-            consumableIcon.sprite = item.itemIcon;
-            consumableIcon.enabled = true;
-        }
-
-        public void UpdateSkillSlotsUI(bool isLeft,Image image)
-        {
-            if (isLeft)
+            if(item.itemIcon != null)
             {
-                skill_Slot_1Icon = image;
-                skill_Slot_1Icon.enabled = true;
+                consumableIcon.sprite = item.itemIcon;
+                consumableIcon.enabled = true;
             }
             else
             {
-                skill_Slot_2Icon = image;
-                skill_Slot_2Icon.enabled = true;
+                consumableIcon.sprite = null;
+                consumableIcon.enabled = false;
+            }
+        }
+
+        public void UpdateSkillSlotsUI(bool isLeft,WeaponItem weapon)
+        {
+            if (isLeft)
+            {
+                if (weapon.skillQIcon != null)
+                {
+                    skill_Slot_1Icon.sprite = weapon.skillQIcon;
+                    skill_Slot_1Icon.enabled = true;
+                }
+                else
+                {
+                    skill_Slot_1Icon.sprite = null;
+                    skill_Slot_1Icon.enabled = false;
+                }
+            }
+            else
+            {
+                if (weapon.skillEIcon != null)
+                {
+                    skill_Slot_2Icon.sprite = weapon.skillEIcon;
+                    skill_Slot_2Icon.enabled = true;
+                }
+                else
+                {
+                    skill_Slot_2Icon.sprite = null;
+                    skill_Slot_2Icon.enabled = false;
+                }
             }
         }
     }
