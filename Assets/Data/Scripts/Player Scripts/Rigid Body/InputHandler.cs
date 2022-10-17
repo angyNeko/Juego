@@ -179,10 +179,14 @@ namespace J
                 if (inventoryFlag)
                 {
                     uiManager.OpenSelectWindow(); 
+                    uiManager.UpdateUI();
+                    uiManager.hudWindow.SetActive(false);
                 }
                 else
                 {
                     uiManager.CloseSelectWindow();
+                    uiManager.CloseAllInventoryWindows();
+                    uiManager.hudWindow.SetActive(true);
                 }
             }
         }
