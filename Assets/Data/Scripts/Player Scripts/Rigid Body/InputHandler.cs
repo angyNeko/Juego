@@ -181,10 +181,13 @@ namespace J
                     uiManager.OpenSelectWindow(); 
                     uiManager.UpdateUI();
                     uiManager.hudWindow.SetActive(false);
+                    uiManager.uiInventoryNavbar.SetActive(false);
+                    uiManager.leftPanel.SetActive(false);
                 }
                 else
                 {
                     uiManager.CloseSelectWindow();
+                    uiManager.CloseCharCustWindow();
                     uiManager.CloseAllInventoryWindows();
                     uiManager.hudWindow.SetActive(true);
                 }
