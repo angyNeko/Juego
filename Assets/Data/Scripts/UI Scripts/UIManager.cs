@@ -10,6 +10,8 @@ namespace J
     {
         [SerializeField]
         PlayerInventory playerInventory;
+        [SerializeField]
+        EquipmentWindowUI equipmentWindowUI;
 
         [Header("UI Windows")]
         public GameObject hudWindow;
@@ -27,6 +29,7 @@ namespace J
         {
             playerInventory = FindObjectOfType<PlayerInventory>();
         }
+
         private void Start()
         {
             weaponInventorySlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponInventorySlot>();
@@ -76,5 +79,12 @@ namespace J
             uiInventoryNavbar.SetActive(false);
             weaponInventoryWindow.SetActive(false);
         }
+
+        public void LoadItems()
+        {
+            equipmentWindowUI.LoadEquipmentsOnEquipmentScreen(playerInventory);
+        }
+
+
     }
 }
