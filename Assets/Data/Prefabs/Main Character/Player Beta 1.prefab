@@ -1410,16 +1410,18 @@ MonoBehaviour:
   mouseX: 0
   mouseY: 0
   sprint_Input: 0
-  lightAtkInput: 0
-  heavyAtkInput: 0
+  lightAtk_Input: 0
+  heavyAtk_Input: 0
+  interact_Input: 0
+  inventory_Input: 0
   d_Pad_Up: 0
   d_Pad_Right: 0
   d_Pad_Down: 0
   d_Pad_Left: 0
-  interact_Input: 0
   dodgelFlag: 0
   sprintFlag: 0
   comboFlag: 0
+  inventoryFlag: 0
   rollInputTimer: 0
 --- !u!114 &2636926346723425111
 MonoBehaviour:
@@ -1477,7 +1479,8 @@ MonoBehaviour:
   leftHandWeapon: {fileID: 11400000, guid: 0d59725bb9a3a8d4caf24690afb76fba, type: 2}
   rightHandWeapon: {fileID: 11400000, guid: 0d59725bb9a3a8d4caf24690afb76fba, type: 2}
   unarmedWeapon: {fileID: 11400000, guid: 0d59725bb9a3a8d4caf24690afb76fba, type: 2}
-  weaponsInRightHandSlot: []
+  weaponsInRightHandSlot:
+  - {fileID: 11400000, guid: 1acc451d72022574495caf31763229e6, type: 2}
   weaponsInLeftHandSlot: []
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
