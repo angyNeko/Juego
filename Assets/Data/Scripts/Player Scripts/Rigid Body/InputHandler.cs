@@ -178,6 +178,7 @@ namespace J
 
                 if (inventoryFlag)
                 {
+                    Time.timeScale = 0;
                     uiManager.OpenSelectWindow(); 
                     uiManager.UpdateUI();
                     uiManager.hudWindow.SetActive(false);
@@ -186,6 +187,7 @@ namespace J
                 }
                 else
                 {
+                    Time.timeScale = 1;
                     uiManager.CloseSelectWindow();
                     uiManager.CloseCharCustWindow();
                     uiManager.CloseAllInventoryWindows();
