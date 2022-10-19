@@ -16,7 +16,6 @@ namespace J
         [Header("UI Windows")]
         public GameObject hudWindow;
         public GameObject selectWindow;
-        public GameObject leftPanel;
         public GameObject inventory;
         public GameObject weaponInventoryWindow;
         public GameObject uiInventoryNavbar;
@@ -25,9 +24,6 @@ namespace J
         public GameObject weaponInventorySlotPrefab;
         public Transform weaponInventorySlotParent;
         WeaponInventorySlot[] weaponInventorySlots;
-
-        [Header("Character Customization Windows")]
-        public GameObject characterCustomizationWindow;
 
         private void Awake()
         {
@@ -82,11 +78,6 @@ namespace J
         {
             uiInventoryNavbar.SetActive(false);
             weaponInventoryWindow.SetActive(false);
-        }
-
-        public void CloseCharCustWindow()
-        {
-            characterCustomizationWindow.SetActive(false);
         }
 
         public void LoadItems()

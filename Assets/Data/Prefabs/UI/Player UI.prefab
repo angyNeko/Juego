@@ -7118,13 +7118,11 @@ MonoBehaviour:
   equipmentWindowUI: {fileID: 1295209261858514607}
   hudWindow: {fileID: 6361437582200359943}
   selectWindow: {fileID: 1466838468019849361}
-  leftPanel: {fileID: 0}
   inventory: {fileID: 512033948376133026}
   weaponInventoryWindow: {fileID: 9011369530871368089}
   uiInventoryNavbar: {fileID: 4296733194570453169}
   weaponInventorySlotPrefab: {fileID: 1295209261988503553}
   weaponInventorySlotParent: {fileID: 1295209261417665387}
-  characterCustomizationWindow: {fileID: 6678615855653571124}
 --- !u!1 &3060612768238852941
 GameObject:
   m_ObjectHideFlags: 0
