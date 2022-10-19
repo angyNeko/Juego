@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.Controls;
 
 namespace J
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         InputHandler inputHandler;
         PlayerLocomotion playerLocomotion;

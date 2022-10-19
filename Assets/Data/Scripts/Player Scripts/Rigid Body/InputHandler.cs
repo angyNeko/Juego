@@ -17,6 +17,9 @@ namespace J
         public bool heavyAtk_Input;
         public bool interact_Input;
         public bool inventory_Input;
+        public bool lockOnInput;
+        public bool right_Stick_Right_Input;
+        public bool right_Stick_Left_Input;
 
         public bool d_Pad_Up;
         public bool d_Pad_Right;
@@ -26,6 +29,7 @@ namespace J
         public bool dodgelFlag;
         public bool sprintFlag;
         public bool comboFlag;
+        public bool lockOnFlag;
         public bool inventoryFlag;
         public float rollInputTimer;
 
@@ -34,6 +38,7 @@ namespace J
         PlayerInventory playerInventory;
         PlayerManager playerManager;
         UIManager uiManager;
+        CameraHandler cameraHandler;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -44,6 +49,7 @@ namespace J
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
             uiManager = FindObjectOfType<UIManager>();
+            cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
         public void OnEnable()
@@ -53,6 +59,10 @@ namespace J
                 inputActions = new PlayerInputActions();
                 inputActions.PlayerMovement.Movement.performed += inputAction => movementInput = inputAction.ReadValue<Vector2>();
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                //add other controls here
+                inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
+                inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
+                inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
             }
 
             inputActions.Enable();
@@ -65,13 +75,14 @@ namespace J
 
         public void TickInput(float delta)
         {
-            MoveInput(delta);
+            HandleMoveInput(delta);
             HandleRollSprintInput(delta);
             HandleAttackInput(delta);
             HandleQuickSlotInput();
             HandleInteractInput();
             //HandleJumpInput();
             HandleInventoryInput();
+            HandleLockOnInput();
         }
 
         public void ResetBools()
@@ -92,7 +103,7 @@ namespace J
             d_Pad_Down = false;
         }
 
-        private void MoveInput(float delta)
+        private void HandleMoveInput(float delta)
         {
             horizontal = movementInput.x;
             vertical = movementInput.y;
@@ -189,6 +200,49 @@ namespace J
                     uiManager.hudWindow.SetActive(true);
                 }
             }
+        }
+
+        private void HandleLockOnInput()
+        {
+            if (lockOnInput && lockOnFlag == false)
+            {
+                lockOnInput = false;
+                cameraHandler.HandleLockOn();
+                if (cameraHandler.nearestLockOnTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
+                    lockOnFlag = true;
+                }
+            }
+            else if (lockOnInput && lockOnFlag)
+            {
+                lockOnInput = false;
+                lockOnFlag = false;
+                cameraHandler.ClearLockOnTargets();
+            }
+
+            if (lockOnFlag && right_Stick_Left_Input)
+            {
+                right_Stick_Left_Input = false;
+                cameraHandler.HandleLockOn();
+                if (cameraHandler.leftLockTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.leftLockTarget;
+
+                }
+            }
+
+            if (lockOnFlag && right_Stick_Right_Input)
+            {
+                right_Stick_Right_Input = false;
+                cameraHandler.HandleLockOn();
+                if (cameraHandler.rightLockTarget != null)
+                {
+                    cameraHandler.currentLockOnTarget = cameraHandler.rightLockTarget;
+                }
+            }
+
+            cameraHandler.SetCameraHeight();
         }
     }
 }

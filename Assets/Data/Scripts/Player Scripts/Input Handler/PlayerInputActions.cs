@@ -83,6 +83,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Lock On Target Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d1f60ca-93af-48ef-8510-3c8672ffc5db"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock On Target Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd75bfc1-627d-484e-b6ce-7b9c6a42734f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -173,6 +191,50 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14b75416-48a5-49bd-81cf-bfde458bbe61"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""Lock On Target Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""703f0d37-fb3f-479b-a955-c83c0ea80811"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Lock On Target Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b7c88ee-1720-456a-9cbb-001099d9b037"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""Lock On Target Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08ad086e-b622-4075-8d4e-325d896d5e2f"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Lock On Target Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -184,6 +246,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""b1402fde-77c9-45b0-ad89-aa9f6d6a7d22"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LockOn"",
+                    ""type"": ""Button"",
+                    ""id"": ""65f19e15-a489-40db-ba33-1fa34d84d6e2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -367,6 +438,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22f6e1f2-5104-4fa4-8abd-c5ef4060bc5d"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MouseKeyboard"",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84d97c85-e585-4b74-b643-8ba147fcbfe9"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -540,9 +633,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_PlayerMovement = asset.FindActionMap("PlayerMovement", throwIfNotFound: true);
         m_PlayerMovement_Movement = m_PlayerMovement.FindAction("Movement", throwIfNotFound: true);
         m_PlayerMovement_Camera = m_PlayerMovement.FindAction("Camera", throwIfNotFound: true);
+        m_PlayerMovement_LockOnTargetLeft = m_PlayerMovement.FindAction("Lock On Target Left", throwIfNotFound: true);
+        m_PlayerMovement_LockOnTargetRight = m_PlayerMovement.FindAction("Lock On Target Right", throwIfNotFound: true);
         // PlayerActions
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
+        m_PlayerActions_LockOn = m_PlayerActions.FindAction("LockOn", throwIfNotFound: true);
         m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
         m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
         m_PlayerActions_Dodge = m_PlayerActions.FindAction("Dodge", throwIfNotFound: true);
@@ -648,12 +744,16 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerMovementActions m_PlayerMovementActionsCallbackInterface;
     private readonly InputAction m_PlayerMovement_Movement;
     private readonly InputAction m_PlayerMovement_Camera;
+    private readonly InputAction m_PlayerMovement_LockOnTargetLeft;
+    private readonly InputAction m_PlayerMovement_LockOnTargetRight;
     public struct PlayerMovementActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerMovementActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerMovement_Movement;
         public InputAction @Camera => m_Wrapper.m_PlayerMovement_Camera;
+        public InputAction @LockOnTargetLeft => m_Wrapper.m_PlayerMovement_LockOnTargetLeft;
+        public InputAction @LockOnTargetRight => m_Wrapper.m_PlayerMovement_LockOnTargetRight;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -669,6 +769,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Camera.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnCamera;
+                @LockOnTargetLeft.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLockOnTargetLeft;
+                @LockOnTargetLeft.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLockOnTargetLeft;
+                @LockOnTargetLeft.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLockOnTargetLeft;
+                @LockOnTargetRight.started -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLockOnTargetRight;
+                @LockOnTargetRight.performed -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLockOnTargetRight;
+                @LockOnTargetRight.canceled -= m_Wrapper.m_PlayerMovementActionsCallbackInterface.OnLockOnTargetRight;
             }
             m_Wrapper.m_PlayerMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -679,6 +785,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @LockOnTargetLeft.started += instance.OnLockOnTargetLeft;
+                @LockOnTargetLeft.performed += instance.OnLockOnTargetLeft;
+                @LockOnTargetLeft.canceled += instance.OnLockOnTargetLeft;
+                @LockOnTargetRight.started += instance.OnLockOnTargetRight;
+                @LockOnTargetRight.performed += instance.OnLockOnTargetRight;
+                @LockOnTargetRight.canceled += instance.OnLockOnTargetRight;
             }
         }
     }
@@ -688,6 +800,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActions;
     private IPlayerActionsActions m_PlayerActionsActionsCallbackInterface;
     private readonly InputAction m_PlayerActions_Inventory;
+    private readonly InputAction m_PlayerActions_LockOn;
     private readonly InputAction m_PlayerActions_HeavyAttack;
     private readonly InputAction m_PlayerActions_LightAttack;
     private readonly InputAction m_PlayerActions_Dodge;
@@ -698,6 +811,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         private @PlayerInputActions m_Wrapper;
         public PlayerActionsActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
+        public InputAction @LockOn => m_Wrapper.m_PlayerActions_LockOn;
         public InputAction @HeavyAttack => m_Wrapper.m_PlayerActions_HeavyAttack;
         public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
         public InputAction @Dodge => m_Wrapper.m_PlayerActions_Dodge;
@@ -715,6 +829,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Inventory.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnInventory;
+                @LockOn.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLockOn;
+                @LockOn.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLockOn;
+                @LockOn.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLockOn;
                 @HeavyAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
@@ -737,6 +854,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
+                @LockOn.started += instance.OnLockOn;
+                @LockOn.performed += instance.OnLockOn;
+                @LockOn.canceled += instance.OnLockOn;
                 @HeavyAttack.started += instance.OnHeavyAttack;
                 @HeavyAttack.performed += instance.OnHeavyAttack;
                 @HeavyAttack.canceled += instance.OnHeavyAttack;
@@ -839,10 +959,13 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnLockOnTargetLeft(InputAction.CallbackContext context);
+        void OnLockOnTargetRight(InputAction.CallbackContext context);
     }
     public interface IPlayerActionsActions
     {
         void OnInventory(InputAction.CallbackContext context);
+        void OnLockOn(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);

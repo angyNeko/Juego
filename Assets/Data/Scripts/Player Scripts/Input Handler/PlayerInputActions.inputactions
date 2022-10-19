@@ -61,6 +61,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Lock On Target Left",
+                    "type": "Button",
+                    "id": "8d1f60ca-93af-48ef-8510-3c8672ffc5db",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Lock On Target Right",
+                    "type": "Button",
+                    "id": "cd75bfc1-627d-484e-b6ce-7b9c6a42734f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -151,6 +169,50 @@
                     "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14b75416-48a5-49bd-81cf-bfde458bbe61",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Lock On Target Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "703f0d37-fb3f-479b-a955-c83c0ea80811",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Lock On Target Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8b7c88ee-1720-456a-9cbb-001099d9b037",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "Lock On Target Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08ad086e-b622-4075-8d4e-325d896d5e2f",
+                    "path": "<Gamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Lock On Target Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -162,6 +224,15 @@
                     "name": "Inventory",
                     "type": "Button",
                     "id": "b1402fde-77c9-45b0-ad89-aa9f6d6a7d22",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockOn",
+                    "type": "Button",
+                    "id": "65f19e15-a489-40db-ba33-1fa34d84d6e2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -343,6 +414,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22f6e1f2-5104-4fa4-8abd-c5ef4060bc5d",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MouseKeyboard",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84d97c85-e585-4b74-b643-8ba147fcbfe9",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LockOn",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

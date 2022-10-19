@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace J
 {
-    public class AnimatorHandler : MonoBehaviour
+    public class AnimatorHandler : AnimatorManager
     {
-        public Animator anim;
         InputHandler inputHandler;
         PlayerLocomotion playerLocomotion;
         PlayerManager playerManager;
@@ -25,12 +24,6 @@ namespace J
             vertical = Animator.StringToHash("Vertical");
         }
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
-        {
-            anim.applyRootMotion = isInteracting;
-            anim.SetBool("isInteracting", isInteracting);
-            anim.CrossFade(targetAnim, 0.01f);
-        }
 
         public void UpdateAnimatorValues(float horizontalMovement, float verticalMovement, bool isSprinting)
         {
