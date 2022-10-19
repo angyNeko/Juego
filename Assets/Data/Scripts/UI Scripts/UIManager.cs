@@ -87,7 +87,7 @@ namespace J
 
         public void CloseAllLeftPanelWindow()
         {
-            characterCustomizationWindow.SetActive(false);
+            //characterCustomizationWindow.SetActive(false);
         }
     }
 }
