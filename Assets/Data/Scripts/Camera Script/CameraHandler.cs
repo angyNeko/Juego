@@ -67,18 +67,6 @@ namespace J
 
         public void FollowTarget(float delta, float vertical)
         {
-            /*
-            float mFollowSpeed;
-            if (vertical < 0)
-            {
-                mFollowSpeed = 2;
-            }
-            else
-            {
-                mFollowSpeed = followSpeed;
-            }
-            */
-
             Vector3 targetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
             myTransform.position = targetPosition;
 
