@@ -11,6 +11,16 @@ namespace J
     {
         public WeaponItem weapon;
 
+        private void OnTriggerEnter(Collider other)
+        {
+            PlayerManager player = other.GetComponent<PlayerManager>();
+
+            if (player != null)
+            {
+                player.DisplayInteractableObject();
+            }
+        }
+
         public override void Interact(PlayerManager playerManager)
         {
             base.Interact(playerManager);
