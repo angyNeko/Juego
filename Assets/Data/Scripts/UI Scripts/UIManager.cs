@@ -94,6 +94,9 @@ namespace J
             equipmentWindowUI.LoadEquipmentsOnEquipmentScreen(playerInventory);
         }
 
-
+        public void CloseAllLeftPanelWindow()
+        {
+            characterCustomizationWindow.SetActive(false);
+        }
     }
 }

@@ -53,6 +53,7 @@ namespace J
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
 
+
             CheckForInteractable();
 
         }
@@ -92,6 +93,8 @@ namespace J
 
         public void CheckForInteractable()
         {
+
+            // Fix this in the future
             RaycastHit hit;
 
             if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
@@ -125,6 +128,11 @@ namespace J
                     itemInteractableGameObject.SetActive(false);
                 }
             }
+        }
+
+        public void DisplayInteractableObject()
+        {
+
         }
 
         /*private void SetRagdall()
