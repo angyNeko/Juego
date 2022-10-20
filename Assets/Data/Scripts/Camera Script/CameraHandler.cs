@@ -2,7 +2,7 @@ using Mono.Cecil.Cil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
+//using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 namespace J
@@ -39,7 +39,7 @@ namespace J
         public float cameraCollisionOffset = 0.2f;
         public float minimumCollisionOffset = 0.2f;
         public float lockedPivotPosition = 2.25f;
-        public float unlockedPivotPosition = 1.65f;
+        public float unlockedPivotPosition = 0.5f;
 
         public Transform currentLockOnTarget;
 
@@ -67,18 +67,7 @@ namespace J
 
         public void FollowTarget(float delta, float vertical)
         {
-            /*
-            float mFollowSpeed;
-            if (vertical < 0)
-            {
-                mFollowSpeed = 2;
-            }
-            else
-            {
-                mFollowSpeed = followSpeed;
-            }
-            */
-
+            
             Vector3 targetPosition = Vector3.SmoothDamp(myTransform.position, targetTransform.position, ref cameraFollowVelocity, delta / followSpeed);
             myTransform.position = targetPosition;
 

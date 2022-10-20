@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1589682265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589682266}
+  m_Layer: 0
+  m_Name: Lock On Transform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1589682266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589682265}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.126, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2636926346723425107}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137428176625076104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,7 +1360,7 @@ GameObject:
   - component: {fileID: 2636926346723425110}
   - component: {fileID: 2636926346723425097}
   - component: {fileID: 2636926346723425096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Beta 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1350,6 +1381,7 @@ Transform:
   m_Children:
   - {fileID: 2527231839171370547}
   - {fileID: 2636926347218787796}
+  - {fileID: 1589682266}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -2.276, y: -0.662, z: -0.011}
@@ -1381,6 +1413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb23aad4f77ad249be97c0820fab94a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockOnTransform: {fileID: 1589682266}
   cameraHandler: {fileID: 0}
   cameraOverride: {fileID: 0}
   interactableUI: {fileID: 0}
@@ -1414,6 +1447,9 @@ MonoBehaviour:
   heavyAtk_Input: 0
   interact_Input: 0
   inventory_Input: 0
+  lockOnInput: 0
+  right_Stick_Right_Input: 0
+  right_Stick_Left_Input: 0
   d_Pad_Up: 0
   d_Pad_Right: 0
   d_Pad_Down: 0
@@ -1421,6 +1457,7 @@ MonoBehaviour:
   dodgelFlag: 0
   sprintFlag: 0
   comboFlag: 0
+  lockOnFlag: 0
   inventoryFlag: 0
   rollInputTimer: 0
 --- !u!114 &2636926346723425111
@@ -1527,7 +1564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2636926347218787799}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.221, z: -0.01}
+  m_LocalPosition: {x: 0, y: 1.226, z: -0.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

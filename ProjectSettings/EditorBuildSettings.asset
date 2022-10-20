@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Data/Scenes/Maps/Classroom/Classroom.unity
     guid: ce42c7fcb57b6b64dbeabfef4e0332bc
   - enabled: 1
-    path: Assets/Data/Scenes/Maps/Level 1/Stage1.unity
+    path: Assets/Data/Prefabs/UI/Stage1.unity
     guid: 8b47d962226d4e146b2d828ed417a729
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 307593ded2f017b428b2161478d47958, type: 2}
