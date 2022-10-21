@@ -1328,8 +1328,12 @@ GameObject:
   - component: {fileID: 2636926346723425111}
   - component: {fileID: 2636926346723425110}
   - component: {fileID: 2636926346723425097}
+<<<<<<< Updated upstream
   - component: {fileID: 2636926346723425096}
   m_Layer: 0
+=======
+  m_Layer: 9
+>>>>>>> Stashed changes
   m_Name: Player Beta 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1383,9 +1387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraHandler: {fileID: 0}
   cameraOverride: {fileID: 0}
-  interactableUI: {fileID: 0}
-  interactableUIGameObject: {fileID: 0}
-  itemInteractableGameObject: {fileID: 0}
+  interactManager: {fileID: 0}
   isInteracting: 0
   isSprinting: 0
   isInAir: 0
@@ -1485,24 +1487,6 @@ MonoBehaviour:
   currentRightWeaponIndex: -1
   currentLeftWeaponIndex: -1
   weaponsInventory: []
---- !u!114 &2636926346723425096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2636926346723425099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f83ab9c6d27d5a2448c045f5e208e89c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthLevel: 10
-  maxHealth: 100
-  currentHealth: 100
-  healthBar: {fileID: 0}
-  playerManager: {fileID: 2636926346723425109}
-  animatorHandler: {fileID: 2636926347345181156}
 --- !u!1 &2636926347218787799
 GameObject:
   m_ObjectHideFlags: 0

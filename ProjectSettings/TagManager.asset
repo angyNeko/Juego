@@ -9,6 +9,7 @@ TagManager:
   - Healthbar
   - UI Canvas
   - Interactable
+  - Interact Alert
   layers:
   - Default
   - TransparentFX

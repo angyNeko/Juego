@@ -39,6 +39,7 @@ namespace J
         PlayerManager playerManager;
         UIManager uiManager;
         CameraHandler cameraHandler;
+        PInteractManager pInteractManager;
 
         Vector2 movementInput;
         Vector2 cameraInput;
@@ -50,6 +51,7 @@ namespace J
             playerManager = GetComponent<PlayerManager>();
             uiManager = FindObjectOfType<UIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
+            pInteractManager = GetComponent<PInteractManager>();
         }
 
         public void OnEnable()
@@ -57,12 +59,21 @@ namespace J
             if (inputActions == null)
             {
                 inputActions = new PlayerInputActions();
+
                 inputActions.PlayerMovement.Movement.performed += inputAction => movementInput = inputAction.ReadValue<Vector2>();
+                inputActions.PlayerMovement.Movement.canceled += inputAction => movementInput = Vector2.zero;
+
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+                inputActions.PlayerMovement.Camera.canceled += i => cameraInput = Vector2.zero;
                 //add other controls here
                 inputActions.PlayerActions.LockOn.performed += i => lockOnInput = true;
+                inputActions.PlayerActions.LockOn.canceled += i => lockOnInput = false;
+
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
+                inputActions.PlayerMovement.LockOnTargetRight.canceled += i => right_Stick_Right_Input = false;
+
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
+                inputActions.PlayerMovement.LockOnTargetLeft.canceled += i => right_Stick_Left_Input = false;
             }
 
             inputActions.Enable();
@@ -94,7 +105,6 @@ namespace J
             sprint_Input = false;
             lightAtk_Input = false;
             heavyAtk_Input = false;
-            interact_Input = false;
             inventory_Input = false;
 
             d_Pad_Right = false;
@@ -172,6 +182,12 @@ namespace J
         private void HandleInteractInput()
         {
             inputActions.PlayerActions.Interact.performed += i => interact_Input = true;
+            inputActions.PlayerActions.Interact.canceled += i => interact_Input = false;
+
+            if (interact_Input && pInteractManager.canInteract)
+            {
+                pInteractManager.InteractWithObject();
+            }
         }
 
         private void HandleJumpInput()
@@ -193,15 +209,12 @@ namespace J
                     uiManager.OpenSelectWindow(); 
                     uiManager.UpdateUI();
                     uiManager.hudWindow.SetActive(false);
-                    uiManager.uiInventoryNavbar.SetActive(false);
                     uiManager.leftPanel.SetActive(false);
                 }
                 else
                 {
                     Time.timeScale = 1;
                     uiManager.CloseSelectWindow();
-                    uiManager.CloseCharCustWindow();
-                    uiManager.CloseAllInventoryWindows();
                     uiManager.hudWindow.SetActive(true);
                 }
             }
