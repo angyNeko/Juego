@@ -15,7 +15,7 @@ namespace J
             Gizmos.DrawSphere(transform.position, radius);
         }
 
-        public virtual void Interact(PlayerManager playerManager)
+        public virtual void Interact(PInteractManager interactManager)
         {
             Debug.Log("Interacted with an object");
         }

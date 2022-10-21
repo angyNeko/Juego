@@ -10,61 +10,54 @@ namespace J
     {
         [SerializeField]
         PlayerInventory playerInventory;
-        [SerializeField]
-        EquipmentWindowUI equipmentWindowUI;
 
         [Header("UI Windows")]
         public GameObject hudWindow;
         public GameObject selectWindow;
         public GameObject leftPanel;
-        public GameObject inventory;
-        public GameObject weaponInventoryWindow;
-        public GameObject uiInventoryNavbar;
 
-        [Header("Weapon Inventory")]
-        public GameObject weaponInventorySlotPrefab;
-        public Transform weaponInventorySlotParent;
-        WeaponInventorySlot[] weaponInventorySlots;
+        [Header("HUD Windows")]
+        public GameObject[] quickSlots;
+        public GameObject interactAltert;
+        public GameObject interactPopUp;
+        public GameObject dialogueBoxContainer;
+        public GameObject timerContainer;
+        public Button pauseButton;
 
-        [Header("Character Customization Windows")]
-        public GameObject characterCustomizationWindow;
+        [Header("Window Panels")]
+        public GameObject pausePanel;
 
         private void Awake()
         {
             playerInventory = FindObjectOfType<PlayerInventory>();
         }
 
-        private void Start()
-        {
-            weaponInventorySlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponInventorySlot>();
-        }
-
         public void UpdateUI()
         {
-            #region Weapon Inventory Slots
-            for (int i = 0; i < weaponInventorySlots.Length; i++)
-            {
-                if (i < playerInventory.weaponsInventory.Count)
-                {
-                    if (playerInventory.weaponsInventory.Count == 0)
-                    {
-                        weaponInventorySlotPrefab.SetActive(false);
-                        return;
-                    }
+            #region Weapon Inventory Slots (Reuse Later for inventory)
+            //for (int i = 0; i < weaponInventorySlots.Length; i++)
+            //{
+            //    if (i < playerInventory.weaponsInventory.Count)
+            //    {
+            //        if (playerInventory.weaponsInventory.Count == 0)
+            //        {
+            //            weaponInventorySlotPrefab.SetActive(false);
+            //            return;
+            //        }
 
-                    if (weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
-                    {
-                        Instantiate(weaponInventorySlotPrefab, weaponInventorySlotParent);
-                        weaponInventorySlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponInventorySlot>();
-                    }
-                    weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
-                }
-                else
-                {
-                    weaponInventorySlots[i].ClearInventorySlot();
-                    weaponInventoryWindow.SetActive(true);
-                }
-            }
+            //        if (weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
+            //        {
+            //            Instantiate(weaponInventorySlotPrefab, weaponInventorySlotParent);
+            //            weaponInventorySlots = weaponInventorySlotParent.GetComponentsInChildren<WeaponInventorySlot>();
+            //        }
+            //        weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
+            //    }
+            //    else
+            //    {
+            //        weaponInventorySlots[i].ClearInventorySlot();
+            //        weaponInventoryWindow.SetActive(true);
+            //    }
+            //}
             #endregion
         }
 
@@ -76,22 +69,6 @@ namespace J
         public void CloseSelectWindow()
         {
             selectWindow.SetActive(false);
-        }
-
-        public void CloseAllInventoryWindows()
-        {
-            uiInventoryNavbar.SetActive(false);
-            weaponInventoryWindow.SetActive(false);
-        }
-
-        public void CloseCharCustWindow()
-        {
-            characterCustomizationWindow.SetActive(false);
-        }
-
-        public void LoadItems()
-        {
-            equipmentWindowUI.LoadEquipmentsOnEquipmentScreen(playerInventory);
         }
 
         public void CloseAllLeftPanelWindow()

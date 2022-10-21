@@ -14,10 +14,7 @@ namespace J
         public CameraHandler cameraHandler;
         public GameObject cameraOverride;
 
-        [SerializeField]
-        InteractableUI interactableUI;
-        public GameObject interactableUIGameObject;
-        public GameObject itemInteractableGameObject;
+        public PInteractManager interactManager;
 
         [Header("Player Flags")]
         public bool isInteracting;
@@ -39,7 +36,7 @@ namespace J
             inputHandler = GetComponent<InputHandler>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             anim = GetComponentInChildren<Animator>();
-            interactableUI = FindObjectOfType<InteractableUI>();
+            interactManager = GetComponent<PInteractManager>();
         }
 
         //Here
@@ -53,9 +50,6 @@ namespace J
             inputHandler.TickInput(delta);
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollAndSprint(delta);
-
-
-            CheckForInteractable();
 
         }
 
@@ -83,8 +77,6 @@ namespace J
             }
 
             inputHandler.ResetBools();
-
-            CheckForInteractable();
         }
 
         public void InitializeCamera()
@@ -92,63 +84,13 @@ namespace J
             cameraHandler = FindObjectOfType<CameraHandler>();
         }
 
-        public void CheckForInteractable()
-        {
-
-            // Fix this in the future
-            RaycastHit hit;
-
-            if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
-            {
-                if (hit.collider.tag == "Interactable")
-                {
-                    Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-
-                    if(interactableObject != null)
-                    {
-                        string interactableText = interactableObject.interactableText;
-                        interactableUI.interactableText.text = interactableText;
-                        interactableUIGameObject.SetActive(true);
-
-                        if (inputHandler.interact_Input)
-                        {
-                            hit.collider.GetComponent<Interactable>().Interact(this);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if (interactableUIGameObject != null)
-                {
-                    interactableUIGameObject.SetActive(false);
-                }
-
-                if (itemInteractableGameObject != null && inputHandler.interact_Input)
-                {
-                    itemInteractableGameObject.SetActive(false);
-                }
-            }
-        }
+        
 
         public void DisplayInteractableObject()
         {
 
         }
 
-        /*private void SetRagdall()
-        {
-            Collider[] colliders = this.GetComponentsInChildren<Collider>();
-
-            foreach (Collider c in colliders)
-            {
-                if (c.gameObject != this.gameObject)
-                {
-                    c.isTrigger = true;
-                    Ragdallpart.Add(c);
-                }
-            }
-        }*/
         private void isTriggerRagdall()
         {
 
